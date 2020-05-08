@@ -4,6 +4,7 @@
 * Copy the q.html file onto your local drive and open it in a browser (preferably Chrome).
 * Add new sections using the sidebar buttons.
 * Edit, delete, duplicate, and transform sections using the controls next to each section.
+* "Save" your work periodically by bookmarking the page.
 * Click "Preview" to view the result.
 * Click "Generate HTML" and copy the resulting HTML code from the pop-up window.
 * Save the resulting code as an HTML file.
