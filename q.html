@@ -237,6 +237,14 @@
         }
 
         let array_section = [];
+
+        let month_names = [
+            "January", "February", "March",
+            "April", "May", "June", "July",
+            "August", "September", "October",
+            "November", "December"
+            ];
+
         if (temp_section.length === 0) {
             // make default data for header and theme
             let defaultHeader = {
@@ -245,6 +253,7 @@
                 typ: 'cb',
                 bgc: '',
                 ttl: new Date(),
+                dsc: '',
                 lnk: '',
                 btn: ''
             };
@@ -255,6 +264,8 @@
                     current_sections.push(new sectionObj(temp_section[(i+1)], temp_section[(i+3)], temp_section[(i+5)], temp_section[(i+7)], temp_section[(i+9)], temp_section[(i+11)], temp_section[(i+13)], temp_section[(i+15)]));
                 };
             };
+            let header_date = new Date(current_sections[0].ttl);
+            current_sections[0].ttl = header_date;
         };
         
         // sort sections by odr value
@@ -284,37 +295,37 @@
             };
             qs = qs.slice(1)
             switch (t) {
-                case `lgsh`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=lgsh&bgc=f&ttl=LARGE%20HEADER&lnk=&dsc=&lnk=&btn=`;
+                case `lgsh`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=lgsh&bgc=f&ttl=LARGE%20HEADER&lnk=&dsc=&btn=`;
                 break;
-                case `scsh`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=scsh&bgc=f&ttl=COLOR%20SUB-HEADER&dsc=&lnk=&btn=`;
+                case `scsh`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=scsh&bgc=f&ttl=COLOR%20SUB-HEADER&lnk=&dsc=&btn=`;
                 break;
-                case `bn`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=bn&bgc=f&ttl=SECTION%20BANNER&lnk=&dsc=&lnk=&btn=`;
+                case `bn`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=bn&bgc=f&ttl=SECTION%20BANNER&lnk=&dsc=&btn=`;
                 break;
-                case `bl`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=bl&bgc=f&ttl=&lnk=&dsc=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetur%20adipiscing%20elit%2C%20sed%20do%20eiusmod%20tempor%20incididunt%20ut%20labore%20et%20dolore%20magna%20aliqua.%20&lnk=&btn=`;
+                case `bl`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=bl&bgc=f&ttl=&lnk=&dsc=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetur%20adipiscing%20elit%2C%20sed%20do%20eiusmod%20tempor%20incididunt%20ut%20labore%20et%20dolore%20magna%20aliqua.%20&btn=`;
                 break;
-                case `sla`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=sla&bgc=f&ttl=Single%20Line%20Article&lnk=https%3A%2F%2Fwww.nfp.com%2F&dsc=&lnk=https%3A%2F%2Fwww.nfp.com%2F&btn=`;
+                case `sla`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=sla&bgc=f&ttl=Single%20Line%20Article&lnk=https%3A%2F%2Fwww.nfp.com%2F&dsc=&btn=`;
                 break;
-                case `lad`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=lad&bgc=f&ttl=Linked%20Article%20with%20Description&lnk=https%3A%2F%2Fwww.nfp.com%2F&dsc=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetur%20adipiscing%20elit%2C%20sed%20do%20eiusmod%20tempor%20incididunt%20ut%20labore%20et%20dolore%20magna%20aliqua.&lnk=https%3A%2F%2Fwww.nfp.com%2F&btn=`;
+                case `lad`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=lad&bgc=f&ttl=Linked%20Article%20with%20Description&lnk=https%3A%2F%2Fwww.nfp.com%2F&dsc=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetur%20adipiscing%20elit%2C%20sed%20do%20eiusmod%20tempor%20incididunt%20ut%20labore%20et%20dolore%20magna%20aliqua.&btn=`;
                 break;
-                case `ubt`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=ubt&bgc=f&ttl=Underlined%20Bold%20Title&lnk=&dsc=&lnk=&btn=`;
+                case `ubt`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=ubt&bgc=f&ttl=Underlined%20Bold%20Title&lnk=&dsc=&btn=`;
                 break;
-                case `lssh`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=lssh&bgc=f&ttl=Letterspaced%20Sub-Header&lnk=&dsc=&lnk=&btn=`;
+                case `lssh`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=lssh&bgc=f&ttl=Letterspaced%20Sub-Header&lnk=&dsc=&btn=`;
                 break;
-                case `twbl`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=twbl&bgc=f&ttl=Title%20with%20Bulleted%20Links&lnk=&dsc=%3Cli%3E%3Ca%20href%3D%22https%3A%2F%2Fwww.nfp.com%2F%22%20target%3D%22_blank%22%3EBulleted%20Link%201%3C%2Fa%3E%3C%2Fli%3E%3Cli%3E%3Ca%20href%3D%22https%3A%2F%2Fwww.nfp.com%2F%22%20target%3D%22_blank%22%3EBulleted%20Link%202%3C%2Fa%3E%3C%2Fli%3E&lnk=&btn=`;
+                case `twbl`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=twbl&bgc=f&ttl=Title%20with%20Bulleted%20Links&lnk=&dsc=%3Cli%3E%3Ca%20href%3D%22https%3A%2F%2Fwww.nfp.com%2F%22%20target%3D%22_blank%22%3EBulleted%20Link%201%3C%2Fa%3E%3C%2Fli%3E%3Cli%3E%3Ca%20href%3D%22https%3A%2F%2Fwww.nfp.com%2F%22%20target%3D%22_blank%22%3EBulleted%20Link%202%3C%2Fa%3E%3C%2Fli%3E&btn=`;
                 break;
                 case `tdwb`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=tdwb&bgc=f&ttl=Title%20%7C%20Description%20%7C%20Button&lnk=https%3A%2F%2Fwww.nfp.com%2F&dsc=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetur%20adipiscing%20elit%2C%20sed%20do%20eiusmod%20tempor%20incididunt%20ut%20labore%20et%20dolore%20magna%20aliqua.&btn=Button%20Text`;
                 break;
-                case `tbwd`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=tbwd&bgc=f&ttl=Title%20%7C%20Description%20%7C%20Button&lnk=https%3A%2F%2Fwww.nfp.com%2F&dsc=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetur%20adipiscing%20elit%2C%20sed%20do%20eiusmod%20tempor%20incididunt%20ut%20labore%20et%20dolore%20magna%20aliqua.&btn=Button%20Text`;
+                case `tbwd`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=tbwd&bgc=f&ttl=Title%20%7C%20Button%20%7C%20Description&lnk=https%3A%2F%2Fwww.nfp.com%2F&dsc=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetur%20adipiscing%20elit%2C%20sed%20do%20eiusmod%20tempor%20incididunt%20ut%20labore%20et%20dolore%20magna%20aliqua.&btn=Button%20Text`;
                 break;
-                case `nltd`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=nltd&bgc=f&ttl=Non-Linked%20Title%20and%20Description&lnk=&dsc=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetur%20adipiscing%20elit%2C%20sed%20do%20eiusmod%20tempor%20incididunt%20ut%20labore%20et%20dolore%20magna%20aliqua.&lnk=&btn=`;
+                case `nltd`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=nltd&bgc=f&ttl=Non-Linked%20Title%20and%20Description&lnk=&dsc=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetur%20adipiscing%20elit%2C%20sed%20do%20eiusmod%20tempor%20incididunt%20ut%20labore%20et%20dolore%20magna%20aliqua.&btn=`;
                 break;
-                case `img`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=img&bgc=f&ttl=https%3A%2F%2Fwebfiles2.nfp.com%2Fwebfiles%2Fpublic%2F2020_emails%2Fcorp_ben%2Fimg%2Finsights_podcast_banner.jpg&dsc=&lnk=https%3A%2F%2Fwww.nfp.com%2F&btn=`;
+                case `img`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=img&bgc=f&ttl=https%3A%2F%2Fwebfiles2.nfp.com%2Fwebfiles%2Fpublic%2F2020_emails%2Fcorp_ben%2Fimg%2Finsights_podcast_banner.jpg&lnk=https%3A%2F%2Fwww.nfp.com%2F&dsc=&btn=`;
                 break;
-                case `cstm`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=cstm&bgc=f&ttl=&lnk=&dsc=Custom%20HTML&lnk=&btn=`;
+                case `cstm`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=cstm&bgc=f&ttl=&lnk=&dsc=Custom%20HTML&btn=`;
                 break;
-                case `hr`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=hr&bgc=f&ttl=&lnk=&dsc=&lnk=&btn=`;
+                case `hr`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=hr&bgc=f&ttl=&lnk=&dsc=&btn=`;
                 break;
-                case `sp`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=sp&bgc=f&ttl=&lnk=&dsc=20&lnk=&btn=`;
+                case `sp`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=sp&bgc=f&ttl=&lnk=&dsc=20&btn=`;
                 break;
             };
             
@@ -324,6 +335,9 @@
 
         // delete a section
         function deleteSection(id) {
+
+            // console.log(`ID: ${id}`);
+
             qs = ``;
             current_sections.splice((id), 1);
             for (let o in current_sections) {
@@ -336,6 +350,8 @@
 
         function updateSection(id) {
 
+            // console.log(`ID: ${id}`);
+
             let updated_odr;
             let updated_typ;
             let updated_bgc;
@@ -344,13 +360,46 @@
             let updated_dsc;
             let updated_btn;
 
-            updated_odr = document.getElementById(`odr${id}`);
-            updated_typ = document.getElementById(`typ${id}`);
-            updated_bgc = document.getElementById(`bgc${id}`);
-            updated_ttl = document.getElementById(`ttl${id}`);
-            updated_lnk = document.getElementById(`lnk${id}`);
-            updated_dsc = document.getElementById(`dsc${id}`);
-            updated_btn = document.getElementById(`btn${id}`);
+            // special values for header
+            let updated_month;
+            let updated_date;
+            let updated_year;
+
+            let newQs = ``;
+
+            // if it's the header being updated
+            if (id === 0) {
+                updated_month = document.getElementById(`month0`);
+                updated_date = document.getElementById(`date0`);
+                updated_year = document.getElementById(`year0`);
+
+                updated_odr = document.getElementById(`odr${id}`);
+                updated_typ = document.getElementById(`typ${id}`);
+                updated_bgc = document.getElementById(`bgc${id}`);
+                updated_ttl = new Date(updated_year.value, updated_month.value, updated_date.value)
+                updated_lnk = document.getElementById(`lnk${id}`);
+                updated_dsc = document.getElementById(`dsc${id}`);
+                updated_btn = document.getElementById(`btn${id}`);
+
+                console.log(`month: ${updated_month.value}`);
+                console.log(`date: ${updated_date.value}`);
+                console.log(`year: ${updated_year.value}`);
+
+                // build updated section as newQs
+                newQs = `&odr=${updated_odr.value}&id=${id}&typ=${updated_typ.value}&bgc=${updated_bgc.value}&ttl=${encodeURIComponent(updated_ttl)}&lnk=${encodeURIComponent(updated_lnk.value)}&dsc=${encodeURIComponent(updated_dsc.value)}&btn=${updated_btn.value}`;
+
+            } else {
+                updated_odr = document.getElementById(`odr${id}`);
+                updated_typ = document.getElementById(`typ${id}`);
+                updated_bgc = document.getElementById(`bgc${id}`);
+                updated_ttl = document.getElementById(`ttl${id}`);
+                updated_lnk = document.getElementById(`lnk${id}`);
+                updated_dsc = document.getElementById(`dsc${id}`);
+                updated_btn = document.getElementById(`btn${id}`);
+
+                // build updated section as newQs
+                newQs = `&odr=${updated_odr.value}&id=${id}&typ=${updated_typ.value}&bgc=${updated_bgc.value}&ttl=${encodeURIComponent(updated_ttl.value)}&lnk=${encodeURIComponent(updated_lnk.value)}&dsc=${encodeURIComponent(updated_dsc.value)}&btn=${updated_btn.value}`;
+            };
 
             console.log(`id: ${id}`);
             console.log(`odr: ${updated_odr.value}`);
@@ -362,19 +411,16 @@
             console.log(`btn: ${updated_btn.value}`);
 
             // delete section that's being updated
-            current_sections.splice((id-1), 1);
+            current_sections.splice((id), 1);
 
-            // reset qs valiable
+            // reset qs variable
             qs = ``;
+
             // rebuild current_sections as oldQs;
             let oldQs = ``;
             for (let o in current_sections) {
                 oldQs = oldQs + `&odr=${current_sections[o].odr}&id=${current_sections[o].id}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}`;
             };
-
-            // build updated section as newQs
-            let newQs = ``;
-            newQs = `&odr=${updated_odr.value}&id=${id}&typ=${updated_typ.value}&bgc=${updated_bgc.value}&ttl=${encodeURIComponent(updated_ttl.value)}&lnk=${encodeURIComponent(updated_lnk.value)}&dsc=${encodeURIComponent(updated_dsc.value)}&btn=${updated_btn.value}`;
 
             // append updated section data to existing querystring variable qs
             qs = oldQs + newQs;
@@ -416,8 +462,8 @@
             
             // get rid of initial "&" character
             qs = qs.slice(1)
-            // console.log(qs);
-            window.location.replace(`q.html?${qs}#section${(id-1)}`);
+            console.log(qs);
+            // window.location.replace(`q.html?${qs}#section${(id-1)}`);
         };
 
         // move a section down
@@ -512,6 +558,16 @@
                 };
             };
 
+            function themeDropdown(typ) {
+                switch(typ) {
+                    case `cb`: return `<select name="typ0" id="typ0"><option selected value="cb">Corporate Benefits</option><option value="is">Individual Solutions</option><option value="pc">Propery &amp; Casualty</option></select>`;
+                    case `is`: return `<select name="typ0" id="typ0"><option selected value="is">Individual Solutions</option><option value="cb">Corporate Benefits</option><option value="pc">Propery &amp; Casualty</option></select>`;
+                    case `pc`: return `<select name="typ0" id="typ0"><option selected value="pc">Property &amp; Casualty</option><option value="is">Individual Solutions</option><option value="cb">Corporate Benefits</option></select>`;
+                    default: return `<select name="typ0" id="typ0"><option selected value="cb">Corporate Benefits</option><option value="is">Individual Solutions</option><option value="pc">Propery &amp; Casualty</option></select>`;
+                };
+            };
+                                                    
+
             function bgc(c) {
                 switch(c) {
                     case `f`: return `ffffff`;
@@ -528,14 +584,6 @@
                 };
             };
 
-            // function typDropdown(t, id) {
-            //     switch(t) {
-            //         case `lgsh`: return `<select  name="typ${id}" id="typ${id}"><option selected value="lgsh">Large Header</option><option value="e">Grey</option></select>`;
-            //         case `e`: return `<select  name="bgc${id}" id="bgc${id}"><option selected value="e">Grey</option><option value="f">White</option></select>`;
-            //         default: return `<select  name="bgc${id}" id="bgc${id}"><option selected value="f">White</option><option value="e">Grey</option></select>`;
-            //     };
-            // };
-
             function sectionEditColor(id) {
                 if (id % 2 == 0) {
                     return `ffffff`;
@@ -543,6 +591,93 @@
                     return `f0f0f0`;
                 };
             };
+
+            function typDropdown(typ, id) {
+                let typ_select = ``;
+                typ_select = `<select name=typ${id} id="typ${id}>`;
+                if (typ === `lgsh`) {
+                    typ_select = typ_select + `<option selected value="lgsh">Large Header</option>`;
+                } else {
+                    typ_select = typ_select + `<option value="lgsh">Large Header</option>`;
+                };
+                if (typ === `scsh`) {
+                    typ_select = typ_select + `<option selected value="scsh">Color Sub-Header</option>`;
+                } else {
+                    typ_select = typ_select + `<option value="scsh">Color Sub-Header</option>`;
+                };
+                if (typ === `bn`) {
+                    typ_select = typ_select + `<option selected value="bn">Color Banner</option>`;
+                } else {
+                    typ_select = typ_select + `<option value="bn">Color Banner</option>`;
+                };
+                if (typ === `bl`) {
+                    typ_select = typ_select + `<option selected value="bl">Text Blurb</option>`;
+                } else {
+                    typ_select = typ_select + `<option value="bl">Text Blurb</option>`;
+                };
+                if (typ === `sla`) {
+                    typ_select = typ_select + `<option selected value="sla">Single Line Article</option>`;
+                } else {
+                    typ_select = typ_select + `<option value="sla">Single Line Article</option>`;
+                };
+                if (typ === `lad`) {
+                    typ_select = typ_select + `<option selected value="lad">Article with Desc</option>`;
+                } else {
+                    typ_select = typ_select + `<option value="lad">Article with Desc</option>`;
+                };
+                if (typ === `ubt`) {
+                    typ_select = typ_select + `<option selected value="ubt">Underlined Bold Title</option>`;
+                } else {
+                    typ_select = typ_select + `<option value="ubt">Underlined Bold Title</option>`;
+                };
+                if (typ === `lssh`) {
+                    typ_select = typ_select + `<option selected value="lssh">Letterspaced Sub-Header</option>`;
+                } else {
+                    typ_select = typ_select + `<option value="lssh">Letterspaced Sub-Header</option>`;
+                };
+                if (typ === `twbl`) {
+                    typ_select = typ_select + `<option selected value="twbl">Title with Bulleted Links</option>`;
+                } else {
+                    typ_select = typ_select + `<option value="twbl">Title with Bulleted Links</option>`;
+                };
+                if (typ === `tdwb`) {
+                    typ_select = typ_select + `<option selected value="tdwb">Title | Description | Button</option>`;
+                } else {
+                    typ_select = typ_select + `<option value="tdwb">Title | Description | Button</option>`;
+                };
+                if (typ === `tbwd`) {
+                    typ_select = typ_select + `<option selected value="tbwd">Title | Button | Description</option>`;
+                } else {
+                    typ_select = typ_select + `<option value="tbwd">Title | Button | Description</option>`;
+                };
+                if (typ === `nltd`) {
+                    typ_select = typ_select + `<option selected value="nltd">Non-linked Title &amp; Desc</option>`;
+                } else {
+                    typ_select = typ_select + `<option value="nltd">Non-linked Title &amp; Desc</option>`;
+                };
+                if (typ === `img`) {
+                    typ_select = typ_select + `<option selected value="img">Full Width Image</option>`;
+                } else {
+                    typ_select = typ_select + `<option value="img">Full Width Image</option>`;
+                };
+                if (typ === `cstm`) {
+                    typ_select = typ_select + `<option selected value="cstm">Custom HTML</option>`;
+                } else {
+                    typ_select = typ_select + `<option value="cstm">Custom HTML</option>`;
+                };
+                if (typ === `hr`) {
+                    typ_select = typ_select + `<option selected value="hr">Horizontal Rule</option>`;
+                } else {
+                    typ_select = typ_select + `<option value="hr">Horizontal Rule</option>`;
+                };
+                if (typ === `sp`) {
+                    typ_select = typ_select + `<option selected value="sp">Spacer</option>`;
+                } else {
+                    typ_select = typ_select + `<option value="sp">Spacer</option>`;
+                };
+                typ_select = typ_select + `</select>`
+                return typ_select;
+            }
 
             // prepare the header table for new rows
             header_table = document.getElementById(`headerTable`);
@@ -563,8 +698,6 @@
             code_modal.value = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="format-detection" content="telephone=no"/><title>Individual Solutions Report</title><style>table{border-spacing: 0 !important; border-collapse: collapse !important; margin: 0 auto !important;}table, td{mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important;}a{color: #000000; text-decoration: none; font-weight: 600;}a:hover{color: #ad434f;}/* a:visited{color: #000000;}*/ /* stop gmail from turning links without inline styling blue */ u + #body a{color: inherit; text-decoration: none; font-size: inherit; font-family: inherit; font-weight: inherit; line-height: inherit;}</style><!--[if gt mso 16]><style type="text/css" media="all"> /* Outlook 2016 Height Fix */ table, tr, td{border-collapse: collapse !important;}</style><![endif]--></head><body id="body" style="margin: 0pt; padding: 0pt; width: 100% !important;" bgcolor="#efefef"><center><table align="center" bgcolor="#efefef" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse; border-color: #efefef;"><tr><td bgcolor="#e0e0e0" width="35%" style="font-size: 1px; line-height: 1px">&nbsp;</td><td bgcolor="#efefef" valign="top"><table bgcolor="#ffffff" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #ffffff;"><tr><td width="600" height="10" style="font-size: 10px; line-height: 10px;"><table width="600" height="10" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; border-color: #ffffff;"><tr><td width="600">&nbsp;</td></tr></table></td></tr><tr><td align="center" valign="top" width="600"><table bgcolor="#ffffff" border="0" width="600" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #ffffff;"><tr><td width="10" align="left" valign="middle"> &nbsp; </td><td width="190" align="left" valign="middle"><a href="https://www.nfp.com/" target="_blank"><img src="https://webfiles2.nfp.com/webfiles/public/tier1/emails/logos/nfp-black.png" style="display: block; border: 0;"></a></td><td width="200" align="center" valign="middle"><p style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 14px; color: #000000;"> May 1,&nbsp;2020 </p></td><td width="175" align="right" valign="middle"><p style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 12px; color: #007795;"><a href="https://webfiles2.nfp.com/webfiles/public/2020_emails/individual_solutions/2020_05_01/individual_solutions_internal_20200501.html" style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 12px; color: #ad434f; text-decoration: none;"> view email in browser&nbsp;&raquo; </a></p></td><td width="25" align="left" valign="middle"> &nbsp; </td></tr></table></td></tr><tr><td width="600" height="10" style="font-size: 10px; line-height: 10px;"><table width="600" height="10" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; border-color: #ffffff;"><tr><td width="600">&nbsp;</td></tr></table></td></tr><tr><td><table width="600" height="230" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #ffffff;"><tr><td width="600" height="230"><img width="600" height="230" alt="individual Solutions Report" src="https://webfiles2.nfp.com/webfiles/public/2020_emails/individual_solutions/img/i_s_covid_header.jpg" style="width: 600px; height: 230px; display: block; border: 0;"></td></tr></table></td></tr>`;
 
             // loop through the section data objects
-            // let header_date = document.getElementById(`headerDate`);
-                // header_date.innerHTML = `${monthNames[new Date(current_sections[0].ttl).getMonth()]}&nbsp;${new Date(current_sections[0].ttl).getDate()}, ${new Date(current_sections[0].ttl).getFullYear()}`;
             for (let s=0; s<current_sections.length; s++) {
             
                 info_row = document.createElement(`tr`);
@@ -582,27 +715,31 @@
                         header_path = `https://webfiles2.nfp.com/webfiles/public/2020_emails/property_and_casualty_newsletter/img/p_c_covid_header.jpg`;
                     };
 
-                    header_info = (`<td onclick="openEditForm(0)" align="center" valign="top" width="100"><table width="100" border="0">
+                    header_info = (`<td align="center" valign="top" width="100"><table width="100" border="0">
                                     <tr>
                                         <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/edit_icon.png" onclick="openEditForm(0)" /></td>
                                         <td>&nbsp;</td>
                                         <td>&nbsp;</td>
                                         <td>&nbsp;
                                             <div class="form-popup" id="editForm0">
-                                                <p class="label" style="font-size: 18px; line-height: 24px;">Edit Spacer - Section 0
+                                                <p class="label" style="font-size: 18px; line-height: 24px;">Edit Header - Section 0
                                                 <input type="hidden" name="odr0" id="odr0" value="" />
-                                                <input type="hidden" name="ttl0" id="ttl0" value="" />
-                                                <input type="hidden" name="lnk0" id="lnk0" value="" />
+                                                <input type="hidden" name="bgc0" id="bgc0" value="" />
+                                                <input type="hidden" name="dsc0" id="dsc0" value="" />
                                                 <input type="hidden" name="btn0" id="btn0" value="" />
-                                                <nobr>Type:&nbsp;<input type="text" size="30" name="typ0" id="typ0" value="" /></nobr>
+                                                <nobr>Theme:&nbsp;${themeDropdown(current_sections[0].typ)}</nobr>
                                                 <br />
-                                                <nobr>Height:&nbsp;<input type="text" size="4" name="dsc0" id="dsc0" value="" /></nobr>
+                                                <nobr>Month:&nbsp;<input type="text" size="30" name="month0" id="month0" value="${current_sections[0].ttl.getMonth()}" /></nobr>
                                                 <br />
-                                                <nobr>Background:&nbsp;</nobr>
-                                                <br />&nbsp;<br />
-                                                <button type="button" class="btn" onclick="updateSection(0)">Update</button>
-                                                <button type="button" class="btn cancel" onclick="closeEditForm(0)">Cancel</button></p>
-                                            </div></td></tr></table></td><td align="center" valign="top" width="600"><!-- nfp logo and date table --><table bgcolor="#ffffff" border="0" width="600" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #ffffff;"><tr><td width="10" align="left" valign="middle">&nbsp;</td><td width="190" align="left" valign="middle"><a href="https://www.nfp.com/" target="_blank"><img src="https://webfiles2.nfp.com/webfiles/public/tier1/emails/logos/nfp-black.png" style="display: block; border: 0;"></a></td><td width="200" align="center" valign="middle"><p id="headerDate" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 14px; color: #000000;"></p></td><td width="175" align="right" valign="middle"><p style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 12px; color: #007795;"><a href="https://webfiles2.nfp.com/webfiles/public/2020_emails/corp_ben/04_23/corporate_benefits_internal_20200423.html" style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 12px; color: #ad434f; text-decoration: none;">view email in browser&nbsp;&raquo;</a></p></td><td width="25" align="left" valign="middle">&nbsp;</td></tr></table><!-- end nfp logo and date table --></td>`)
+                                                <nobr>Date:&nbsp;<input type="text" size="30" name="date0" id="date0" value="${current_sections[0].ttl.getDate()}" /></nobr>
+                                                <br />
+                                                <nobr>Year:&nbsp;<input type="text" size="30" name="year0" id="year0" value="${current_sections[0].ttl.getFullYear()}" /></nobr>
+                                                <br />
+                                                <nobr>Browser Link:&nbsp;<input type="text" size="4" name="lnk0" id="lnk0" value="" /></nobr>
+                                                <br />
+                                                <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                                                <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                                            </div></td></tr></table></td><td align="center" valign="top" width="600"><!-- nfp logo and date table --><table bgcolor="#ffffff" border="0" width="600" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #ffffff;"><tr><td width="10" align="left" valign="middle">&nbsp;</td><td width="190" align="left" valign="middle"><a href="https://www.nfp.com/" target="_blank"><img src="https://webfiles2.nfp.com/webfiles/public/tier1/emails/logos/nfp-black.png" style="display: block; border: 0;"></a></td><td width="200" align="center" valign="middle"><p id="headerDate" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 14px; color: #000000;">${month_names[current_sections[0].ttl.getMonth()]}&nbsp;${current_sections[0].ttl.getDate()},&nbsp;${current_sections[0].ttl.getFullYear()}</p></td><td width="175" align="right" valign="middle"><p style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 12px; color: #007795;"><a href="https://webfiles2.nfp.com/webfiles/public/2020_emails/corp_ben/04_23/corporate_benefits_internal_20200423.html" style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 12px; color: #ad434f; text-decoration: none;">view email in browser&nbsp;&raquo;</a></p></td><td width="25" align="left" valign="middle">&nbsp;</td></tr></table><!-- end nfp logo and date table --></td>`)
 
                     header_spacer = (`<td align="center" valign="top" width="100"></td><td width="600" height="10" style="font-size: 10px; line-height: 10px;"><table width="600" height="10" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; border-color: #ffffff;"><tr><td width="600">&nbsp;</td></tr></table></td></tr>`)
 
@@ -610,27 +747,204 @@
 
                 // build approriate section type
                 } else if (current_sections[s].typ === `lgsh`) {
-                    section_cells = (`<td bgcolor="#${sectionEditColor(current_sections[s].id)}" width="1000" align="left" style="border-top: solid #cccccc 1px; border-right: solid #cccccc 1px; border-bottom: solid #cccccc 1px;"><a class="anchor" id="section${current_sections[s].id}"></a><table width="1000" border="0" cellpadding="2"><tr><td width="10">&nbsp;</td><td width="40" align="right"><strong>Type:</strong></td><td width="610" align="left"><input type="text" size="30" name="typ${current_sections[s].id}" id="typ${current_sections[s].id}" value="${unAbrvType(current_sections[s].typ)}" /></td><td width="85" align="right"><strong>Background:</strong></td><td width="85" align="left">${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</td><td width="135" align="center" valign="middle"><button class="update" onclick="updateSection(${current_sections[s].id})">Update</button>&nbsp;<img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" style="display: inline;" onclick="copySection(${current_sections[s].id})" />&nbsp;<button class="delete" onclick="deleteSection(${current_sections[s].id})">Delete</button><input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" /><input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="" /><input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="" /><input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="" /></td><td width="25" align="center" valign="middle" style="font-size: 12px; color:#666666;"><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a></td><td width="10">&nbsp;</td></tr><tr><td width="10">&nbsp;</td><td width="40" align="right" valign="top"><strong>Text:</strong></td><td colspan="6" width="950" align="left"><input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></td></tr></table></td><!-- large Header --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse;  border: 0;" width="100%"><tr><td width="50">&nbsp;</td><td width="500" style="border-spacing: 0; border-collapse: collapse;  font-family: Arial, Helvetica, sans-serif; font-weight: 100; display: block; font-size: 24px; line-height: 24px; letter-spacing: 2px; color: #000000; text-align: center;">${current_sections[s].ttl}</td><td width="50">&nbsp;</td></tr><tr><td colspan="3" height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td align="center" colspan="3" height="15" style="font-size: 15px; line-height: 15px;">_________</td></tr><tr><td colspan="3" bgcolor="#${bgc(current_sections[s].bgc)}" height="60" style="font-size: 60px; line-height: 60px;">&nbsp;</td></tr></table></td>`);
+                    section_cells = (`
+                    <td onclick="openEditForm(${current_sections[s].id})" align="center" valign="top" width="100">
+                        <table width="100" border="0">
+                            <tr>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/edit_icon.png" onclick="openEditForm(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" onclick="copySection(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/delete_icon.png" onclick="deleteSection(${current_sections[s].id})" /></td>
+                                <td><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <!-- large Header --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse;  border: 0;" width="100%"><tr><td width="50">&nbsp;</td><td width="500" style="border-spacing: 0; border-collapse: collapse;  font-family: Arial, Helvetica, sans-serif; font-weight: 100; display: block; font-size: 24px; line-height: 24px; letter-spacing: 2px; color: #000000; text-align: center;">${current_sections[s].ttl}</td><td width="50">&nbsp;</td></tr><tr><td colspan="3" height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td align="center" colspan="3" height="15" style="font-size: 15px; line-height: 15px;">_________</td></tr><tr><td colspan="3" bgcolor="#${bgc(current_sections[s].bgc)}" height="60" style="font-size: 60px; line-height: 60px;">&nbsp;</td></tr></table>
+                        <div class="form-popup" id="editForm${current_sections[s].id}">
+                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                            <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
+                            <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
+                            <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                            <br />
+                            <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
+                            <br />
+                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                            <br />&nbsp;<br />
+                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                        </div>
+                    </td>`);
 
                     raw_HTML = (`<!-- large Header --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse;  border: 0;" width="100%"><tr><td width="50">&nbsp;</td><td width="500" style="border-spacing: 0; border-collapse: collapse;  font-family: Arial, Helvetica, sans-serif; font-weight: 100; display: block; font-size: 24px; line-height: 24px; letter-spacing: 2px; color: #000000; text-align: center;">${current_sections[s].ttl}</td><td width="50">&nbsp;</td></tr><tr><td colspan="3" height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td align="center" colspan="3" height="15" style="font-size: 15px; line-height: 15px;">_________</td></tr><tr><td colspan="3" bgcolor="#${bgc(current_sections[s].bgc)}" height="60" style="font-size: 60px; line-height: 60px;">&nbsp;</td></tr></table></td>`);
                 } else if (current_sections[s].typ === `scsh`) {
-                    section_cells = (`<td bgcolor="#${sectionEditColor(current_sections[s].id)}" width="1000" align="left" style="border-top: solid #cccccc 1px; border-right: solid #cccccc 1px; border-bottom: solid #cccccc 1px;"><a class="anchor" id="section${current_sections[s].id}"></a><table width="1000" border="0" cellpadding="2"><tr><td width="10">&nbsp;</td><td width="40" align="right"><strong>Type:</strong></td><td width="610" align="left"><input type="text" size="30" name="typ${current_sections[s].id}" id="typ${current_sections[s].id}" value="${unAbrvType(current_sections[s].typ)}" /></td><td width="85" align="right"><strong>Background:</strong></td><td width="85" align="left">${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</td><td width="135" align="center" valign="middle"><button class="update" onclick="updateSection(${current_sections[s].id})">Update</button>&nbsp;<img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" style="display: inline;" onclick="copySection(${current_sections[s].id})" />&nbsp;<button class="delete" onclick="deleteSection(${current_sections[s].id})">Delete</button><input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" /><input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="" /><input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="" /><input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="" /></td><td width="25" align="center" valign="middle" style="font-size: 12px; color:#666666;"><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a></td><td width="10">&nbsp;</td></tr><tr><td width="10">&nbsp;</td><td width="40" align="right" valign="top"><strong>Text:</strong></td><td colspan="6" width="950" align="left"><input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></td></tr></table></td><!-- Color Sub-Header --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse;  border: 0;" width="100%"><tr style="border-spacing: 0; border-collapse: collapse; "><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td><td style="border-spacing: 0; border-collapse: collapse; " width="500"><h4 class="letterspace" style="margin-bottom: 0px; margin-top: 5px; font-family: Arial, Helvetica, sans-serif; font-weight: 600; display: block; font-size: 17px; line-height: 17px; letter-spacing: 2px; color: #ad434f; text-align: center;">${current_sections[s].ttl}</h4></td><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td></tr><tr><td colspan="3" height="20" style="font-size: 20px; line-height: 20px;">&nbsp;</td></tr></table></td>`);
+                    section_cells = (`
+                    <td onclick="openEditForm(${current_sections[s].id})" align="center" valign="top" width="100">
+                        <table width="100" border="0">
+                            <tr>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/edit_icon.png" onclick="openEditForm(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" onclick="copySection(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/delete_icon.png" onclick="deleteSection(${current_sections[s].id})" /></td>
+                                <td><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <!-- Color Sub-Header --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse;  border: 0;" width="100%"><tr style="border-spacing: 0; border-collapse: collapse; "><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td><td style="border-spacing: 0; border-collapse: collapse; " width="500"><h4 class="letterspace" style="margin-bottom: 0px; margin-top: 5px; font-family: Arial, Helvetica, sans-serif; font-weight: 600; display: block; font-size: 17px; line-height: 17px; letter-spacing: 2px; color: #ad434f; text-align: center;">${current_sections[s].ttl}</h4></td><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td></tr><tr><td colspan="3" height="20" style="font-size: 20px; line-height: 20px;">&nbsp;</td></tr></table>
+                        <div class="form-popup" id="editForm${current_sections[s].id}">
+                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                            <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
+                            <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
+                            <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                            <br />
+                            <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
+                            <br />
+                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                            <br />&nbsp;<br />
+                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                        </div>
+                    </td>`);
 
                     raw_HTML = (`<!-- Color Sub-Header --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse;  border: 0;" width="100%"><tr style="border-spacing: 0; border-collapse: collapse; "><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td><td style="border-spacing: 0; border-collapse: collapse; " width="500"><h4 class="letterspace" style="margin-bottom: 0px; margin-top: 5px; font-family: Arial, Helvetica, sans-serif; font-weight: 600; display: block; font-size: 17px; line-height: 17px; letter-spacing: 2px; color: #ad434f; text-align: center;">${current_sections[s].ttl}</h4></td><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td></tr><tr><td colspan="3" height="20" style="font-size: 20px; line-height: 20px;">&nbsp;</td></tr></table></td>`);
                 } else if (current_sections[s].typ === `bn`) {
-                    section_cells = (`<td bgcolor="#${sectionEditColor(current_sections[s].id)}" width="1000" align="left" style="border-top: solid #cccccc 1px; border-right: solid #cccccc 1px; border-bottom: solid #cccccc 1px;"><a class="anchor" id="section${current_sections[s].id}"></a><table width="1000" border="0" cellpadding="2"><tr><td width="10">&nbsp;</td><td width="40" align="right"><strong>Type:</strong></td><td width="610" align="left"><input type="text" size="30" name="typ${current_sections[s].id}" id="typ${current_sections[s].id}" value="${unAbrvType(current_sections[s].typ)}" /></td><td width="85" align="right"><strong>Background:</strong></td><td width="85" align="left">${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</td><td width="135" align="center" valign="middle"><button class="update" onclick="updateSection(${current_sections[s].id})">Update</button>&nbsp;<img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" style="display: inline;" onclick="copySection(${current_sections[s].id})" />&nbsp;<button class="delete" onclick="deleteSection(${current_sections[s].id})">Delete</button><input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" /><input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="" /><input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="" /><input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="" /></td><td width="25" align="center" valign="middle" style="font-size: 12px; color:#666666;"><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a></td><td width="10">&nbsp;</td></tr><tr><td width="10">&nbsp;</td><td width="40" align="right" valign="top"><strong>Text:</strong></td><td colspan="6" width="950" align="left"><input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></td></tr></table></td><!-- Color Banner --><td><table align="center" bgcolor="#ad434f" border="0" cellpadding="0" cellspacing="0" class="m-0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border: 0;" width="600"><tr style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;"><td bgcolor="#ad434f" height="46" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="125"><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/individual_solutions/img/left_fade_red.png" style="width: 125px; display: block; border: none;"></td><td align="center" bgcolor="#ad434f" height="46" style="font-family:'Open Sans', Arial, Helvetica, sans-serif; border: 0 none; text-decoration: none; color: #ffffff; font-size: 13px; line-height: 13px; font-weight: bold; letter-spacing: 2px;" width="350"><strong>${current_sections[s].ttl}</strong></td><td bgcolor="#ad434f" height="46" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="125"><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/individual_solutions/img/right_fade_red.png" style="width: 125px; display: block; border: none;"></td></tr><tr><td colspan="3" bgcolor="#${bgc(current_sections[s].bgc)}" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td>`);
+                    section_cells = (`
+                    <td onclick="openEditForm(${current_sections[s].id})" align="center" valign="top" width="100">
+                        <table width="100" border="0">
+                            <tr>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/edit_icon.png" onclick="openEditForm(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" onclick="copySection(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/delete_icon.png" onclick="deleteSection(${current_sections[s].id})" /></td>
+                                <td><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <!-- Color Banner --><td><table align="center" bgcolor="#ad434f" border="0" cellpadding="0" cellspacing="0" class="m-0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border: 0;" width="600"><tr style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;"><td bgcolor="#ad434f" height="46" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="125"><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/individual_solutions/img/left_fade_red.png" style="width: 125px; display: block; border: none;"></td><td align="center" bgcolor="#ad434f" height="46" style="font-family:'Open Sans', Arial, Helvetica, sans-serif; border: 0 none; text-decoration: none; color: #ffffff; font-size: 13px; line-height: 13px; font-weight: bold; letter-spacing: 2px;" width="350"><strong>${current_sections[s].ttl}</strong></td><td bgcolor="#ad434f" height="46" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="125"><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/individual_solutions/img/right_fade_red.png" style="width: 125px; display: block; border: none;"></td></tr><tr><td colspan="3" bgcolor="#${bgc(current_sections[s].bgc)}" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table>
+                        <div class="form-popup" id="editForm${current_sections[s].id}">
+                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                            <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
+                            <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
+                            <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                            <br />
+                            <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
+                            <br />
+                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                            <br />&nbsp;<br />
+                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                        </div>
+                    </td>`);
 
                     raw_HTML = (`<!-- Color Banner --><td><table align="center" bgcolor="#ad434f" border="0" cellpadding="0" cellspacing="0" class="m-0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border: 0;" width="600"><tr style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;"><td bgcolor="#ad434f" height="46" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="125"><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/individual_solutions/img/left_fade_red.png" style="width: 125px; display: block; border: none;"></td><td align="center" bgcolor="#ad434f" height="46" style="font-family:'Open Sans', Arial, Helvetica, sans-serif; border: 0 none; text-decoration: none; color: #ffffff; font-size: 13px; line-height: 13px; font-weight: bold; letter-spacing: 2px;" width="350"><strong>${current_sections[s].ttl}</strong></td><td bgcolor="#ad434f" height="46" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="125"><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/individual_solutions/img/right_fade_red.png" style="width: 125px; display: block; border: none;"></td></tr><tr><td colspan="3" bgcolor="#${bgc(current_sections[s].bgc)}" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td>`);
                 } else if (current_sections[s].typ === `bl`) {
-                    section_cells = (`<td bgcolor="#${sectionEditColor(current_sections[s].id)}" width="1000" align="left" style="border-top: solid #cccccc 1px; border-right: solid #cccccc 1px; border-bottom: solid #cccccc 1px;"><a class="anchor" id="section${current_sections[s].id}"></a><table width="1000" border="0" cellpadding="2"><tr><td width="10">&nbsp;</td><td width="40" align="right"><strong>Type:</strong></td><td width="610" align="left"><input type="text" size="30" name="typ${current_sections[s].id}" id="typ${current_sections[s].id}" value="${unAbrvType(current_sections[s].typ)}" /></td><td width="85" align="right"><strong>Background:</strong></td><td width="85" align="left">${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</td><td width="135" align="center" valign="middle"><button class="update" onclick="updateSection(${current_sections[s].id})">Update</button>&nbsp;<img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" style="display: inline;" onclick="copySection(${current_sections[s].id})" />&nbsp;<button class="delete" onclick="deleteSection(${current_sections[s].id})">Delete</button><input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" /><input type="hidden" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" value="" /><input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="" /><input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="" /></td><td width="25" align="center" valign="middle" style="font-size: 12px; color:#666666;"><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a></td><td width="10">&nbsp;</td></tr><tr><td width="10">&nbsp;</td><td width="40" align="right" valign="top"><strong>Text:</strong></td><td colspan="6" width="950" align="left"><textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea></td></tr></table></td><!-- Text blurb --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse; border: 0;" width="100%"><tr height="10" style="border-spacing: 0; border-collapse: collapse; "><td width="50">&nbsp;</td><td style="text-align: center; color: #000000; line-height: 17.4px; font-size: 14px; font-family: Arial, Helvetica, sans-serif;" width="500">${current_sections[s].dsc}</td><td width="50">&nbsp;</td></tr><tr><td colspan="3" bgcolor="#${bgc(current_sections[s].bgc)}" height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td></tr></table></td>`);
+                    section_cells = (`
+                    <td onclick="openEditForm(${current_sections[s].id})" align="center" valign="top" width="100">
+                        <table width="100" border="0">
+                            <tr>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/edit_icon.png" onclick="openEditForm(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" onclick="copySection(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/delete_icon.png" onclick="deleteSection(${current_sections[s].id})" /></td>
+                                <td><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <!-- Text blurb --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse; border: 0;" width="100%"><tr height="10" style="border-spacing: 0; border-collapse: collapse; "><td width="50">&nbsp;</td><td style="text-align: center; color: #000000; line-height: 17.4px; font-size: 14px; font-family: Arial, Helvetica, sans-serif;" width="500">${current_sections[s].dsc}</td><td width="50">&nbsp;</td></tr><tr><td colspan="3" bgcolor="#${bgc(current_sections[s].bgc)}" height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td></tr></table>
+                        <div class="form-popup" id="editForm${current_sections[s].id}">
+                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                            <input type="hidden" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" value="${current_sections[s].ttl}" />
+                            <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                            <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
+                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                            <br />
+                            <nobr>Text:&nbsp;<textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea>
+                            <br />
+                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                            <br />&nbsp;<br />
+                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                        </div>
+                    </td>`);
 
                     raw_HTML = (`<!-- Text blurb --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse; border: 0;" width="100%"><tr height="10" style="border-spacing: 0; border-collapse: collapse; "><td width="50">&nbsp;</td><td style="text-align: center; color: #000000; line-height: 17.4px; font-size: 14px; font-family: Arial, Helvetica, sans-serif;" width="500">${current_sections[s].dsc}</td><td width="50">&nbsp;</td></tr><tr><td colspan="3" bgcolor="#${bgc(current_sections[s].bgc)}" height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td></tr></table></td>`);
                 } else if (current_sections[s].typ === `sla`) {
-                    section_cells = (`<td bgcolor="#${sectionEditColor(current_sections[s].id)}" width="1000" align="left" style="border-top: solid #cccccc 1px; border-right: solid #cccccc 1px; border-bottom: solid #cccccc 1px;"><a class="anchor" id="section${current_sections[s].id}"></a><table width="1000" border="0" cellpadding="2"><tr><td width="10">&nbsp;</td><td width="40" align="right"><strong>Type:</strong></td><td width="610" align="left"><input type="text" size="30" name="typ${current_sections[s].id}" id="typ${current_sections[s].id}" value="${unAbrvType(current_sections[s].typ)}" /></td><td width="85" align="right"><strong>Background:</strong></td><td width="85" align="left">${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</td><td width="135" align="center" valign="middle"><button class="update" onclick="updateSection(${current_sections[s].id})">Update</button>&nbsp;<img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" style="display: inline;" onclick="copySection(${current_sections[s].id})" />&nbsp;<button class="delete" onclick="deleteSection(${current_sections[s].id})">Delete</button><input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" /><input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="" /><input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="" /></td><td width="25" align="center" valign="middle" style="font-size: 12px; color:#666666;"><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a></td><td width="10">&nbsp;</td></tr><tr><td width="10">&nbsp;</td><td width="40" align="right" valign="top"><strong>Title:</strong></td><td colspan="6" width="950" align="left"><input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></td></tr><tr><td width="10">&nbsp;</td><td width="40" align="right" valign="top"><strong>Link:</strong></td><td colspan="6" width="950" align="left"><input type="text" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" size="102" value="${current_sections[s].lnk}" /></td></tr></table></td><!-- Single Line Article --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;"><tr><td rowspan="2" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;"><a href="${current_sections[s].lnk}" target="_blank" >${current_sections[s].ttl}&nbsp;&raquo;</a></td><td rowspan="2" width="50">&nbsp;</td></tr><tr><td width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td>`);
+                    section_cells = (`
+                    <td onclick="openEditForm(${current_sections[s].id})" align="center" valign="top" width="100">
+                        <table width="100" border="0">
+                            <tr>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/edit_icon.png" onclick="openEditForm(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" onclick="copySection(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/delete_icon.png" onclick="deleteSection(${current_sections[s].id})" /></td>
+                                <td><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <!-- Single Line Article --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;"><tr><td rowspan="2" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;"><a href="${current_sections[s].lnk}" target="_blank" >${current_sections[s].ttl}&nbsp;&raquo;</a></td><td rowspan="2" width="50">&nbsp;</td></tr><tr><td width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table>
+                        <div class="form-popup" id="editForm${current_sections[s].id}">
+                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                            <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                            <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
+                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                            <br />
+                            <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
+                            <br />
+                            <nobr>Link:&nbsp;<input type="text" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" size="102" value="${current_sections[s].lnk}" />
+                            <br />
+                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                            <br />&nbsp;<br />
+                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                        </div>
+                    </td>`);
 
                     raw_HTML = (`<!-- Single Line Article --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;"><tr><td rowspan="2" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;"><a href="${current_sections[s].lnk}" target="_blank" >${current_sections[s].ttl}&nbsp;&raquo;</a></td><td rowspan="2" width="50">&nbsp;</td></tr><tr><td width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td>`);
                 } else if (current_sections[s].typ === `lad`) {
-                    section_cells = (`<td bgcolor="#${sectionEditColor(current_sections[s].id)}" width="1000" align="left" style="border-top: solid #cccccc 1px; border-right: solid #cccccc 1px; border-bottom: solid #cccccc 1px;"><a class="anchor" id="section${current_sections[s].id}"></a><table width="1000" border="0" cellpadding="2"><tr><td width="10">&nbsp;</td><td width="40" align="right"><strong>Type:</strong></td><td width="610" align="left"><input type="text" size="30" name="typ${current_sections[s].id}" id="typ${current_sections[s].id}" value="${unAbrvType(current_sections[s].typ)}" /></td><td width="85" align="right"><strong>Background:</strong></td><td width="85" align="left">${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</td><td width="135" align="center" valign="middle"><button class="update" onclick="updateSection(${current_sections[s].id})">Update</button>&nbsp;<img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" style="display: inline;" onclick="copySection(${current_sections[s].id})" />&nbsp;<button class="delete" onclick="deleteSection(${current_sections[s].id})">Delete</button><input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" /><input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="" /></td><td width="25" align="center" valign="middle" style="font-size: 12px; color:#666666;"><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a></td><td width="10">&nbsp;</td></tr><tr><td width="10">&nbsp;</td><td width="40" align="right" valign="top"><strong>Title:</strong></td><td colspan="6" width="950" align="left"><input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></td></tr><tr><td width="10">&nbsp;</td><td width="40" align="right" valign="top"><strong>Link:</strong></td><td colspan="6" width="950" align="left"><input type="text" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" size="102" value="${current_sections[s].lnk}" /></td></tr><tr><td width="10">&nbsp;</td><td width="40" align="right" valign="top"><strong>Desc:</strong></td><td colspan="6" width="950" align="left"><textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea></td></tr></table></td><!-- article with title and description --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;"><a href="${current_sections[s].lnk}" target="_blank" >${current_sections[s].ttl}&nbsp;&raquo;</a></td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #eeeeee;"><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr><tr><td colspan="2" width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td></tr></table></td>`);
+                    section_cells = (`
+                    <td onclick="openEditForm(${current_sections[s].id})" align="center" valign="top" width="100">
+                        <table width="100" border="0">
+                            <tr>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/edit_icon.png" onclick="openEditForm(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" onclick="copySection(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/delete_icon.png" onclick="deleteSection(${current_sections[s].id})" /></td>
+                                <td><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <!-- article with title and description --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;"><a href="${current_sections[s].lnk}" target="_blank" >${current_sections[s].ttl}&nbsp;&raquo;</a></td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #eeeeee;"><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr><tr><td colspan="2" width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td></tr></table>
+                        <div class="form-popup" id="editForm${current_sections[s].id}">
+                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                            <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                            <br />
+                            <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
+                            <br />
+                            <nobr>Link:&nbsp;<input type="text" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" size="102" value="${current_sections[s].lnk}" />
+                            <br />
+                            <nobr>Desc:&nbsp;<textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea>
+                            <br />
+                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                            <br />&nbsp;<br />
+                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                        </div>
+                    </td>`);
 
                     raw_HTML = (`<!-- article with title and description -->
                     <td>
@@ -665,11 +979,69 @@
                         </table>
                     </td>`);
                 } else if (current_sections[s].typ === `ubt`) {
-                    section_cells = (`<td bgcolor="#${sectionEditColor(current_sections[s].id)}" width="1000" align="left" style="border-top: solid #cccccc 1px; border-right: solid #cccccc 1px; border-bottom: solid #cccccc 1px;"><a class="anchor" id="section${current_sections[s].id}"></a><table width="1000" border="0" cellpadding="2"><tr><td width="10">&nbsp;</td><td width="40" align="right"><strong>Type:</strong></td><td width="610" align="left"><input type="text" size="30" name="typ${current_sections[s].id}" id="typ${current_sections[s].id}" value="${unAbrvType(current_sections[s].typ)}" /></td><td width="85" align="right"><strong>Background:</strong></td><td width="85" align="left">${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</td><td width="135" align="center" valign="middle"><button class="update" onclick="updateSection(${current_sections[s].id})">Update</button>&nbsp;<img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" style="display: inline;" onclick="copySection(${current_sections[s].id})" />&nbsp;<button class="delete" onclick="deleteSection(${current_sections[s].id})">Delete</button><input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" /><input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="" /><input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="" /><input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="" /></td><td width="25" align="center" valign="middle" style="font-size: 12px; color:#666666;"><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a></td><td width="10">&nbsp;</td></tr><tr><td width="10">&nbsp;</td><td width="40" align="right" valign="top"><strong>Text:</strong></td><td colspan="6" width="950" align="left"><input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></td></tr></table></td><!-- underlined bold title --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #000000;"><tr><td rowspan="2" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: underline; font-weight: 600;">${current_sections[s].ttl}</td><td rowspan="2" width="50">&nbsp;</td></tr><tr><td width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td>`);
+                    section_cells = (`
+                    <td onclick="openEditForm(${current_sections[s].id})" align="center" valign="top" width="100">
+                        <table width="100" border="0">
+                            <tr>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/edit_icon.png" onclick="openEditForm(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" onclick="copySection(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/delete_icon.png" onclick="deleteSection(${current_sections[s].id})" /></td>
+                                <td><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <!-- underlined bold title --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #000000;"><tr><td rowspan="2" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: underline; font-weight: 600;">${current_sections[s].ttl}</td><td rowspan="2" width="50">&nbsp;</td></tr><tr><td width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table>
+                        <div class="form-popup" id="editForm${current_sections[s].id}">
+                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                            <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
+                            <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
+                            <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                            <br />
+                            <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></nobr>
+                            <br />
+                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                            <br />&nbsp;<br />
+                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                        </div>
+                    </td>`);
 
                     raw_HTML = (`<!-- underlined bold title --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #000000;"><tr><td rowspan="2" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: underline; font-weight: 600;">${current_sections[s].ttl}</td><td rowspan="2" width="50">&nbsp;</td></tr><tr><td width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td>`);
                 } else if (current_sections[s].typ === `lssh`) {
-                    section_cells = (`<td bgcolor="#${sectionEditColor(current_sections[s].id)}" width="1000" align="left" style="border-top: solid #cccccc 1px; border-right: solid #cccccc 1px; border-bottom: solid #cccccc 1px;"><a class="anchor" id="section${current_sections[s].id}"></a><table width="1000" border="0" cellpadding="2"><tr><td width="10">&nbsp;</td><td width="40" align="right"><strong>Type:</strong></td><td width="610" align="left"><input type="text" size="30" name="typ${current_sections[s].id}" id="typ${current_sections[s].id}" value="${unAbrvType(current_sections[s].typ)}" /></td><td width="85" align="right"><strong>Background:</strong></td><td width="85" align="left">${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</td><td width="135" align="center" valign="middle"><button class="update" onclick="updateSection(${current_sections[s].id})">Update</button>&nbsp;<img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" style="display: inline;" onclick="copySection(${current_sections[s].id})" />&nbsp;<button class="delete" onclick="deleteSection(${current_sections[s].id})">Delete</button><input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" /><input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="" /><input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="" /><input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="" /></td><td width="25" align="center" valign="middle" style="font-size: 12px; color:#666666;"><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a></td><td width="10">&nbsp;</td></tr><tr><td width="10">&nbsp;</td><td width="40" align="right" valign="top"><strong>Text:</strong></td><td colspan="6" width="950" align="left"><input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></td></tr></table></td><!-- letterspaced sub-header --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse;  border: 0;" width="100%"><tr style="border-spacing: 0; border-collapse: collapse; "><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td><td style="border-spacing: 0; border-collapse: collapse; " width="500"><h4 class="letterspace" style="margin-bottom: 0px; margin-top: 5px; font-family: Arial, Helvetica, sans-serif; font-weight: 500; display: block; font-size: 18px; line-height: 25px; letter-spacing: 2px; color: #000000; text-align: center;">${current_sections[s].ttl}</h4></td><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td></tr><tr><td colspan="3" height="20" style="font-size: 20px; line-height: 20px;">&nbsp;</td></tr></table></td>`);
+                    section_cells = (`
+                    <td onclick="openEditForm(${current_sections[s].id})" align="center" valign="top" width="100">
+                        <table width="100" border="0">
+                            <tr>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/edit_icon.png" onclick="openEditForm(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" onclick="copySection(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/delete_icon.png" onclick="deleteSection(${current_sections[s].id})" /></td>
+                                <td><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <!-- letterspaced sub-header --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse;  border: 0;" width="100%"><tr style="border-spacing: 0; border-collapse: collapse; "><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td><td style="border-spacing: 0; border-collapse: collapse; " width="500"><h4 class="letterspace" style="margin-bottom: 0px; margin-top: 5px; font-family: Arial, Helvetica, sans-serif; font-weight: 500; display: block; font-size: 18px; line-height: 25px; letter-spacing: 2px; color: #000000; text-align: center;">${current_sections[s].ttl}</h4></td><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td></tr><tr><td colspan="3" height="20" style="font-size: 20px; line-height: 20px;">&nbsp;</td></tr></table>
+                        <div class="form-popup" id="editForm${current_sections[s].id}">
+                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                            <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
+                            <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
+                            <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                            <br />
+                            <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></nobr>
+                            <br />
+                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                            <br />&nbsp;<br />
+                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                        </div>
+                    </td>`);
 
                     raw_HTML = (`<!-- letterspaced sub-header --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse;  border: 0;" width="100%"><tr style="border-spacing: 0; border-collapse: collapse; "><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td><td style="border-spacing: 0; border-collapse: collapse; " width="500"><h4 class="letterspace" style="margin-bottom: 0px; margin-top: 5px; font-family: Arial, Helvetica, sans-serif; font-weight: 500; display: block; font-size: 18px; line-height: 25px; letter-spacing: 2px; color: #000000; text-align: center;">${current_sections[s].ttl}</h4></td><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td></tr><tr><td colspan="3" height="20" style="font-size: 20px; line-height: 20px;">&nbsp;</td></tr></table></td>`);
                 } else if (current_sections[s].typ === `twbl`) {
@@ -695,20 +1067,142 @@
                     
                     raw_HTML = (`<!-- title with bulleted links --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="2" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px; text-decoration: none;">${current_sections[s].ttl}<ul style="color: #000000; line-height: 23.2px; font-size: 16px; font-family: Arial, Helvetica, sans-serif;">${current_sections[s].dsc}</ul></td><td rowspan="2" width="50">&nbsp;</td></tr><tr><td width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td>`);
                 } else if (current_sections[s].typ === `tdwb`) {
-                    section_cells = (`<td bgcolor="#${sectionEditColor(current_sections[s].id)}" width="1000" align="left" style="border-top: solid #cccccc 1px; border-right: solid #cccccc 1px; border-bottom: solid #cccccc 1px;"><a class="anchor" id="section${current_sections[s].id}"></a><table width="1000" border="0" cellpadding="2"><tr><td width="10">&nbsp;</td><td width="40" align="right"><strong>Type:</strong></td><td width="610" align="left"><input type="text" size="30" name="typ${current_sections[s].id}" id="typ${current_sections[s].id}" value="${unAbrvType(current_sections[s].typ)}" /></td><td width="85" align="right"><strong>Background:</strong></td><td width="85" align="left">${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</td><td width="135" align="center" valign="middle"><button class="update" onclick="updateSection(${current_sections[s].id})">Update</button>&nbsp;<img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" style="display: inline;" onclick="copySection(${current_sections[s].id})" />&nbsp;<button class="delete" onclick="deleteSection(${current_sections[s].id})">Delete</button><input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" /></td><td width="25" align="center" valign="middle" style="font-size: 12px; color:#666666;"><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a></td><td width="10">&nbsp;</td></tr><tr><td width="10">&nbsp;</td><td width="40" align="right" valign="top"><strong>Title:</strong></td><td colspan="6" width="950" align="left"><input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></td></tr><tr><td width="10">&nbsp;</td><td width="40" align="right" valign="top"><strong>Desc:</strong></td><td colspan="6" width="950" align="left"><textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea></td></tr><tr><td width="10">&nbsp;</td><td width="40" align="right" valign="top"><strong>Btn:</strong></td><td colspan="6" width="950" align="left"><input type="text" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" size="102" value="${current_sections[s].btn}" /></td></tr><tr><td width="10">&nbsp;</td><td width="40" align="right" valign="top"><strong>Link:</strong></td><td colspan="6" width="950" align="left"><input type="text" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" size="102" value="${current_sections[s].lnk}" /></td></tr></table></td><!-- title and description with button --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;">${current_sections[s].ttl}</td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #ffffff;"><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr><tr><td colspan="2" width="520" height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td width="30">&nbsp;</td><td align="left" width="470"><table align="left" width="150" border="0" cellspacing="0" cellpadding="0"><tr><td style="background: #000000; padding: 7px 7px; border-radius: 0px; text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none;"><a href="${current_sections[s].lnk}" style="text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none; letter-spacing: .5px" target="_blank">${current_sections[s].btn}</a></td></tr></table></td></tr></table></td></tr><tr><td height="40" style="font-size: 40px; line-height: 40px;">&nbsp;</td></tr></table></td></tr></table></td>`);
+                    section_cells = (`
+                    <td onclick="openEditForm(${current_sections[s].id})" align="center" valign="top" width="100">
+                        <table width="100" border="0">
+                            <tr>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/edit_icon.png" onclick="openEditForm(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" onclick="copySection(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/delete_icon.png" onclick="deleteSection(${current_sections[s].id})" /></td>
+                                <td><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <!-- title and description with button --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;">${current_sections[s].ttl}</td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #ffffff;"><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr><tr><td colspan="2" width="520" height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td width="30">&nbsp;</td><td align="left" width="470"><table align="left" width="150" border="0" cellspacing="0" cellpadding="0"><tr><td style="background: #000000; padding: 7px 7px; border-radius: 0px; text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none;"><a href="${current_sections[s].lnk}" style="text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none; letter-spacing: .5px" target="_blank">${current_sections[s].btn}</a></td></tr></table></td></tr></table></td></tr><tr><td height="40" style="font-size: 40px; line-height: 40px;">&nbsp;</td></tr></table></td></tr></table>
+                        <div class="form-popup" id="editForm${current_sections[s].id}">
+                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                            <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
+                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                            <br />
+                            <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></nobr>
+                            <br />
+                            <nobr>Desc:&nbsp;<textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea></nobr>
+                            <br />
+                            <nobr>Button:&nbsp;<input type="text" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" size="102" value="${current_sections[s].btn}" /></nobr>
+                            <br />
+                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                            <br />&nbsp;<br />
+                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                        </div>
+                    </td>`);
 
                     raw_HTML = (`<!-- title and description with button --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;">${current_sections[s].ttl}</td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #ffffff;"><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr><tr><td colspan="2" width="520" height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td width="30">&nbsp;</td><td align="left" width="470"><table align="left" width="150" border="0" cellspacing="0" cellpadding="0"><tr><td style="background: #000000; padding: 7px 7px; border-radius: 0px; text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none;"><a href="${current_sections[s].lnk}" style="text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none; letter-spacing: .5px" target="_blank">${current_sections[s].btn}</a></td></tr></table></td></tr></table></td></tr><tr><td height="40" style="font-size: 40px; line-height: 40px;">&nbsp;</td></tr></table></td></tr></table></td>`);
                 } else if (current_sections[s].typ === `tbwd`) {
-                    section_cells = (`<td bgcolor="#${sectionEditColor(current_sections[s].id)}" width="1000" align="left" style="border-top: solid #cccccc 1px; border-right: solid #cccccc 1px; border-bottom: solid #cccccc 1px;"><a class="anchor" id="section${current_sections[s].id}"></a><table width="1000" border="0" cellpadding="2"><tr><td width="10">&nbsp;</td><td width="40" align="right"><strong>Type:</strong></td><td width="610" align="left"><input type="text" size="30" name="typ${current_sections[s].id}" id="typ${current_sections[s].id}" value="${unAbrvType(current_sections[s].typ)}" /></td><td width="85" align="right"><strong>Background:</strong></td><td width="85" align="left">${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</td><td width="135" align="center" valign="middle"><button class="update" onclick="updateSection(${current_sections[s].id})">Update</button>&nbsp;<img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" style="display: inline;" onclick="copySection(${current_sections[s].id})" />&nbsp;<button class="delete" onclick="deleteSection(${current_sections[s].id})">Delete</button><input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" /></td><td width="25" align="center" valign="middle" style="font-size: 12px; color:#666666;"><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a></td><td width="10">&nbsp;</td></tr><tr><td width="10">&nbsp;</td><td width="40" align="right" valign="top"><strong>Title:</strong></td><td colspan="6" width="950" align="left"><input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></td></tr><tr><td width="10">&nbsp;</td><td width="40" align="right" valign="top"><strong>Link:</strong></td><td colspan="6" width="950" align="left"><input type="text" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" size="102" value="${current_sections[s].lnk}" /></td></tr><tr><td width="10">&nbsp;</td><td width="40" align="right" valign="top"><strong>Btn:</strong></td><td colspan="6" width="950" align="left"><input type="text" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" size="102" value="${current_sections[s].btn}" /></td></tr><tr><td width="10">&nbsp;</td><td width="40" align="right" valign="top"><strong>Desc:</strong></td><td colspan="6" width="950" align="left"><textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea></td></tr></table></td><!-- title with description under button --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;">${current_sections[s].ttl}</td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="30">&nbsp;</td><td align="left" width="470"><table align="left" width="150" border="0" cellspacing="0" cellpadding="0"><tr><td style="background: #000000; padding: 7px 7px; border-radius: 0px; text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none;"><a href="${current_sections[s].lnk}" style="text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none; letter-spacing: .5px" target="_blank">${current_sections[s].btn}</a></td></tr></table></td></tr><tr><td colspan="2" width="520" height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr></table></td></tr><tr><td height="40" style="font-size: 40px; line-height: 40px;">&nbsp;</td></tr></table></td></tr></table></td>`);
+                    section_cells = (`
+                    <td onclick="openEditForm(${current_sections[s].id})" align="center" valign="top" width="100">
+                        <table width="100" border="0">
+                            <tr>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/edit_icon.png" onclick="openEditForm(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" onclick="copySection(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/delete_icon.png" onclick="deleteSection(${current_sections[s].id})" /></td>
+                                <td><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <!-- title with description under button --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;">${current_sections[s].ttl}</td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="30">&nbsp;</td><td align="left" width="470"><table align="left" width="150" border="0" cellspacing="0" cellpadding="0"><tr><td style="background: #000000; padding: 7px 7px; border-radius: 0px; text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none;"><a href="${current_sections[s].lnk}" style="text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none; letter-spacing: .5px" target="_blank">${current_sections[s].btn}</a></td></tr></table></td></tr><tr><td colspan="2" width="520" height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr></table></td></tr><tr><td height="40" style="font-size: 40px; line-height: 40px;">&nbsp;</td></tr></table></td></tr></table>
+                        <div class="form-popup" id="editForm${current_sections[s].id}">
+                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                            <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
+                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                            <br />
+                            <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></nobr>
+                            <br />
+                            <nobr>Button:&nbsp;<input type="text" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" size="102" value="${current_sections[s].btn}" /></nobr>
+                            <br />
+                            <nobr>Desc:&nbsp;<textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea></nobr>
+                            <br />
+                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                            <br />&nbsp;<br />
+                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                        </div>
+                    </td>`);
 
                     raw_HTML = (`<!-- title with description under button --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;">${current_sections[s].ttl}</td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="30">&nbsp;</td><td align="left" width="470"><table align="left" width="150" border="0" cellspacing="0" cellpadding="0"><tr><td style="background: #000000; padding: 7px 7px; border-radius: 0px; text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none;"><a href="${current_sections[s].lnk}" style="text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none; letter-spacing: .5px" target="_blank">${current_sections[s].btn}</a></td></tr></table></td></tr><tr><td colspan="2" width="520" height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr></table></td></tr><tr><td height="40" style="font-size: 40px; line-height: 40px;">&nbsp;</td></tr></table></td></tr></table></td>`);
                 } else if (current_sections[s].typ === `nltd`) {
-                    section_cells = (`<td bgcolor="#${sectionEditColor(current_sections[s].id)}" width="1000" align="left" style="border-top: solid #cccccc 1px; border-right: solid #cccccc 1px; border-bottom: solid #cccccc 1px;"><a class="anchor" id="section${current_sections[s].id}"></a><table width="1000" border="0" cellpadding="2"><tr><td width="10">&nbsp;</td><td width="40" align="right"><strong>Type:</strong></td><td width="610" align="left"><input type="text" size="30" name="typ${current_sections[s].id}" id="typ${current_sections[s].id}" value="${unAbrvType(current_sections[s].typ)}" /></td><td width="85" align="right"><strong>Background:</strong></td><td width="85" align="left">${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</td><td width="135" align="center" valign="middle"><button class="update" onclick="updateSection(${current_sections[s].id})">Update</button>&nbsp;<img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" style="display: inline;" onclick="copySection(${current_sections[s].id})" />&nbsp;<button class="delete" onclick="deleteSection(${current_sections[s].id})">Delete</button><input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" /><input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="" /><input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="" /></td><td width="25" align="center" valign="middle" style="font-size: 12px; color:#666666;"><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a></td><td width="10">&nbsp;</td></tr><tr><td width="10">&nbsp;</td><td width="40" align="right" valign="top"><strong>Title:</strong></td><td colspan="6" width="950" align="left"><input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></td></tr><tr><td width="10">&nbsp;</td><td width="40" align="right" valign="top"><strong>Desc:</strong></td><td colspan="6" width="950" align="left"><textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea></td></tr></table></td><!-- non-linked title and description --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;">${current_sections[s].ttl}</td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr><tr><td colspan="2" width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td></tr></table></td>`);
+                    section_cells = (`
+                    <td onclick="openEditForm(${current_sections[s].id})" align="center" valign="top" width="100">
+                        <table width="100" border="0">
+                            <tr>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/edit_icon.png" onclick="openEditForm(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" onclick="copySection(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/delete_icon.png" onclick="deleteSection(${current_sections[s].id})" /></td>
+                                <td><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <!-- non-linked title and description --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;">${current_sections[s].ttl}</td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr><tr><td colspan="2" width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td></tr></table>
+                        <div class="form-popup" id="editForm${current_sections[s].id}">
+                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                            <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
+                            <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                            <br />
+                            <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
+                            <br />
+                            <nobr>Desc:&nbsp;<textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea>
+                            <br />
+                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                            <br />&nbsp;<br />
+                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                        </div>
+                    </td>`);
 
                     raw_HTML = (`<!-- non-linked title and description --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;">${current_sections[s].ttl}</td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr><tr><td colspan="2" width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td></tr></table></td>`);
                 } else if (current_sections[s].typ === `img`) {
-                    section_cells = (`<td bgcolor="#${sectionEditColor(current_sections[s].id)}" width="1000" align="left" style="border-top: solid #cccccc 1px; border-right: solid #cccccc 1px; border-bottom: solid #cccccc 1px;"><a class="anchor" id="section${current_sections[s].id}"></a><table width="1000" border="0" cellpadding="2"><tr><td width="10">&nbsp;</td><td width="40" align="right"><strong>Type:</strong></td><td width="610" align="left"><input type="text" size="30" name="typ${current_sections[s].id}" id="typ${current_sections[s].id}" value="${unAbrvType(current_sections[s].typ)}" /></td><td width="85" align="right"><strong>Background:</strong></td><td width="85" align="left">${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</td><td width="135" align="center" valign="middle"><button class="update" onclick="updateSection(${current_sections[s].id})">Update</button>&nbsp;<img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" style="display: inline;" onclick="copySection(${current_sections[s].id})" />&nbsp;<button class="delete" onclick="deleteSection(${current_sections[s].id})">Delete</button><input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" /><input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="" /><input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="" /></td><td width="25" align="center" valign="middle" style="font-size: 12px; color:#666666;"><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a></td><td width="10">&nbsp;</td></tr><tr><td width="10">&nbsp;</td><td width="40" align="right" valign="top"><strong>Path:</strong></td><td colspan="6" width="950" align="left"><input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></td></tr><tr><td width="10">&nbsp;</td><td width="40" align="right" valign="top"><strong>Link:</strong></td><td colspan="6" width="950" align="left"><input type="text" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" size="102" value="${current_sections[s].lnk}" /></td></tr></table></td><!-- full width image -->
-                    <td><table width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600"><a href="${current_sections[s].lnk}" target="_blank"><img width="600" alt="" src="${current_sections[s].ttl}" style="width: 600px; height: auto; display: block; border: 0;"></a></td></tr></table></td>`);
+                    section_cells = (`
+                    <td onclick="openEditForm(${current_sections[s].id})" align="center" valign="top" width="100">
+                        <table width="100" border="0">
+                            <tr>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/edit_icon.png" onclick="openEditForm(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" onclick="copySection(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/delete_icon.png" onclick="deleteSection(${current_sections[s].id})" /></td>
+                                <td><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <!-- full width image -->
+                    <td><table width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600"><a href="${current_sections[s].lnk}" target="_blank"><img width="600" alt="" src="${current_sections[s].ttl}" style="width: 600px; height: auto; display: block; border: 0;"></a></td></tr></table>
+                        <div class="form-popup" id="editForm${current_sections[s].id}">
+                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                            <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
+                            <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                            <br />
+                            <nobr>Path:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
+                            <br />
+                            <nobr>Link:&nbsp;<input type="text" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" size="102" value="${current_sections[s].lnk}" />
+                            <br />
+                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                            <br />&nbsp;<br />
+                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                        </div>
+                    </td>`);
 
                     raw_HTML = (`<!-- full width image -->
                     <td>
@@ -719,8 +1213,37 @@
                         </table>
                     </td>`);
                 } else if (current_sections[s].typ === `cstm`) {
-                    section_cells = (`<td bgcolor="#${sectionEditColor(current_sections[s].id)}" width="1000" align="left" style="border-top: solid #cccccc 1px; border-right: solid #cccccc 1px; border-bottom: solid #cccccc 1px;"><a class="anchor" id="section${current_sections[s].id}"></a><table width="1000" border="0" cellpadding="2"><tr><td width="10">&nbsp;</td><td width="40" align="right"><strong>Type:</strong></td><td width="610" align="left"><input type="text" size="30" name="typ${current_sections[s].id}" id="typ${current_sections[s].id}" value="${unAbrvType(current_sections[s].typ)}" /></td><td width="85" align="right"><strong>Background:</strong></td><td width="85" align="left">${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</td><td width="135" align="center" valign="middle"><button class="update" onclick="updateSection(${current_sections[s].id})">Update</button>&nbsp;<img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" style="display: inline;" onclick="copySection(${current_sections[s].id})" />&nbsp;<button class="delete" onclick="deleteSection(${current_sections[s].id})">Delete</button><input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" /><input type="hidden" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" value="" /><input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="" /><input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="" /></td><td width="25" align="center" valign="middle" style="font-size: 12px; color:#666666;"><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a></td><td width="10">&nbsp;</td></tr><tr><td width="10">&nbsp;</td><td width="40" align="right" valign="top"><strong>Text:</strong></td><td colspan="6" width="950" align="left"><textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea></td></tr></table></td><!-- custom HTML --><td bgcolor="#${bgc(current_sections[s].bgc)}">${current_sections[s].dsc}</td>`);
-
+                    section_cells = (`
+                    <td onclick="openEditForm(${current_sections[s].id})" align="center" valign="top" width="100">
+                        <table width="100" border="0">
+                            <tr>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/edit_icon.png" onclick="openEditForm(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" onclick="copySection(${current_sections[s].id})" /></td>
+                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/delete_icon.png" onclick="deleteSection(${current_sections[s].id})" /></td>
+                                <td><a onclick="reorderUp(${current_sections[s].id})">&#x25B2;</a><br /><a onclick="reorderDown(${current_sections[s].id})">&#x25BC;</a>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <!-- custom HTML --><td bgcolor="#${bgc(current_sections[s].bgc)}">${current_sections[s].dsc}
+                        <div class="form-popup" id="editForm${current_sections[s].id}">
+                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                            <input type="hidden" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" value="${current_sections[s].ttl}" />
+                            <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
+                            <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                            <br />
+                            <nobr>HTML:&nbsp;<textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea>
+                            <br />
+                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                            <br />&nbsp;<br />
+                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                        </div>
+                    </td>`);
+                    
                     raw_HTML = (`<!-- custom HTML --><td bgcolor="#${bgc(current_sections[s].bgc)}">${current_sections[s].dsc}</td>`)
                 } else if (current_sections[s].typ === `hr`) {
                     section_cells = (`
@@ -737,12 +1260,12 @@
                     </td>
                     <!-- horizontal rule divider --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td align="center" height="15" style="font-size: 15px; line-height: 15px;">_________</td></tr><tr><td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table>
                         <div class="form-popup" id="editForm${current_sections[s].id}">
-                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit Spacer - Section ${current_sections[s].id}
+                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
                             <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
                             <input type="hidden" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" value="${current_sections[s].ttl}" />
                             <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
                             <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
-                            <nobr>Type:&nbsp;<input type="text" size="30" name="typ${current_sections[s].id}" id="typ${current_sections[s].id}" value="${unAbrvType(current_sections[s].typ)}" /></nobr>
+                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
                             <br />
                             <nobr>Height:&nbsp;<input type="text" size="4" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" /></nobr>
                             <br />
@@ -771,12 +1294,12 @@
                     <!-- spacer -->
                     <td width="600" bgcolor="#${bgc(current_sections[s].bgc)}" height="${current_sections[s].dsc}" style="font-size: ${current_sections[s].dsc}px; line-height: ${current_sections[s].dsc}px;">
                         <div class="form-popup" id="editForm${current_sections[s].id}">
-                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit Spacer - Section ${current_sections[s].id}
+                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
                             <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
                             <input type="hidden" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" value="${current_sections[s].ttl}" />
                             <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
                             <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
-                            <nobr>Type:&nbsp;<input type="text" size="30" name="typ${current_sections[s].id}" id="typ${current_sections[s].id}" value="${unAbrvType(current_sections[s].typ)}" /></nobr>
+                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
                             <br />
                             <nobr>Height:&nbsp;<input type="text" size="4" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" /></nobr>
                             <br />
@@ -790,13 +1313,6 @@
 
                     raw_HTML = (`<!-- spacer --><td bgcolor="#${bgc(current_sections[s].bgc)}" height="${current_sections[s].dsc}" style="font-size: ${current_sections[s].dsc}px; line-height: ${current_sections[s].dsc}px;">&nbsp;</td>`);
                 };
-
-                // let cc_header_month;
-                // if (Number(cc_main[0].cc_header_date.getMonth()+1).toString.length > 1) {
-                //     cc_header_month = (cc_main[0].cc_header_date.getMonth()+1);
-                // } else {
-                //     cc_header_month = "0" + (cc_main[0].cc_header_date.getMonth()+1);
-                // }
 
                 let monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
                 
