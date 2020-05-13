@@ -446,8 +446,8 @@
             };
 
             // delete sections being swapped
+            current_sections.splice((id), 1);
             current_sections.splice((id-1), 1);
-            current_sections.splice((id-2), 1);
 
             // reset qs valiable
             qs = ``;
@@ -463,7 +463,7 @@
             // get rid of initial "&" character
             qs = qs.slice(1)
             console.log(qs);
-            // window.location.replace(`q.html?${qs}#section${(id-1)}`);
+            window.location.replace(`q.html?${qs}#section${(id-1)}`);
         };
 
         // move a section down
@@ -481,8 +481,8 @@
             };
 
             // delete sections being swapped
+            current_sections.splice((id+1), 1);
             current_sections.splice((id), 1);
-            current_sections.splice((id-1), 1);
 
             // reset qs valiable
             qs = ``;
@@ -578,9 +578,9 @@
 
             function bgcDropdown(c, id) {
                 switch(c) {
-                    case `f`: return `<select  name="bgc${id}" id="bgc${id}"><option selected value="f">White</option><option value="e">Grey</option></select>`;
-                    case `e`: return `<select  name="bgc${id}" id="bgc${id}"><option selected value="e">Grey</option><option value="f">White</option></select>`;
-                    default: return `<select  name="bgc${id}" id="bgc${id}"><option selected value="f">White</option><option value="e">Grey</option></select>`;
+                    case `f`: return `<select name="bgc${id}" id="bgc${id}"><option selected value="f">White</option><option value="e">Grey</option></select>`;
+                    case `e`: return `<select name="bgc${id}" id="bgc${id}"><option selected value="e">Grey</option><option value="f">White</option></select>`;
+                    default: return `<select name="bgc${id}" id="bgc${id}"><option selected value="f">White</option><option value="e">Grey</option></select>`;
                 };
             };
 
@@ -594,7 +594,7 @@
 
             function typDropdown(typ, id) {
                 let typ_select = ``;
-                typ_select = `<select name=typ${id} id="typ${id}>`;
+                typ_select = `<select name="typ${id}" id="typ${id}">`;
                 if (typ === `lgsh`) {
                     typ_select = typ_select + `<option selected value="lgsh">Large Header</option>`;
                 } else {
