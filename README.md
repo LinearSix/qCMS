@@ -4,6 +4,7 @@
 * Copy the q.html file onto your local drive and open it in a browser (preferably Chrome).
 * Add new sections using the sidebar buttons.
 * Edit, delete, duplicate, and reorder sections using the controls next to each section.
+* Enter data in the pop-up dialog to alter the section's content. HTML is allowed.
 * Keep in mind when editing a section's type that data might not match properly. IE: Converting a spacer to a header will require text data to be entered afterward.
 * "Save" your work periodically by bookmarking the page.
 * Click "Preview" to view the result.
