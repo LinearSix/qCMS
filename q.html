@@ -363,6 +363,7 @@
             window.location.replace(`q.html?${qs}#section${(id-1)}`);
         };
 
+        // update a section
         function updateSection(id) {
 
             // console.log(`ID: ${id}`);
@@ -384,24 +385,26 @@
 
             // if it's the header being updated
             if (id === 0) {
-                updated_month = document.getElementById(`month0`);
-                updated_date = document.getElementById(`date0`);
-                updated_year = document.getElementById(`year0`);
+                updated_month = document.getElementById(`month0`).value;
+                updated_date = document.getElementById(`date0`).value;
+                updated_year = document.getElementById(`year0`).value;
 
                 updated_odr = document.getElementById(`odr${id}`);
                 updated_typ = document.getElementById(`typ${id}`);
                 updated_bgc = document.getElementById(`bgc${id}`);
-                updated_ttl = new Date(updated_year.value, updated_month.value, updated_date.value)
+                updated_ttl = new Date(updated_year, updated_month, updated_date)
                 updated_lnk = document.getElementById(`lnk${id}`);
                 updated_dsc = document.getElementById(`dsc${id}`);
                 updated_btn = document.getElementById(`btn${id}`);
 
-                console.log(`month: ${updated_month.value}`);
-                console.log(`date: ${updated_date.value}`);
-                console.log(`year: ${updated_year.value}`);
-
+                console.log(`month: ${updated_month}`);
+                console.log(`date: ${updated_date}`);
+                console.log(`year: ${updated_year}`);
+                
                 // build updated section as newQs
-                newQs = `&odr=${updated_odr.value}&id=${id}&typ=${updated_typ.value}&bgc=${updated_bgc.value}&ttl=${encodeURIComponent(updated_ttl)}&lnk=${encodeURIComponent(updated_lnk.value)}&dsc=${encodeURIComponent(updated_dsc.value)}&btn=${updated_btn.value}`;
+                newQs = `&odr=${updated_odr.value}&id=${id}&typ=${updated_typ.value}&bgc=${updated_bgc.value}&ttl=${new Date(updated_year, updated_month, updated_date)}&lnk=${encodeURIComponent(updated_lnk.value)}&dsc=${encodeURIComponent(updated_dsc.value)}&btn=${updated_btn.value}`;
+
+                console.log(`newQs: ${newQs}`);
 
             } else {
                 updated_odr = document.getElementById(`odr${id}`);
@@ -478,7 +481,7 @@
             
             // get rid of initial "&" character
             qs = qs.slice(1)
-            console.log(qs);
+            // console.log(qs);
             stopTimer()
             window.location.replace(`q.html?${qs}#section${(id-1)}`);
         };
@@ -519,6 +522,7 @@
             window.location.replace(`q.html?${qs}#section${(id-1)}`);
         };
 
+        // duplicate a section
         function copySection(id) {
             qs = ``;
             let i = 1;
@@ -537,10 +541,12 @@
             window.location.replace(`q.html?${qs}#section${id}`);
         }
 
+        // open an edit pop-up
         function openEditForm(id) {
             document.getElementById(`editForm${id}`).style.display = "inline";
         };
         
+        // close an edit pop-up
         function closeEditForm(id) {
             console.log(id);
             document.getElementById(`editForm${id}`).style.display = "none";
@@ -548,13 +554,10 @@
 
         let header_table;
         let section_table;
+        // things that need to happen after page load
         document.addEventListener('DOMContentLoaded', function() {
 
-            // function closeEditForm(id) {
-            //     console.log(id);
-            //     document.getElementById(`editForm${id}`).style.display = "none";
-            // }; 
-
+            // convert abbreviations to full section types for display in the pop-ups
             function unAbrvType(abrv) {
                 switch(abrv) {
                     case `lgsh`: return `Large Header`;
@@ -577,6 +580,7 @@
                 };
             };
 
+            // build a select dropdown based on the section type
             function themeDropdown(typ) {
                 switch(typ) {
                     case `cb`: return `<select name="typ0" id="typ0"><option selected value="cb">Corporate Benefits</option><option value="is">Individual Solutions</option><option value="pc">Propery &amp; Casualty</option></select>`;
@@ -586,7 +590,7 @@
                 };
             };
                                                     
-
+            // convert the abbreviated background color data into its full 6 characters
             function bgc(c) {
                 switch(c) {
                     case `f`: return `ffffff`;
@@ -595,6 +599,7 @@
                 };
             };
 
+            // build a select dropdown based on the section background color
             function bgcDropdown(c, id) {
                 switch(c) {
                     case `f`: return `<select name="bgc${id}" id="bgc${id}"><option selected value="f">White</option><option value="e">Grey</option></select>`;
@@ -603,14 +608,7 @@
                 };
             };
 
-            function sectionEditColor(id) {
-                if (id % 2 == 0) {
-                    return `ffffff`;
-                } else {
-                    return `f0f0f0`;
-                };
-            };
-
+            // build a select dripdown based on the section type
             function typDropdown(typ, id) {
                 let typ_select = ``;
                 typ_select = `<select name="typ${id}" id="typ${id}">`;
@@ -712,7 +710,7 @@
             let section_list_array = [];
             let raw_HTML = ``;
             
-            // start building the raw HTML for copying
+            // start building the raw HTML
             code_modal = document.getElementById(`codeModal`);
             code_modal.value = `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="format-detection" content="telephone=no"/><title>Individual Solutions Report</title><style>table{border-spacing: 0 !important; border-collapse: collapse !important; margin: 0 auto !important;}table, td{mso-table-lspace: 0pt !important; mso-table-rspace: 0pt !important;}a{color: #000000; text-decoration: none; font-weight: 600;}a:hover{color: #ad434f;}/* a:visited{color: #000000;}*/ /* stop gmail from turning links without inline styling blue */ u + #body a{color: inherit; text-decoration: none; font-size: inherit; font-family: inherit; font-weight: inherit; line-height: inherit;}</style><!--[if gt mso 16]><style type="text/css" media="all"> /* Outlook 2016 Height Fix */ table, tr, td{border-collapse: collapse !important;}</style><![endif]--></head><body id="body" style="margin: 0pt; padding: 0pt; width: 100% !important;" bgcolor="#efefef"><center><table align="center" bgcolor="#efefef" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse; border-color: #efefef;"><tr><td bgcolor="#e0e0e0" width="35%" style="font-size: 1px; line-height: 1px">&nbsp;</td><td bgcolor="#efefef" valign="top"><table bgcolor="#ffffff" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #ffffff;"><tr><td width="600" height="10" style="font-size: 10px; line-height: 10px;"><table width="600" height="10" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; border-color: #ffffff;"><tr><td width="600">&nbsp;</td></tr></table></td></tr><tr><td align="center" valign="top" width="600"><table bgcolor="#ffffff" border="0" width="600" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #ffffff;"><tr><td width="10" align="left" valign="middle"> &nbsp; </td><td width="190" align="left" valign="middle"><a href="https://www.nfp.com/" target="_blank"><img src="https://webfiles2.nfp.com/webfiles/public/tier1/emails/logos/nfp-black.png" style="display: block; border: 0;"></a></td><td width="200" align="center" valign="middle"><p style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 14px; color: #000000;"> May 1,&nbsp;2020 </p></td><td width="175" align="right" valign="middle"><p style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 12px; color: #007795;"><a href="https://webfiles2.nfp.com/webfiles/public/2020_emails/individual_solutions/2020_05_01/individual_solutions_internal_20200501.html" style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 12px; color: #ad434f; text-decoration: none;"> view email in browser&nbsp;&raquo; </a></p></td><td width="25" align="left" valign="middle"> &nbsp; </td></tr></table></td></tr><tr><td width="600" height="10" style="font-size: 10px; line-height: 10px;"><table width="600" height="10" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; border-color: #ffffff;"><tr><td width="600">&nbsp;</td></tr></table></td></tr><tr><td><table width="600" height="230" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #ffffff;"><tr><td width="600" height="230"><img width="600" height="230" alt="individual Solutions Report" src="https://webfiles2.nfp.com/webfiles/public/2020_emails/individual_solutions/img/i_s_covid_header.jpg" style="width: 600px; height: 230px; display: block; border: 0;"></td></tr></table></td></tr>`;
 
@@ -742,23 +740,23 @@
                                         <td>&nbsp;
                                             <div class="form-popup" id="editForm0">
                                                 <p class="label" style="font-size: 18px; line-height: 24px;">Edit Header - Section 0
-                                                <input type="hidden" name="odr0" id="odr0" value="" />
+                                                <input type="hidden" name="odr0" id="odr0" value="0" />
                                                 <input type="hidden" name="bgc0" id="bgc0" value="" />
                                                 <input type="hidden" name="dsc0" id="dsc0" value="" />
                                                 <input type="hidden" name="btn0" id="btn0" value="" />
-                                                <nobr>Theme:&nbsp;${themeDropdown(current_sections[0].typ)}</nobr>
+                                                <nobr>Theme:&nbsp;${themeDropdown(current_sections[s].typ)}</nobr>
                                                 <br />
-                                                <nobr>Month:&nbsp;<input type="text" size="30" name="month0" id="month0" value="${current_sections[0].ttl.getMonth()}" /></nobr>
+                                                <nobr>Month:&nbsp;<input type="text" size="30" name="month0" id="month0" value="${new Date(current_sections[s].ttl).getMonth()}" /></nobr>
                                                 <br />
-                                                <nobr>Date:&nbsp;<input type="text" size="30" name="date0" id="date0" value="${current_sections[0].ttl.getDate()}" /></nobr>
+                                                <nobr>Date:&nbsp;<input type="text" size="30" name="date0" id="date0" value="${new Date(current_sections[s].ttl).getDate()}" /></nobr>
                                                 <br />
-                                                <nobr>Year:&nbsp;<input type="text" size="30" name="year0" id="year0" value="${current_sections[0].ttl.getFullYear()}" /></nobr>
+                                                <nobr>Year:&nbsp;<input type="text" size="30" name="year0" id="year0" value="${new Date(current_sections[s].ttl).getFullYear()}" /></nobr>
                                                 <br />
                                                 <nobr>Browser Link:&nbsp;<input type="text" size="4" name="lnk0" id="lnk0" value="" /></nobr>
                                                 <br />
                                                 <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
                                                 <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
-                                            </div></td></tr></table></td><td align="center" valign="top" width="600"><!-- nfp logo and date table --><table bgcolor="#ffffff" border="0" width="600" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #ffffff;"><tr><td width="10" align="left" valign="middle">&nbsp;</td><td width="190" align="left" valign="middle"><a href="https://www.nfp.com/" target="_blank"><img src="https://webfiles2.nfp.com/webfiles/public/tier1/emails/logos/nfp-black.png" style="display: block; border: 0;"></a></td><td width="200" align="center" valign="middle"><p id="headerDate" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 14px; color: #000000;">${month_names[current_sections[0].ttl.getMonth()]}&nbsp;${current_sections[0].ttl.getDate()},&nbsp;${current_sections[0].ttl.getFullYear()}</p></td><td width="175" align="right" valign="middle"><p style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 12px; color: #007795;"><a href="https://webfiles2.nfp.com/webfiles/public/2020_emails/corp_ben/04_23/corporate_benefits_internal_20200423.html" style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 12px; color: #ad434f; text-decoration: none;">view email in browser&nbsp;&raquo;</a></p></td><td width="25" align="left" valign="middle">&nbsp;</td></tr></table><!-- end nfp logo and date table --></td>`)
+                                            </div></td></tr></table></td><td align="center" valign="top" width="600"><!-- nfp logo and date table --><table bgcolor="#ffffff" border="0" width="600" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #ffffff;"><tr><td width="10" align="left" valign="middle">&nbsp;</td><td width="190" align="left" valign="middle"><a href="https://www.nfp.com/" target="_blank"><img src="https://webfiles2.nfp.com/webfiles/public/tier1/emails/logos/nfp-black.png" style="display: block; border: 0;"></a></td><td width="200" align="center" valign="middle"><p id="headerDate" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 14px; color: #000000;">${month_names[new Date(current_sections[s].ttl).getMonth()]}&nbsp;${new Date(current_sections[s].ttl).getDate()},&nbsp;${new Date(current_sections[s].ttl).getFullYear()}</p></td><td width="175" align="right" valign="middle"><p style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 12px; color: #007795;"><a href="https://webfiles2.nfp.com/webfiles/public/2020_emails/corp_ben/04_23/corporate_benefits_internal_20200423.html" style="font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 12px; color: #ad434f; text-decoration: none;">view email in browser&nbsp;&raquo;</a></p></td><td width="25" align="left" valign="middle">&nbsp;</td></tr></table><!-- end nfp logo and date table --></td>`)
 
                     header_spacer = (`<td align="center" valign="top" width="100"></td><td width="600" height="10" style="font-size: 10px; line-height: 10px;"><table width="600" height="10" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; border-color: #ffffff;"><tr><td width="600">&nbsp;</td></tr></table></td></tr>`)
 
