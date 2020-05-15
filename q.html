@@ -723,6 +723,9 @@
             let section_list_array = [];
             let raw_HTML = ``;
 
+            // prepare the footer table for new rows
+            footer_table = document.getElementById(`footerTable`);
+
             // declare the them variables
             let theme_color = ``;
             let banner_path_left = ``;
@@ -739,6 +742,7 @@
                 spacer_row = document.createElement(`tr`);
                 header_row = document.createElement(`tr`);
                 section_row = document.createElement(`tr`);
+                footer_row = document.createElement(`tr`);
 
                 if (current_sections[s].id === 0) {
                     let header_path = ``;
@@ -1376,8 +1380,9 @@
                     raw_HTML = (`<!-- spacer --><td bgcolor="#${bgc(current_sections[s].bgc)}" height="${current_sections[s].dsc}" style="font-size: ${current_sections[s].dsc}px; line-height: ${current_sections[s].dsc}px;">&nbsp;</td>`);
                 };
 
-                let monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
                 
+
+                // append the generated sections and info
                 info_row.innerHTML = header_info;
                 spacer_row.innerHTML = header_spacer;
                 header_row.innerHTML = header_cells;
@@ -1393,7 +1398,129 @@
                 section_cells = ``;
                 
             };
-            
+
+            // build the appropriate footer
+            let footer_info = ``;
+            if (current_sections[0].typ === `cb`) {
+                if (current_sections[0].dsc === `int`) {
+                    footer_info = `<td width="600" align="center" bgcolor="#333e48" >
+                                            <table align="center" border="0" width="500" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #ffffff;">
+                                                <tr>
+                                                    <td height="20" style="font-style: 20px; line-height: 20px;">&nbsp; </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="center" style="font-size: 12px; line-height: 17.4px; font-family:Arial, Helvetica, sans-serif; font-weight: 600; color: #ffffff;"> 5/14/20&nbsp;20-CB-CB-GEN-0225 <br/>&nbsp;<br/> You're receiving this email in your capacity as an employee, contractor, principal or agent of an NFP company and may not unsubscribe from this publication. <br/>&nbsp;<br/> This information has been provided as an informational resource for NFP clients and business partners. It is intended to provide general guidance, and is not intended to address specific risk scenarios. Regarding insurance coverage questions, each specific policy must be reviewed in its entirety to determine the extent, if any, of coverage available for the impact of the Coronavirus. If you have questions, please reach out to your NFP contact. </td>
+                                                </tr>
+                                                <tr>
+                                                    <td height="20" style="font-style: 20px; line-height: 20px;">&nbsp; </td>
+                                                </tr>
+                                            </table>
+                                        </td>`
+                } else {
+                    footer_info = `<td width="600" align="center" bgcolor="#333e48" >
+                                        <table align="center" border="0" width="500" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #ffffff;">
+                                            <tr>
+                                                <td height="20" style="font-style: 20px; line-height: 20px;">&nbsp;
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" style="font-size: 12px; line-height: 17.4px; font-family:Arial, Helvetica, sans-serif;  font-weight: 600; color: #ffffff;">
+                                                    5/14/20&nbsp;20-CB-CB-GEN-0225
+                                                    <br />&nbsp;<br />
+                                                    This information has been provided as an informational resource for NFP clients and business partners. It is intended to provide general guidance, and is not intended to address specific risk scenarios. Regarding insurance coverage questions, each specific policy must be reviewed in its entirety to determine the extent, if any, of coverage available for the impact of the Coronavirus. If you have questions, please reach out to your NFP contact.
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="20" style="font-style: 20px; line-height: 20px;">&nbsp;
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>`
+                };
+            } else if (current_sections[0].typ === `pc`) {
+                if (current_sections[0].dsc === `int`) {
+                    footer_info = `<td width="600" align="center" bgcolor="#333e48" >
+                                    <table align="center" border="0" width="500" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #ffffff;">
+                                        <tr>
+                                            <td height="20" style="font-style: 20px; line-height: 20px;">&nbsp;
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center" style="font-size: 12px; line-height: 17.4px; font-family:Arial, Helvetica, sans-serif;  font-weight: 600; color: #ffffff;">
+                                                5/11/20&nbsp;20-FPC-GEN-GEN-0221
+                                                <br />&nbsp;<br />
+                                                You're receiving this email in your capacity as an employee, contractor, principal or agent of an NFP company and may not unsubscribe from this publication.
+                                                <br />&nbsp;<br />
+                                                This information has been provided as an informational resource for NFP clients and business partners. It is intended to provide general guidance, and is not intended to address specific risk scenarios. Regarding insurance coverage questions, each specific policy must be reviewed in its entirety to determine the extent, if any, of coverage available for the impact of the Coronavirus. If you have questions, please reach out to your NFP contact.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td height="20" style="font-style: 20px; line-height: 20px;">&nbsp;
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>`
+                } else {
+                    footer_info = `<td width="600" align="center" bgcolor="#333e48" >
+                                    <table align="center" border="0" width="500" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #ffffff;">
+                                        <tr>
+                                            <td height="20" style="font-style: 20px; line-height: 20px;">&nbsp;
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="center" style="font-size: 12px; line-height: 17.4px; font-family:Arial, Helvetica, sans-serif;  font-weight: 600; color: #ffffff;">
+                                                5/11/20&nbsp;20-FPC-GEN-GEN-0221
+                                                <br />&nbsp;<br />
+                                                This information has been provided as an informational resource for NFP clients and business partners. It is intended to provide general guidance, and is not intended to address specific risk scenarios. Regarding insurance coverage questions, each specific policy must be reviewed in its entirety to determine the extent, if any, of coverage available for the impact of the Coronavirus. If you have questions, please reach out to your NFP contact.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td height="20" style="font-style: 20px; line-height: 20px;">&nbsp;
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>`
+                };
+            } else {
+                if (current_sections[0].dsc === `int`) {
+                    footer_info = `<td width="600" align="center" bgcolor="#333e48" >
+                                            <table align="center" border="0" width="500" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #ffffff;">
+                                                <tr>
+                                                    <td height="20" style="font-style: 20px; line-height: 20px;">&nbsp; </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="center" style="font-size: 12px; line-height: 17.4px; font-family:Arial, Helvetica, sans-serif; font-weight: 600; color: #ffffff;">5/15/20&nbsp;20-IS-LIFE-GEN-0212<br />&nbsp;<br />You're receiving this email in your capacity as an employee, contractor, principal or agent of an NFP company and may not unsubscribe from this publication.<br />&nbsp;<br />This information has been provided as an informational resource for NFP clients and business partners. It is intended to provide general guidance and is not intended to address specific risk scenarios. Regarding insurance coverage questions, each specific policy must be reviewed in its entirety to determine the extent, if any, of coverage available for the impact of the coronavirus. If you have questions, please reach out to your NFP contact. Links to third party websites are for informational purposes only and are not an endorsement by NFP. NFP does not guarantee the accuracy of these websites or that they will be appropriate for your situation.</td>
+                                                </tr>
+                                                <tr>
+                                                    <td height="20" style="font-style: 20px; line-height: 20px;">&nbsp; </td>
+                                                </tr>
+                                            </table>
+                                        </td>`
+                } else {
+                    footer_info = `<td width="600" align="center" bgcolor="#333e48" >
+                                            <table align="center" border="0" width="500" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #ffffff;">
+                                                <tr>
+                                                    <td height="20" style="font-style: 20px; line-height: 20px;">&nbsp; </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="center" style="font-size: 12px; line-height: 17.4px; font-family:Arial, Helvetica, sans-serif; font-weight: 600; color: #ffffff;">5/15/20&nbsp;20-IS-LIFE-GEN-0212<br />&nbsp;<br />This information has been provided as an informational resource for NFP clients and business partners. It is intended to provide general guidance, and is not intended to address specific risk scenarios. Regarding insurance coverage questions, each specific policy must be reviewed in its entirety to determine the extent, if any, of coverage available for the impact of the Coronavirus. If you have questions, please reach out to your NFP contact.
+                                                        <br />&nbsp;<br />
+                                                        NFP and its subsidiaries do not provide tax or legal advice.  Links to third party websites are for informational purposes only and are not an endorsement by NFP.  NFP does not guarantee the accuracy of these websites or that they will be appropriate for your situation.
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td height="20" style="font-style: 20px; line-height: 20px;">&nbsp; </td>
+                                                </tr>
+                                            </table>
+                                        </td>`
+                };
+            };
+
+            // append the footer
+            footer_row.innerHTML = footer_info;
+            footer_table.appendChild(footer_row);
+            footer_info = ``;            
+
             code_modal.value = code_modal.value + `<tr><td><table align="center" border="0" width="600" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #333e48;"><tr><td width="600" align="center" bgcolor="#333e48" ><table align="center" border="0" width="500" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #ffffff;"><tr><td height="20" style="font-style: 20px; line-height: 20px;">&nbsp; </td></tr><tr><td align="center" style="font-size: 12px; line-height: 17.4px; font-family:Arial, Helvetica, sans-serif; font-weight: 600; color: #ffffff;">5/01/20&nbsp;20-IS-LIFE-GEN-0212<br />&nbsp;<br />You're receiving this email in your capacity as an employee, contractor, principal or agent of an NFP company and may not unsubscribe from this publication.<br />&nbsp;<br />This information has been provided as an informational resource for NFP clients and business partners. It is intended to provide general guidance and is not intended to address specific risk scenarios. Regarding insurance coverage questions, each specific policy must be reviewed in its entirety to determine the extent, if any, of coverage available for the impact of the coronavirus. If you have questions, please reach out to your NFP contact. Links to third party websites are for informational purposes only and are not an endorsement by NFP. NFP does not guarantee the accuracy of these websites or that they will be appropriate for your situation.</td></tr><tr><td height="20" style="font-style: 20px; line-height: 20px;">&nbsp; </td></tr></table></td></tr></table></td></tr></table></td><td bgcolor="#e0e0e0" width="35%" style="font-size: 1px; line-height: 1px">&nbsp;</td></tr></table></center></body></html>`;
         });
     </script>
@@ -1482,30 +1609,7 @@
                         <tr>
                             <td align="center" valign="top" width="100"></td>
                             <td width="600" align="right">
-                                <table align="right" border="0" width="600" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #333e48;">
-                                    <tr>
-                                        <td width="600" align="right" bgcolor="#333e48" >
-                                            <table align="center" border="0" width="500" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #ffffff;">
-                                                <tr>
-                                                    <td height="20" style="font-style: 20px; line-height: 20px;">&nbsp;
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td align="center" style="font-size: 12px; line-height: 17.4px; font-family:Arial, Helvetica, sans-serif;  font-weight: 600; color: #ffffff;">
-                                                        5/01/20&nbsp;20-IS-LIFE-GEN-0212
-                                                        <br />&nbsp;<br />
-                                                        You're receiving this email in your capacity as an employee, contractor, principal or agent of an NFP company and may not unsubscribe from this publication.
-                                                        <br />&nbsp;<br />
-                                                        This information has been provided as an informational resource for NFP clients and business partners. It is intended to provide general guidance and is not intended to address specific risk scenarios. Regarding insurance coverage questions, each specific policy must be reviewed in its entirety to determine the extent, if any, of coverage available for the impact of the coronavirus. If you have questions, please reach out to your NFP contact. Links to third party websites are for informational purposes only and are not an endorsement by NFP. NFP does not guarantee the accuracy of these websites or that they will be appropriate for your situation.
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td height="20" style="font-style: 20px; line-height: 20px;">&nbsp;
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
+                                <table id="footerTable" align="right" border="0" width="600" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #333e48;">
                                 </table>
                                 <!-- end footer -->
                             </td>
