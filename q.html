@@ -608,7 +608,7 @@
                 };
             };
 
-            // build a select dripdown based on the section type
+            // build a select dropdown based on the section type
             function typDropdown(typ, id) {
                 let typ_select = ``;
                 typ_select = `<select name="typ${id}" id="typ${id}">`;
@@ -696,7 +696,7 @@
                 return typ_select;
             };
 
-            // build a select dripdown based on the section type
+            // build a select dropdown based on the int/ext classification
             function intExtDropdown(typ) {
                 let int_ext_select = ``;
                 int_ext_select = `<select name="dsc0" id="dsc0">`;
@@ -707,6 +707,74 @@
                     };
                 int_ext_select = int_ext_select + `</select>`;
                 return int_ext_select;
+            };
+
+            // build a select dropdown for months
+            function monthDropdown(mo) {
+                let mo_select = ``;
+                mo_select = `<select name="month0" id="month0">`;
+                if (mo === 0) {
+                    mo_select = mo_select + `<option selected value="0">January</option>`;
+                } else {
+                    mo_select = mo_select + `<option value="0">January</option>`;
+                };
+                if (mo === 1) {
+                    mo_select = mo_select + `<option selected value="1">February</option>`;
+                } else {
+                    mo_select = mo_select + `<option value="1">February</option>`;
+                };
+                if (mo === 2) {
+                    mo_select = mo_select + `<option selected value="2">March</option>`;
+                } else {
+                    mo_select = mo_select + `<option value="2">March</option>`;
+                };
+                if (mo === 3) {
+                    mo_select = mo_select + `<option selected value="3">April</option>`;
+                } else {
+                    mo_select = mo_select + `<option value="3">April</option>`;
+                };
+                if (mo === 4) {
+                    mo_select = mo_select + `<option selected value="4">May</option>`;
+                } else {
+                    mo_select = mo_select + `<option value="4">May</option>`;
+                };
+                if (mo === 5) {
+                    mo_select = mo_select + `<option selected value="5">June</option>`;
+                } else {
+                    mo_select = mo_select + `<option value="5">June</option>`;
+                };
+                if (mo === 6) {
+                    mo_select = mo_select + `<option selected value="6">July</option>`;
+                } else {
+                    mo_select = mo_select + `<option value="6">July</option>`;
+                };
+                if (mo === 7) {
+                    mo_select = mo_select + `<option selected value="7">August</option>`;
+                } else {
+                    mo_select = mo_select + `<option value="7">August</option>`;
+                };
+                if (mo === 8) {
+                    mo_select = mo_select + `<option selected value="8">September</option>`;
+                } else {
+                    mo_select = mo_select + `<option value="8">September</option>`;
+                };
+                if (mo === 9) {
+                    mo_select = mo_select + `<option selected value="9">October</option>`;
+                } else {
+                    mo_select = mo_select + `<option value="9">October</option>`;
+                };
+                if (mo === 10) {
+                    mo_select = mo_select + `<option selected value="10">November</option>`;
+                } else {
+                    mo_select = mo_select + `<option value="10">November</option>`;
+                };
+                if (mo === 11) {
+                    mo_select = mo_select + `<option selected value="11">December</option>`;
+                } else {
+                    mo_select = mo_select + `<option value="11">December</option>`;
+                };
+                mo_select = mo_select + `</select>`
+                return mo_select;
             };
 
             // prepare the header table for new rows
@@ -784,7 +852,7 @@
                                                 <br />
                                                 <nobr>Internal/External:&nbsp;${intExtDropdown(current_sections[s].dsc)}</nobr>
                                                 <br />
-                                                <nobr>Month:&nbsp;<input type="text" size="30" name="month0" id="month0" value="${new Date(current_sections[s].ttl).getMonth()}" /></nobr>
+                                                <nobr>Month:&nbsp;${monthDropdown(new Date(current_sections[s].ttl).getMonth())}</nobr>
                                                 <br />
                                                 <nobr>Date:&nbsp;<input type="text" size="30" name="date0" id="date0" value="${new Date(current_sections[s].ttl).getDate()}" /></nobr>
                                                 <br />
