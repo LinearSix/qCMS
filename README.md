@@ -7,7 +7,6 @@
 * Enter data in the pop-up dialog to alter the section's content. HTML is allowed.
 * Keep in mind when editing a section's type that data might not match properly. IE: Converting a spacer to a header will require text data to be entered afterward.
 * "Save" your work periodically by bookmarking the page.
-* Click "Preview" to view the result.
 * Click "Generate HTML" and copy the resulting HTML code from the pop-up window.
 * Save the resulting code as an HTML file.
 
