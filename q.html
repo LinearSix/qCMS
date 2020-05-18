@@ -239,7 +239,7 @@
 
         console.log(`temp_section: ${temp_section}`);
 
-        function sectionObj(odr, id, typ, bgc, ttl, lnk, dsc, btn) {
+        function sectionObj(odr, id, typ, bgc, ttl, lnk, dsc, btn, vis, stl) {
             this.odr = odr;
             this.id = id;
             this.typ = typ;
@@ -248,6 +248,8 @@
             this.lnk = lnk;
             this.dsc = dsc;
             this.btn = btn;
+            this.vis = vis;
+            this.stl = stl;
         }
 
         let array_section = [];
@@ -269,13 +271,15 @@
                 ttl: new Date(),
                 dsc: '',
                 lnk: '',
-                btn: ''
+                btn: '',
+                vis: 1,
+                stl: ''
             };
             current_sections.push(defaultHeader);
         } else {
             for (let i=0; i<temp_section.length; i++) {
                 if (temp_section[i] === `odr`) {
-                    current_sections.push(new sectionObj(temp_section[(i+1)], temp_section[(i+3)], temp_section[(i+5)], temp_section[(i+7)], temp_section[(i+9)], temp_section[(i+11)], temp_section[(i+13)], temp_section[(i+15)]));
+                    current_sections.push(new sectionObj(temp_section[(i+1)], temp_section[(i+3)], temp_section[(i+5)], temp_section[(i+7)], temp_section[(i+9)], temp_section[(i+11)], temp_section[(i+13)], temp_section[(i+15)], temp_section[(i+17)], temp_section[(i+19)]));
                 };
             };
             let header_date = new Date(current_sections[0].ttl);
@@ -305,41 +309,41 @@
         function addSection(t) {
             qs = ``;
             for (let o in current_sections) {
-                    qs = qs + `&odr=${current_sections[o].odr}&id=${current_sections[o].id}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}`;
+                    qs = qs + `&odr=${current_sections[o].odr}&id=${current_sections[o].id}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}&vis=${current_sections[o].vis}&stl=${current_sections[o].stl}`;
             };
             qs = qs.slice(1)
             switch (t) {
-                case `lgh`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=lgh&bgc=f&ttl=LARGE%20HEADER&lnk=&dsc=&btn=`;
+                case `lgh`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=lgh&bgc=f&ttl=LARGE%20HEADER&lnk=&dsc=&btn=&vis=1&stl=`;
                 break;
-                case `csh`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=csh&bgc=f&ttl=COLOR%20SUB-HEADER&lnk=&dsc=&btn=`;
+                case `csh`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=csh&bgc=f&ttl=COLOR%20SUB-HEADER&lnk=&dsc=&btn=&vis=1&stl=`;
                 break;
-                case `ban`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=ban&bgc=f&ttl=SECTION%20BANNER&lnk=&dsc=&btn=`;
+                case `ban`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=ban&bgc=f&ttl=SECTION%20BANNER&lnk=&dsc=&btn=&vis=1&stl=`;
                 break;
-                case `blb`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=blb&bgc=f&ttl=&lnk=&dsc=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetur%20adipiscing%20elit%2C%20sed%20do%20eiusmod%20tempor%20incididunt%20ut%20labore%20et%20dolore%20magna%20aliqua.%20&btn=`;
+                case `blb`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=blb&bgc=f&ttl=&lnk=&dsc=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetur%20adipiscing%20elit%2C%20sed%20do%20eiusmod%20tempor%20incididunt%20ut%20labore%20et%20dolore%20magna%20aliqua.%20&btn=&vis=1&stl=`;
                 break;
-                case `sla`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=sla&bgc=f&ttl=Single%20Line%20Article&lnk=https%3A%2F%2Fwww.nfp.com%2F&dsc=&btn=`;
+                case `sla`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=sla&bgc=f&ttl=Single%20Line%20Article&lnk=https%3A%2F%2Fwww.nfp.com%2F&dsc=&btn=&vis=1&stl=`;
                 break;
-                case `lad`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=lad&bgc=f&ttl=Linked%20Article%20with%20Description&lnk=https%3A%2F%2Fwww.nfp.com%2F&dsc=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetur%20adipiscing%20elit%2C%20sed%20do%20eiusmod%20tempor%20incididunt%20ut%20labore%20et%20dolore%20magna%20aliqua.&btn=`;
+                case `lad`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=lad&bgc=f&ttl=Linked%20Article%20with%20Description&lnk=https%3A%2F%2Fwww.nfp.com%2F&dsc=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetur%20adipiscing%20elit%2C%20sed%20do%20eiusmod%20tempor%20incididunt%20ut%20labore%20et%20dolore%20magna%20aliqua.&btn=&vis=1&stl=`;
                 break;
-                case `ulb`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=ulb&bgc=f&ttl=Underlined%20Bold%20Title&lnk=&dsc=&btn=`;
+                case `ulb`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=ulb&bgc=f&ttl=Underlined%20Bold%20Title&lnk=&dsc=&btn=&vis=1&stl=`;
                 break;
-                case `lsh`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=lsh&bgc=f&ttl=Letterspaced%20Sub-Header&lnk=&dsc=&btn=`;
+                case `lsh`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=lsh&bgc=f&ttl=Letterspaced%20Sub-Header&lnk=&dsc=&btn=&vis=1&stl=`;
                 break;
-                case `tbl`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=tbl&bgc=f&ttl=Title%20with%20Bulleted%20Links&lnk=&dsc=%3Cli%3E%3Ca%20href%3D%22https%3A%2F%2Fwww.nfp.com%2F%22%20target%3D%22_blank%22%3EBulleted%20Link%201%3C%2Fa%3E%3C%2Fli%3E%3Cli%3E%3Ca%20href%3D%22https%3A%2F%2Fwww.nfp.com%2F%22%20target%3D%22_blank%22%3EBulleted%20Link%202%3C%2Fa%3E%3C%2Fli%3E&btn=`;
+                case `tbl`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=tbl&bgc=f&ttl=Title%20with%20Bulleted%20Links&lnk=&dsc=%3Cli%3E%3Ca%20href%3D%22https%3A%2F%2Fwww.nfp.com%2F%22%20target%3D%22_blank%22%3EBulleted%20Link%201%3C%2Fa%3E%3C%2Fli%3E%3Cli%3E%3Ca%20href%3D%22https%3A%2F%2Fwww.nfp.com%2F%22%20target%3D%22_blank%22%3EBulleted%20Link%202%3C%2Fa%3E%3C%2Fli%3E&btn=&vis=1&stl=`;
                 break;
-                case `tdb`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=tdb&bgc=f&ttl=Title%20%7C%20Description%20%7C%20Button&lnk=https%3A%2F%2Fwww.nfp.com%2F&dsc=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetur%20adipiscing%20elit%2C%20sed%20do%20eiusmod%20tempor%20incididunt%20ut%20labore%20et%20dolore%20magna%20aliqua.&btn=Button%20Text`;
+                case `tdb`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=tdb&bgc=f&ttl=Title%20%7C%20Description%20%7C%20Button&lnk=https%3A%2F%2Fwww.nfp.com%2F&dsc=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetur%20adipiscing%20elit%2C%20sed%20do%20eiusmod%20tempor%20incididunt%20ut%20labore%20et%20dolore%20magna%20aliqua.&btn=Button%20Text&vis=1&stl=`;
                 break;
-                case `tbd`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=tbd&bgc=f&ttl=Title%20%7C%20Button%20%7C%20Description&lnk=https%3A%2F%2Fwww.nfp.com%2F&dsc=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetur%20adipiscing%20elit%2C%20sed%20do%20eiusmod%20tempor%20incididunt%20ut%20labore%20et%20dolore%20magna%20aliqua.&btn=Button%20Text`;
+                case `tbd`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=tbd&bgc=f&ttl=Title%20%7C%20Button%20%7C%20Description&lnk=https%3A%2F%2Fwww.nfp.com%2F&dsc=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetur%20adipiscing%20elit%2C%20sed%20do%20eiusmod%20tempor%20incididunt%20ut%20labore%20et%20dolore%20magna%20aliqua.&btn=Button%20Text&vis=1&stl=`;
                 break;
-                case `twd`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=twd&bgc=f&ttl=Non-Linked%20Title%20and%20Description&lnk=&dsc=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetur%20adipiscing%20elit%2C%20sed%20do%20eiusmod%20tempor%20incididunt%20ut%20labore%20et%20dolore%20magna%20aliqua.&btn=`;
+                case `twd`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=twd&bgc=f&ttl=Non-Linked%20Title%20and%20Description&lnk=&dsc=Lorem%20ipsum%20dolor%20sit%20amet%2C%20consectetur%20adipiscing%20elit%2C%20sed%20do%20eiusmod%20tempor%20incididunt%20ut%20labore%20et%20dolore%20magna%20aliqua.&btn=&vis=1&stl=`;
                 break;
-                case `img`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=img&bgc=f&ttl=https%3A%2F%2Fwebfiles2.nfp.com%2Fwebfiles%2Fpublic%2F2020_emails%2Fcorp_ben%2Fimg%2Finsights_podcast_banner.jpg&lnk=https%3A%2F%2Fwww.nfp.com%2F&dsc=&btn=`;
+                case `img`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=img&bgc=f&ttl=https%3A%2F%2Fwebfiles2.nfp.com%2Fwebfiles%2Fpublic%2F2020_emails%2Fcorp_ben%2Fimg%2Finsights_podcast_banner.jpg&lnk=https%3A%2F%2Fwww.nfp.com%2F&dsc=&btn=&vis=1&stl=`;
                 break;
-                case `ctm`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=ctm&bgc=f&ttl=&lnk=&dsc=Custom%20HTML&btn=`;
+                case `ctm`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=ctm&bgc=f&ttl=&lnk=&dsc=Custom%20HTML&btn=&vis=1&stl=`;
                 break;
-                case `hrl`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=hrl&bgc=f&ttl=&lnk=&dsc=&btn=`;
+                case `hrl`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=hrl&bgc=f&ttl=&lnk=&dsc=&btn=&vis=1&stl=`;
                 break;
-                case `spc`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=spc&bgc=f&ttl=&lnk=&dsc=20&btn=`;
+                case `spc`: qs = qs + `&odr=${(current_sections.length)}&id=${(current_sections.length)}&typ=spc&bgc=f&ttl=&lnk=&dsc=20&btn=&vis=1&stl=`;
                 break;
             };
             
@@ -356,7 +360,7 @@
             qs = ``;
             current_sections.splice((id), 1);
             for (let o in current_sections) {
-                qs = qs + `&odr=${current_sections[o].odr}&id=${current_sections[o].id}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}`;
+                qs = qs + `&odr=${current_sections[o].odr}&id=${current_sections[o].id}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}&vis=${current_sections[o].vis}&stl=${current_sections[o].stl}`;
             };
             qs = qs.slice(1)
             // console.log(qs);
@@ -376,6 +380,8 @@
             let updated_lnk;
             let updated_dsc;
             let updated_btn;
+            let updated_vis;
+            let updated_stl;
 
             // special values for header
             let updated_month;
@@ -397,13 +403,15 @@
                 updated_lnk = document.getElementById(`lnk${id}`);
                 updated_dsc = document.getElementById(`dsc${id}`);
                 updated_btn = document.getElementById(`btn${id}`);
+                updated_vis = document.getElementById(`vis${id}`);
+                updated_stl = document.getElementById(`stl${id}`);
 
                 console.log(`month: ${updated_month}`);
                 console.log(`date: ${updated_date}`);
                 console.log(`year: ${updated_year}`);
                 
                 // build updated section as newQs
-                newQs = `&odr=${updated_odr.value}&id=${id}&typ=${updated_typ.value}&bgc=${updated_bgc.value}&ttl=${new Date(updated_year, updated_month, updated_date)}&lnk=${encodeURIComponent(updated_lnk.value)}&dsc=${encodeURIComponent(updated_dsc.value)}&btn=${updated_btn.value}`;
+                newQs = `&odr=${updated_odr.value}&id=${id}&typ=${updated_typ.value}&bgc=${updated_bgc.value}&ttl=${new Date(updated_year, updated_month, updated_date)}&lnk=${encodeURIComponent(updated_lnk.value)}&dsc=${encodeURIComponent(updated_dsc.value)}&btn=${updated_btn.value}&vis=${Number(updated_vis.value)}&stl=${updated_stl.value}`;
 
                 console.log(`newQs: ${newQs}`);
 
@@ -415,9 +423,11 @@
                 updated_lnk = document.getElementById(`lnk${id}`);
                 updated_dsc = document.getElementById(`dsc${id}`);
                 updated_btn = document.getElementById(`btn${id}`);
+                updated_vis = document.getElementById(`vis${id}`);
+                updated_stl = document.getElementById(`stl${id}`);
 
                 // build updated section as newQs
-                newQs = `&odr=${updated_odr.value}&id=${id}&typ=${updated_typ.value}&bgc=${updated_bgc.value}&ttl=${encodeURIComponent(updated_ttl.value)}&lnk=${encodeURIComponent(updated_lnk.value)}&dsc=${encodeURIComponent(updated_dsc.value)}&btn=${updated_btn.value}`;
+                newQs = `&odr=${updated_odr.value}&id=${id}&typ=${updated_typ.value}&bgc=${updated_bgc.value}&ttl=${encodeURIComponent(updated_ttl.value)}&lnk=${encodeURIComponent(updated_lnk.value)}&dsc=${encodeURIComponent(updated_dsc.value)}&btn=${updated_btn.value}&vis=${Number(updated_vis.value)}&stl=${updated_stl.value}`;
             };
 
             console.log(`id: ${id}`);
@@ -428,6 +438,8 @@
             console.log(`lnk: ${updated_lnk.value}`);
             console.log(`dsc: ${encodeURIComponent(updated_dsc.value)}`);
             console.log(`btn: ${updated_btn.value}`);
+            console.log(`vis: ${updated_vis.value}`);
+            console.log(`stl: ${updated_stl.value}`);
 
             // delete section that's being updated
             current_sections.splice((id), 1);
@@ -438,7 +450,7 @@
             // rebuild current_sections as oldQs;
             let oldQs = ``;
             for (let o in current_sections) {
-                oldQs = oldQs + `&odr=${current_sections[o].odr}&id=${current_sections[o].id}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}`;
+                oldQs = oldQs + `&odr=${current_sections[o].odr}&id=${current_sections[o].id}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}&vis=${Number(current_sections[o].vis)}&stl=${current_sections[o].stl}`;
             };
 
             // append updated section data to existing querystring variable qs
@@ -459,9 +471,9 @@
             // loop through sections and make special variables for the swapping sections
             for (let o in current_sections) {
                 if (current_sections[o].id === id) {
-                    sectionA = `&odr=${(current_sections[o].odr-1)}&id=${(current_sections[o].id-1)}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}`;
+                    sectionA = `&odr=${(current_sections[o].odr-1)}&id=${(current_sections[o].id-1)}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}&vis=${Number(current_sections[o].vis)}&stl=${current_sections[o].stl}`;
                 } else if (current_sections[o].id === (id-1)) {
-                    sectionB = `&odr=${(current_sections[o].odr+1)}&id=${(current_sections[o].id+1)}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}`;
+                    sectionB = `&odr=${(current_sections[o].odr+1)}&id=${(current_sections[o].id+1)}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}&vis=${Number(current_sections[o].vis)}&stl=${current_sections[o].stl}`;
                 };
             };
 
@@ -474,7 +486,7 @@
             // rebuild current_sections as oldQs;
             let oldQs = ``;
             for (let o in current_sections) {
-                oldQs = oldQs + `&odr=${current_sections[o].odr}&id=${current_sections[o].id}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}`;
+                oldQs = oldQs + `&odr=${current_sections[o].odr}&id=${current_sections[o].id}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}&vis=${Number(current_sections[o].vis)}&stl=${current_sections[o].stl}`;
             };
 
             // append swapped sections to existing querystring variable qs
@@ -495,9 +507,9 @@
             // loop through sections and make special variables for the swapping sections
             for (let o in current_sections) {
                 if (current_sections[o].id === id) {
-                    sectionA = `&odr=${(current_sections[o].odr+1)}&id=${(current_sections[o].id+1)}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}`;
+                    sectionA = `&odr=${(current_sections[o].odr+1)}&id=${(current_sections[o].id+1)}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}&vis=${Number(current_sections[o].vis)}&stl=${current_sections[o].stl}`;
                 } else if (current_sections[o].id === (id+1)) {
-                    sectionB = `&odr=${(current_sections[o].odr-1)}&id=${(current_sections[o].id-1)}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}`;
+                    sectionB = `&odr=${(current_sections[o].odr-1)}&id=${(current_sections[o].id-1)}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}&vis=${Number(current_sections[o].vis)}&stl=${current_sections[o].stl}`;
                 };
             };
 
@@ -510,7 +522,7 @@
             // rebuild current_sections as oldQs;
             let oldQs = ``;
             for (let o in current_sections) {
-                oldQs = oldQs + `&odr=${current_sections[o].odr}&id=${current_sections[o].id}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}`;
+                oldQs = oldQs + `&odr=${current_sections[o].odr}&id=${current_sections[o].id}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}&vis=${Number(current_sections[o].vis)}&stl=${current_sections[o].stl}`;
             };
 
             // append swapped sections to existing querystring variable qs
@@ -529,10 +541,10 @@
             let i = 1;
             for (let o in current_sections) {
                 if (current_sections[o].id == id) {
-                    qs = qs + `&odr=${i}&id=${i}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}&odr=${(i+1)}&id=${(i+1)}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}`;
+                    qs = qs + `&odr=${i}&id=${i}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}&odr=${(i+1)}&id=${(i+1)}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}&vis=${Number(current_sections[o].vis)}&stl=${current_sections[o].stl}`;
                     i++
                 } else {
-                    qs = qs + `&odr=${i}&id=${i}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}`;
+                    qs = qs + `&odr=${i}&id=${i}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}&vis=${Number(current_sections[o].vis)}&stl=${current_sections[o].stl}`;
                 }
                 i++
             };
@@ -847,6 +859,8 @@
                                                 <input type="hidden" name="odr0" id="odr0" value="0" />
                                                 <input type="hidden" name="bgc0" id="bgc0" value="" />
                                                 <input type="hidden" name="btn0" id="btn0" value="" />
+                                                <input type="hidden" name="vis0" id="vis0" value="1" />
+                                                <input type="hidden" name="stl0" id="stl0" value="" />
                                                 <br />
                                                 <nobr>Theme:&nbsp;${themeDropdown(current_sections[s].typ)}</nobr>
                                                 <br />
@@ -896,6 +910,8 @@
                             <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
                             <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
                             <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
                             <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
                             <br />
                             <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
@@ -934,6 +950,8 @@
                             <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
                             <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
                             <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
                             <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
                             <br />
                             <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
@@ -972,6 +990,8 @@
                             <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
                             <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
                             <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
                             <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
                             <br />
                             <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
@@ -1010,6 +1030,8 @@
                             <input type="hidden" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" value="${current_sections[s].ttl}" />
                             <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
                             <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
+                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
                             <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
                             <br />
                             <nobr>Text:&nbsp;<textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea>
@@ -1047,6 +1069,8 @@
                             <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
                             <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
                             <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
+                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
                             <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
                             <br />
                             <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
@@ -1085,6 +1109,8 @@
                             <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
                             <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
                             <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
                             <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
                             <br />
                             <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
@@ -1158,6 +1184,8 @@
                             <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
                             <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
                             <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
                             <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
                             <br />
                             <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></nobr>
@@ -1196,6 +1224,8 @@
                             <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
                             <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
                             <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
                             <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
                             <br />
                             <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></nobr>
@@ -1253,6 +1283,8 @@
                         <div class="form-popup" id="editForm${current_sections[s].id}">
                             <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
                             <br /><input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
                             <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
                             <br />
                             <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></nobr>
@@ -1294,6 +1326,8 @@
                         <div class="form-popup" id="editForm${current_sections[s].id}">
                             <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
                             <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
                             <br /><nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
                             <br />
                             <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></nobr>
@@ -1337,6 +1371,8 @@
                             <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
                             <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
                             <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
                             <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
                             <br />
                             <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
@@ -1377,6 +1413,8 @@
                             <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
                             <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
                             <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
                             <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
                             <br />
                             <nobr>Path:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
@@ -1424,6 +1462,8 @@
                             <input type="hidden" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" value="${current_sections[s].ttl}" />
                             <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
                             <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
                             <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
                             <br />
                             <nobr>HTML:&nbsp;<textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea>
@@ -1462,6 +1502,8 @@
                             <input type="hidden" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" value="${current_sections[s].ttl}" />
                             <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
                             <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
                             <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
                             <br />
                             <nobr>Height:&nbsp;<input type="text" size="4" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" /></nobr>
@@ -1501,6 +1543,8 @@
                             <input type="hidden" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" value="${current_sections[s].ttl}" />
                             <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
                             <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
                             <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
                             <br />
                             <nobr>Height:&nbsp;<input type="text" size="4" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" /></nobr>
