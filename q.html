@@ -184,10 +184,10 @@
 
         // THINGS THAT WOULD BE COOL:
 
-            // insert section below
-            // reset button
+            // insert section below - the duplicate function can serve this purpose
+            // reset button - complete
             // change section type - complete
-            // hide section
+            // hide section - visibility button added
             // moving "add" palette to be fixed - complete
             // copy/paste function, or maybe duplicate - duplicate complete
             // highlight blank fields
@@ -462,6 +462,75 @@
             stopTimer()
             window.location.replace(`q.html?${qs}#section${id}`);
         };
+
+        // toggle visibility for a section
+        function sectionVisibility(id) {
+            // console.log(`ID: ${id}`);
+
+            let updated_odr;
+            let updated_typ;
+            let updated_bgc;
+            let updated_ttl;
+            let updated_lnk;
+            let updated_dsc;
+            let updated_btn;
+            let updated_vis;
+            let updated_stl;
+
+            let newQs = ``;
+
+            updated_odr = document.getElementById(`odr${id}`);
+            updated_typ = document.getElementById(`typ${id}`);
+            updated_bgc = document.getElementById(`bgc${id}`);
+            updated_ttl = document.getElementById(`ttl${id}`);
+            updated_lnk = document.getElementById(`lnk${id}`);
+            updated_dsc = document.getElementById(`dsc${id}`);
+            updated_btn = document.getElementById(`btn${id}`);
+            updated_vis = document.getElementById(`vis${id}`);
+            updated_stl = document.getElementById(`stl${id}`);
+
+            // toggle visibility data
+            if (Number(updated_vis.value) === 1) {
+                updated_vis = 0;
+            } else {
+                updated_vis = 1;
+            };
+
+            // build updated section as newQs
+            newQs = `&odr=${updated_odr.value}&id=${id}&typ=${updated_typ.value}&bgc=${updated_bgc.value}&ttl=${encodeURIComponent(updated_ttl.value)}&lnk=${encodeURIComponent(updated_lnk.value)}&dsc=${encodeURIComponent(updated_dsc.value)}&btn=${updated_btn.value}&vis=${updated_vis}&stl=${updated_stl.value}`;
+
+            console.log(`id: ${id}`);
+            console.log(`odr: ${updated_odr.value}`);
+            console.log(`typ: ${updated_typ.value}`);
+            console.log(`bgc: ${updated_bgc.value}`);
+            console.log(`ttl: ${updated_ttl.value}`);
+            console.log(`lnk: ${updated_lnk.value}`);
+            console.log(`dsc: ${encodeURIComponent(updated_dsc.value)}`);
+            console.log(`btn: ${updated_btn.value}`);
+            console.log(`vis: ${updated_vis}`);
+            console.log(`stl: ${updated_stl.value}`);
+
+            // delete section that's being updated
+            current_sections.splice((id), 1);
+
+            // reset qs variable
+            qs = ``;
+
+            // rebuild current_sections as oldQs;
+            let oldQs = ``;
+            for (let o in current_sections) {
+                oldQs = oldQs + `&odr=${current_sections[o].odr}&id=${current_sections[o].id}&typ=${current_sections[o].typ}&bgc=${current_sections[o].bgc}&ttl=${encodeURIComponent(current_sections[o].ttl)}&lnk=${encodeURIComponent(current_sections[o].lnk)}&dsc=${encodeURIComponent(current_sections[o].dsc)}&btn=${current_sections[o].btn}&vis=${Number(current_sections[o].vis)}&stl=${current_sections[o].stl}`;
+            };
+
+            // append updated section data to existing querystring variable qs
+            qs = oldQs + newQs;
+            
+            // get rid of initial "&" character
+            qs = qs.slice(1)
+            // console.log(qs);
+            stopTimer()
+            window.location.replace(`q.html?${qs}#section${id}`);
+        }
 
         // move a section up
         function reorderUp(id) {
@@ -789,6 +858,24 @@
                 return mo_select;
             };
 
+            // render the correct visibility icon based on vis value
+            function visIconPath(vis) {
+                if (Number(vis) === 0) {
+                    return `https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/visibility_off_icon.png`
+                } else {
+                    return `https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/visibility_icon.png`
+                };
+            };
+
+            // return the amount to contrast a section based on vis variable
+            function visContrastFilter(vis) {
+                if (Number(vis) === 0) {
+                    return `30%`;
+                } else {
+                    return `100%`;
+                };
+            }
+
             // prepare the header table for new rows
             header_table = document.getElementById(`headerTable`);
             let header_info = ``;
@@ -898,12 +985,12 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/visibility_icon.png" onclick="" style="border: 0; display: block;" /></td>
+                                <td><img src="${visIconPath(current_sections[s].vis)}" onclick="sectionVisibility(${current_sections[s].id})" style="border: 0; display: block;" /></td>
                             </tr>
                         </table>
                     </td>
                     <a id="section${current_sections[s].id}" />
-                    <!-- large Header --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse;  border: 0;" width="100%"><tr><td width="50">&nbsp;</td><td width="500" style="border-spacing: 0; border-collapse: collapse;  font-family: Arial, Helvetica, sans-serif; font-weight: 100; display: block; font-size: 24px; line-height: 24px; letter-spacing: 2px; color: #000000; text-align: center;">${current_sections[s].ttl}</td><td width="50">&nbsp;</td></tr><tr><td colspan="3" height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td align="center" colspan="3" height="15" style="font-size: 15px; line-height: 15px;">_________</td></tr><tr><td colspan="3" bgcolor="#${bgc(current_sections[s].bgc)}" height="60" style="font-size: 60px; line-height: 60px;">&nbsp;</td></tr></table>
+                    <!-- large Header --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse;  border: 0;" width="100%"><tr><td width="50">&nbsp;</td><td width="500" style="border-spacing: 0; border-collapse: collapse;  font-family: Arial, Helvetica, sans-serif; font-weight: 100; display: block; font-size: 24px; line-height: 24px; letter-spacing: 2px; color: #000000; text-align: center;">${current_sections[s].ttl}</td><td width="50">&nbsp;</td></tr><tr><td colspan="3" height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td align="center" colspan="3" height="15" style="font-size: 15px; line-height: 15px;">_________</td></tr><tr><td colspan="3" bgcolor="#${bgc(current_sections[s].bgc)}" height="60" style="font-size: 60px; line-height: 60px;">&nbsp;</td></tr></table>
                         <div class="form-popup" id="editForm${current_sections[s].id}">
                             <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
                             <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
@@ -938,12 +1025,12 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/visibility_icon.png" onclick="" style="border: 0; display: block;" /></td>
+                                <td><img src="${visIconPath(current_sections[s].vis)}" onclick="sectionVisibility(${current_sections[s].id})" style="border: 0; display: block;" /></td>
                             </tr>
                         </table>
                     </td>
                     <a id="section${current_sections[s].id}" />
-                    <!-- Color Sub-Header --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse;  border: 0;" width="100%"><tr style="border-spacing: 0; border-collapse: collapse; "><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td><td style="border-spacing: 0; border-collapse: collapse; " width="500"><h4 class="letterspace" style="margin-bottom: 0px; margin-top: 5px; font-family: Arial, Helvetica, sans-serif; font-weight: 600; display: block; font-size: 17px; line-height: 17px; letter-spacing: 2px; color: #${theme_color}; text-align: center;">${current_sections[s].ttl}</h4></td><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td></tr><tr><td colspan="3" height="20" style="font-size: 20px; line-height: 20px;">&nbsp;</td></tr></table>
+                    <!-- Color Sub-Header --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse;  border: 0;" width="100%"><tr style="border-spacing: 0; border-collapse: collapse; "><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td><td style="border-spacing: 0; border-collapse: collapse; " width="500"><h4 class="letterspace" style="margin-bottom: 0px; margin-top: 5px; font-family: Arial, Helvetica, sans-serif; font-weight: 600; display: block; font-size: 17px; line-height: 17px; letter-spacing: 2px; color: #${theme_color}; text-align: center;">${current_sections[s].ttl}</h4></td><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td></tr><tr><td colspan="3" height="20" style="font-size: 20px; line-height: 20px;">&nbsp;</td></tr></table>
                         <div class="form-popup" id="editForm${current_sections[s].id}">
                             <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
                             <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
@@ -978,12 +1065,12 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/visibility_icon.png" onclick="" style="border: 0; display: block;" /></td>
+                                <td><img src="${visIconPath(current_sections[s].vis)}" onclick="sectionVisibility(${current_sections[s].id})" style="border: 0; display: block;" /></td>
                             </tr>
                         </table>
                     </td>
                     <a id="section${current_sections[s].id}" />
-                    <!-- Color Banner --><td><table align="center" bgcolor="#${theme_color}" border="0" cellpadding="0" cellspacing="0" class="m-0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border: 0;" width="600"><tr style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;"><td bgcolor="#${theme_color}" height="46" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="125"><img src="${banner_path_left}" style="width: 125px; display: block; border: none;"></td><td align="center" bgcolor="#${theme_color}" height="46" style="font-family:'Open Sans', Arial, Helvetica, sans-serif; border: 0 none; text-decoration: none; color: #ffffff; font-size: 13px; line-height: 13px; font-weight: bold; letter-spacing: 2px;" width="350"><strong>${current_sections[s].ttl}</strong></td><td bgcolor="#${theme_color}" height="46" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="125"><img src="${banner_path_right}" style="width: 125px; display: block; border: none;"></td></tr><tr><td colspan="3" bgcolor="#${bgc(current_sections[s].bgc)}" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table>
+                    <!-- Color Banner --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table align="center" bgcolor="#${theme_color}" border="0" cellpadding="0" cellspacing="0" class="m-0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border: 0;" width="600"><tr style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;"><td bgcolor="#${theme_color}" height="46" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="125"><img src="${banner_path_left}" style="width: 125px; display: block; border: none;"></td><td align="center" bgcolor="#${theme_color}" height="46" style="font-family:'Open Sans', Arial, Helvetica, sans-serif; border: 0 none; text-decoration: none; color: #ffffff; font-size: 13px; line-height: 13px; font-weight: bold; letter-spacing: 2px;" width="350"><strong>${current_sections[s].ttl}</strong></td><td bgcolor="#${theme_color}" height="46" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="125"><img src="${banner_path_right}" style="width: 125px; display: block; border: none;"></td></tr><tr><td colspan="3" bgcolor="#${bgc(current_sections[s].bgc)}" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table>
                         <div class="form-popup" id="editForm${current_sections[s].id}">
                             <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
                             <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
@@ -1018,12 +1105,12 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/visibility_icon.png" onclick="" style="border: 0; display: block;" /></td>
+                                <td><img src="${visIconPath(current_sections[s].vis)}" onclick="sectionVisibility(${current_sections[s].id})" style="border: 0; display: block;" /></td>
                             </tr>
                         </table>
                     </td>
                     <a id="section${current_sections[s].id}" />
-                    <!-- Text blurb --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse; border: 0;" width="100%"><tr height="10" style="border-spacing: 0; border-collapse: collapse; "><td width="50">&nbsp;</td><td style="text-align: center; color: #000000; line-height: 17.4px; font-size: 14px; font-family: Arial, Helvetica, sans-serif;" width="500">${current_sections[s].dsc}</td><td width="50">&nbsp;</td></tr><tr><td colspan="3" bgcolor="#${bgc(current_sections[s].bgc)}" height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td></tr></table>
+                    <!-- Text blurb --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse; border: 0;" width="100%"><tr height="10" style="border-spacing: 0; border-collapse: collapse; "><td width="50">&nbsp;</td><td style="text-align: center; color: #000000; line-height: 17.4px; font-size: 14px; font-family: Arial, Helvetica, sans-serif;" width="500">${current_sections[s].dsc}</td><td width="50">&nbsp;</td></tr><tr><td colspan="3" bgcolor="#${bgc(current_sections[s].bgc)}" height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td></tr></table>
                         <div class="form-popup" id="editForm${current_sections[s].id}">
                             <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
                             <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
@@ -1058,12 +1145,12 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/visibility_icon.png" onclick="" style="border: 0; display: block;" /></td>
+                                <td><img src="${visIconPath(current_sections[s].vis)}" onclick="sectionVisibility(${current_sections[s].id})" style="border: 0; display: block;" /></td>
                             </tr>
                         </table>
                     </td>
                     <a id="section${current_sections[s].id}" />
-                    <!-- Single Line Article --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;"><tr><td rowspan="2" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;"><a href="${current_sections[s].lnk}" target="_blank" >${current_sections[s].ttl}&nbsp;&raquo;</a></td><td rowspan="2" width="50">&nbsp;</td></tr><tr><td width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table>
+                    <!-- Single Line Article --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;"><tr><td rowspan="2" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;"><a href="${current_sections[s].lnk}" target="_blank" >${current_sections[s].ttl}&nbsp;&raquo;</a></td><td rowspan="2" width="50">&nbsp;</td></tr><tr><td width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table>
                         <div class="form-popup" id="editForm${current_sections[s].id}">
                             <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
                             <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
@@ -1099,12 +1186,12 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/visibility_icon.png" onclick="" style="border: 0; display: block;" /></td>
+                                <td><img src="${visIconPath(current_sections[s].vis)}" onclick="sectionVisibility(${current_sections[s].id})" style="border: 0; display: block;" /></td>
                             </tr>
                         </table>
                     </td>
                     <a id="section${current_sections[s].id}" />
-                    <!-- article with title and description --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;"><a href="${current_sections[s].lnk}" target="_blank" >${current_sections[s].ttl}&nbsp;&raquo;</a></td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #eeeeee;"><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr><tr><td colspan="2" width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td></tr></table>
+                    <!-- article with title and description --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;"><a href="${current_sections[s].lnk}" target="_blank" >${current_sections[s].ttl}&nbsp;&raquo;</a></td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #eeeeee;"><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr><tr><td colspan="2" width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td></tr></table>
                         <div class="form-popup" id="editForm${current_sections[s].id}">
                             <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
                             <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
@@ -1172,12 +1259,12 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/visibility_icon.png" onclick="" style="border: 0; display: block;" /></td>
+                                <td><img src="${visIconPath(current_sections[s].vis)}" onclick="sectionVisibility(${current_sections[s].id})" style="border: 0; display: block;" /></td>
                             </tr>
                         </table>
                     </td>
                     <a id="section${current_sections[s].id}" />
-                    <!-- underlined bold title --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #000000;"><tr><td rowspan="2" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: underline; font-weight: 600;">${current_sections[s].ttl}</td><td rowspan="2" width="50">&nbsp;</td></tr><tr><td width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table>
+                    <!-- underlined bold title --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #000000;"><tr><td rowspan="2" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: underline; font-weight: 600;">${current_sections[s].ttl}</td><td rowspan="2" width="50">&nbsp;</td></tr><tr><td width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table>
                         <div class="form-popup" id="editForm${current_sections[s].id}">
                             <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
                             <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
@@ -1212,12 +1299,12 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/visibility_icon.png" onclick="" style="border: 0; display: block;" /></td>
+                                <td><img src="${visIconPath(current_sections[s].vis)}" onclick="sectionVisibility(${current_sections[s].id})" style="border: 0; display: block;" /></td>
                             </tr>
                         </table>
                     </td>
                     <a id="section${current_sections[s].id}" />
-                    <!-- letterspaced sub-header --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse;  border: 0;" width="100%"><tr style="border-spacing: 0; border-collapse: collapse; "><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td><td style="border-spacing: 0; border-collapse: collapse; " width="500"><h4 class="letterspace" style="margin-bottom: 0px; margin-top: 5px; font-family: Arial, Helvetica, sans-serif; font-weight: 500; display: block; font-size: 18px; line-height: 25px; letter-spacing: 2px; color: #000000; text-align: center;">${current_sections[s].ttl}</h4></td><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td></tr><tr><td colspan="3" height="20" style="font-size: 20px; line-height: 20px;">&nbsp;</td></tr></table>
+                    <!-- letterspaced sub-header --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse;  border: 0;" width="100%"><tr style="border-spacing: 0; border-collapse: collapse; "><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td><td style="border-spacing: 0; border-collapse: collapse; " width="500"><h4 class="letterspace" style="margin-bottom: 0px; margin-top: 5px; font-family: Arial, Helvetica, sans-serif; font-weight: 500; display: block; font-size: 18px; line-height: 25px; letter-spacing: 2px; color: #000000; text-align: center;">${current_sections[s].ttl}</h4></td><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td></tr><tr><td colspan="3" height="20" style="font-size: 20px; line-height: 20px;">&nbsp;</td></tr></table>
                         <div class="form-popup" id="editForm${current_sections[s].id}">
                             <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
                             <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
@@ -1274,12 +1361,12 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/visibility_icon.png" onclick="" style="border: 0; display: block;" /></td>
+                                <td><img src="${visIconPath(current_sections[s].vis)}" onclick="sectionVisibility(${current_sections[s].id})" style="border: 0; display: block;" /></td>
                             </tr>
                         </table>
                     </td>
                     <a id="section${current_sections[s].id}" />
-                    <!-- title and description with button --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;">${current_sections[s].ttl}</td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #ffffff;"><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr><tr><td colspan="2" width="520" height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td width="30">&nbsp;</td><td align="left" width="470"><table align="left" width="150" border="0" cellspacing="0" cellpadding="0"><tr><td style="background: #000000; padding: 7px 7px; border-radius: 0px; text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none;"><a href="${current_sections[s].lnk}" style="text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none; letter-spacing: .5px" target="_blank">${current_sections[s].btn}</a></td></tr></table></td></tr></table></td></tr><tr><td height="40" style="font-size: 40px; line-height: 40px;">&nbsp;</td></tr></table></td></tr></table>
+                    <!-- title and description with button --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;">${current_sections[s].ttl}</td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #ffffff;"><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr><tr><td colspan="2" width="520" height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td width="30">&nbsp;</td><td align="left" width="470"><table align="left" width="150" border="0" cellspacing="0" cellpadding="0"><tr><td style="background: #000000; padding: 7px 7px; border-radius: 0px; text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none;"><a href="${current_sections[s].lnk}" style="text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none; letter-spacing: .5px" target="_blank">${current_sections[s].btn}</a></td></tr></table></td></tr></table></td></tr><tr><td height="40" style="font-size: 40px; line-height: 40px;">&nbsp;</td></tr></table></td></tr></table>
                         <div class="form-popup" id="editForm${current_sections[s].id}">
                             <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
                             <br /><input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
@@ -1317,12 +1404,12 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/visibility_icon.png" onclick="" style="border: 0; display: block;" /></td>
+                                <td><img src="${visIconPath(current_sections[s].vis)}" onclick="sectionVisibility(${current_sections[s].id})" style="border: 0; display: block;" /></td>
                             </tr>
                         </table>
                     </td>
                     <a id="section${current_sections[s].id}" />
-                    <!-- title with description under button --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;">${current_sections[s].ttl}</td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="30">&nbsp;</td><td align="left" width="470"><table align="left" width="150" border="0" cellspacing="0" cellpadding="0"><tr><td style="background: #000000; padding: 7px 7px; border-radius: 0px; text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none;"><a href="${current_sections[s].lnk}" style="text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none; letter-spacing: .5px" target="_blank">${current_sections[s].btn}</a></td></tr></table></td></tr><tr><td colspan="2" width="520" height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr></table></td></tr><tr><td height="40" style="font-size: 40px; line-height: 40px;">&nbsp;</td></tr></table></td></tr></table>
+                    <!-- title with description under button --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;">${current_sections[s].ttl}</td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="30">&nbsp;</td><td align="left" width="470"><table align="left" width="150" border="0" cellspacing="0" cellpadding="0"><tr><td style="background: #000000; padding: 7px 7px; border-radius: 0px; text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none;"><a href="${current_sections[s].lnk}" style="text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none; letter-spacing: .5px" target="_blank">${current_sections[s].btn}</a></td></tr></table></td></tr><tr><td colspan="2" width="520" height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr></table></td></tr><tr><td height="40" style="font-size: 40px; line-height: 40px;">&nbsp;</td></tr></table></td></tr></table>
                         <div class="form-popup" id="editForm${current_sections[s].id}">
                             <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
                             <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
@@ -1360,12 +1447,12 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/visibility_icon.png" onclick="" style="border: 0; display: block;" /></td>
+                                <td><img src="${visIconPath(current_sections[s].vis)}" onclick="sectionVisibility(${current_sections[s].id})" style="border: 0; display: block;" /></td>
                             </tr>
                         </table>
                     </td>
                     <a id="section${current_sections[s].id}" />
-                    <!-- non-linked title and description --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;">${current_sections[s].ttl}</td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr><tr><td colspan="2" width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td></tr></table>
+                    <!-- non-linked title and description --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;">${current_sections[s].ttl}</td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr><tr><td colspan="2" width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td></tr></table>
                         <div class="form-popup" id="editForm${current_sections[s].id}">
                             <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
                             <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
@@ -1401,13 +1488,13 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/visibility_icon.png" onclick="" style="border: 0; display: block;" /></td>
+                                <td><img src="${visIconPath(current_sections[s].vis)}" onclick="sectionVisibility(${current_sections[s].id})" style="border: 0; display: block;" /></td>
                             </tr>
                         </table>
                     </td>
                     <a id="section${current_sections[s].id}" />
                     <!-- full width image -->
-                    <td><table width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600"><a href="${current_sections[s].lnk}" target="_blank"><img width="600" alt="" src="${current_sections[s].ttl}" style="width: 600px; height: auto; display: block; border: 0;"></a></td></tr></table>
+                    <td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600"><a href="${current_sections[s].lnk}" target="_blank"><img width="600" alt="" src="${current_sections[s].ttl}" style="width: 600px; height: auto; display: block; border: 0;"></a></td></tr></table>
                         <div class="form-popup" id="editForm${current_sections[s].id}">
                             <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
                             <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
@@ -1450,12 +1537,12 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/visibility_icon.png" onclick="" style="border: 0; display: block;" /></td>
+                                <td><img src="${visIconPath(current_sections[s].vis)}" onclick="sectionVisibility(${current_sections[s].id})" style="border: 0; display: block;" /></td>
                             </tr>
                         </table>
                     </td>
                     <a id="section${current_sections[s].id}" />
-                    <!-- custom HTML --><td bgcolor="#${bgc(current_sections[s].bgc)}">${current_sections[s].dsc}
+                    <!-- custom HTML --><td bgcolor="#${bgc(current_sections[s].bgc)}" style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});">${current_sections[s].dsc}
                         <div class="form-popup" id="editForm${current_sections[s].id}">
                             <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
                             <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
@@ -1490,12 +1577,12 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/visibility_icon.png" onclick="" style="border: 0; display: block;" /></td>
+                                <td><img src="${visIconPath(current_sections[s].vis)}" onclick="sectionVisibility(${current_sections[s].id})" style="border: 0; display: block;" /></td>
                             </tr>
                         </table>
                     </td>
                     <a id="section${current_sections[s].id}" />
-                    <!-- horizontal rule divider --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td align="center" height="15" style="font-size: 15px; line-height: 15px;">_________</td></tr><tr><td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table>
+                    <!-- horizontal rule divider --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td align="center" height="15" style="font-size: 15px; line-height: 15px;">_________</td></tr><tr><td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table>
                         <div class="form-popup" id="editForm${current_sections[s].id}">
                             <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
                             <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
@@ -1530,13 +1617,13 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/visibility_icon.png" onclick="" style="border: 0; display: block;" /></td>
+                                <td><img src="${visIconPath(current_sections[s].vis)}" onclick="sectionVisibility(${current_sections[s].id})" style="border: 0; display: block;" /></td>
                             </tr>
                         </table>
                     </td>
                     <a id="section${current_sections[s].id}" />
                     <!-- spacer -->
-                    <td width="600" bgcolor="#${bgc(current_sections[s].bgc)}" height="${current_sections[s].dsc}" style="font-size: ${current_sections[s].dsc}px; line-height: ${current_sections[s].dsc}px;">
+                    <td width="600" bgcolor="#${bgc(current_sections[s].bgc)}" height="${current_sections[s].dsc}" style="font-size: ${current_sections[s].dsc}px; line-height: ${current_sections[s].dsc}px; filter: contrast(${visContrastFilter(current_sections[s].vis)});"">
                         <div class="form-popup" id="editForm${current_sections[s].id}">
                             <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
                             <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
@@ -1567,7 +1654,6 @@
                 spacer_row.innerHTML = header_spacer;
                 header_row.innerHTML = header_cells;
                 section_row.innerHTML = section_cells;
-                code_modal.value = code_modal.value + `<tr>${raw_HTML}</tr>`;
                 header_table.appendChild(info_row);
                 header_table.appendChild(spacer_row);
                 header_table.appendChild(header_row);
@@ -1576,7 +1662,11 @@
                 header_spacer = ``;
                 header_cells = ``;
                 section_cells = ``;
-                
+
+                // append the raw HTML if visibility is on
+                if (Number(current_sections[s].vis) === 1) {
+                    code_modal.value = code_modal.value + `<tr>${raw_HTML}</tr>`;
+                };
             };
 
             // add the link color styling based on theme
