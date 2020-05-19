@@ -988,28 +988,28 @@
                                 <td><img src="${visIconPath(current_sections[s].vis)}" onclick="sectionVisibility(${current_sections[s].id})" style="border: 0; display: block;" /></td>
                             </tr>
                         </table>
+                        
                     </td>
+                    <div class="form-popup" id="editForm${current_sections[s].id}">
+                        <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                        <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                        <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
+                        <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
+                        <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                        <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                        <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
+                        <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                        <br />
+                        <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
+                        <br />
+                        <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                        <br />&nbsp;<br />
+                        <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                        <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                        <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                    </div>
                     <a id="section${current_sections[s].id}" />
-                    <!-- large Header --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse;  border: 0;" width="100%"><tr><td width="50">&nbsp;</td><td width="500" style="border-spacing: 0; border-collapse: collapse;  font-family: Arial, Helvetica, sans-serif; font-weight: 100; display: block; font-size: 24px; line-height: 24px; letter-spacing: 2px; color: #000000; text-align: center;">${current_sections[s].ttl}</td><td width="50">&nbsp;</td></tr><tr><td colspan="3" height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td align="center" colspan="3" height="15" style="font-size: 15px; line-height: 15px;">_________</td></tr><tr><td colspan="3" bgcolor="#${bgc(current_sections[s].bgc)}" height="60" style="font-size: 60px; line-height: 60px;">&nbsp;</td></tr></table>
-                        <div class="form-popup" id="editForm${current_sections[s].id}">
-                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
-                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
-                            <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
-                            <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
-                            <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
-                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
-                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
-                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
-                            <br />
-                            <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
-                            <br />
-                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
-                            <br />&nbsp;<br />
-                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
-                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
-                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
-                        </div>
-                    </td>`);
+                    <!-- large Header --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse;  border: 0;" width="100%"><tr><td width="50">&nbsp;</td><td width="500" style="border-spacing: 0; border-collapse: collapse;  font-family: Arial, Helvetica, sans-serif; font-weight: 100; display: block; font-size: 24px; line-height: 24px; letter-spacing: 2px; color: #000000; text-align: center;">${current_sections[s].ttl}</td><td width="50">&nbsp;</td></tr><tr><td colspan="3" height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td align="center" colspan="3" height="15" style="font-size: 15px; line-height: 15px;">_________</td></tr><tr><td colspan="3" bgcolor="#${bgc(current_sections[s].bgc)}" height="60" style="font-size: 60px; line-height: 60px;">&nbsp;</td></tr></table></td>`);
 
                     raw_HTML = (`<!-- large Header --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse;  border: 0;" width="100%"><tr><td width="50">&nbsp;</td><td width="500" style="border-spacing: 0; border-collapse: collapse;  font-family: Arial, Helvetica, sans-serif; font-weight: 100; display: block; font-size: 24px; line-height: 24px; letter-spacing: 2px; color: #000000; text-align: center;">${current_sections[s].ttl}</td><td width="50">&nbsp;</td></tr><tr><td colspan="3" height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td align="center" colspan="3" height="15" style="font-size: 15px; line-height: 15px;">_________</td></tr><tr><td colspan="3" bgcolor="#${bgc(current_sections[s].bgc)}" height="60" style="font-size: 60px; line-height: 60px;">&nbsp;</td></tr></table></td>`);
                 } else if (current_sections[s].typ === `csh`) {
@@ -1029,27 +1029,26 @@
                             </tr>
                         </table>
                     </td>
+                    <div class="form-popup" id="editForm${current_sections[s].id}">
+                        <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                        <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                        <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
+                        <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
+                        <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                        <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                        <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
+                        <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                        <br />
+                        <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
+                        <br />
+                        <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                        <br />&nbsp;<br />
+                        <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                        <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                        <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                    </div>
                     <a id="section${current_sections[s].id}" />
-                    <!-- Color Sub-Header --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse;  border: 0;" width="100%"><tr style="border-spacing: 0; border-collapse: collapse; "><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td><td style="border-spacing: 0; border-collapse: collapse; " width="500"><h4 class="letterspace" style="margin-bottom: 0px; margin-top: 5px; font-family: Arial, Helvetica, sans-serif; font-weight: 600; display: block; font-size: 17px; line-height: 17px; letter-spacing: 2px; color: #${theme_color}; text-align: center;">${current_sections[s].ttl}</h4></td><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td></tr><tr><td colspan="3" height="20" style="font-size: 20px; line-height: 20px;">&nbsp;</td></tr></table>
-                        <div class="form-popup" id="editForm${current_sections[s].id}">
-                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
-                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
-                            <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
-                            <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
-                            <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
-                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
-                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
-                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
-                            <br />
-                            <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
-                            <br />
-                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
-                            <br />&nbsp;<br />
-                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
-                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
-                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
-                        </div>
-                    </td>`);
+                    <!-- Color Sub-Header --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse;  border: 0;" width="100%"><tr style="border-spacing: 0; border-collapse: collapse; "><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td><td style="border-spacing: 0; border-collapse: collapse; " width="500"><h4 class="letterspace" style="margin-bottom: 0px; margin-top: 5px; font-family: Arial, Helvetica, sans-serif; font-weight: 600; display: block; font-size: 17px; line-height: 17px; letter-spacing: 2px; color: #${theme_color}; text-align: center;">${current_sections[s].ttl}</h4></td><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td></tr><tr><td colspan="3" height="20" style="font-size: 20px; line-height: 20px;">&nbsp;</td></tr></table></td>`);
 
                     raw_HTML = (`<!-- Color Sub-Header --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse;  border: 0;" width="100%"><tr style="border-spacing: 0; border-collapse: collapse; "><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td><td style="border-spacing: 0; border-collapse: collapse; " width="500"><h4 class="letterspace" style="margin-bottom: 0px; margin-top: 5px; font-family: Arial, Helvetica, sans-serif; font-weight: 600; display: block; font-size: 17px; line-height: 17px; letter-spacing: 2px; color: #${theme_color}; text-align: center;">${current_sections[s].ttl}</h4></td><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td></tr><tr><td colspan="3" height="20" style="font-size: 20px; line-height: 20px;">&nbsp;</td></tr></table></td>`);
                 } else if (current_sections[s].typ === `ban`) {
@@ -1069,27 +1068,26 @@
                             </tr>
                         </table>
                     </td>
+                    <div class="form-popup" id="editForm${current_sections[s].id}">
+                        <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                        <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                        <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
+                        <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
+                        <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                        <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                        <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
+                        <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                        <br />
+                        <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
+                        <br />
+                        <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                        <br />&nbsp;<br />
+                        <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                        <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                        <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                    </div>
                     <a id="section${current_sections[s].id}" />
-                    <!-- Color Banner --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table align="center" bgcolor="#${theme_color}" border="0" cellpadding="0" cellspacing="0" class="m-0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border: 0;" width="600"><tr style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;"><td bgcolor="#${theme_color}" height="46" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="125"><img src="${banner_path_left}" style="width: 125px; display: block; border: none;"></td><td align="center" bgcolor="#${theme_color}" height="46" style="font-family:'Open Sans', Arial, Helvetica, sans-serif; border: 0 none; text-decoration: none; color: #ffffff; font-size: 13px; line-height: 13px; font-weight: bold; letter-spacing: 2px;" width="350"><strong>${current_sections[s].ttl}</strong></td><td bgcolor="#${theme_color}" height="46" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="125"><img src="${banner_path_right}" style="width: 125px; display: block; border: none;"></td></tr><tr><td colspan="3" bgcolor="#${bgc(current_sections[s].bgc)}" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table>
-                        <div class="form-popup" id="editForm${current_sections[s].id}">
-                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
-                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
-                            <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
-                            <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
-                            <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
-                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
-                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
-                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
-                            <br />
-                            <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
-                            <br />
-                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
-                            <br />&nbsp;<br />
-                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
-                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
-                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
-                        </div>
-                    </td>`);
+                    <!-- Color Banner --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table align="center" bgcolor="#${theme_color}" border="0" cellpadding="0" cellspacing="0" class="m-0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border: 0;" width="600"><tr style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;"><td bgcolor="#${theme_color}" height="46" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="125"><img src="${banner_path_left}" style="width: 125px; display: block; border: none;"></td><td align="center" bgcolor="#${theme_color}" height="46" style="font-family:'Open Sans', Arial, Helvetica, sans-serif; border: 0 none; text-decoration: none; color: #ffffff; font-size: 13px; line-height: 13px; font-weight: bold; letter-spacing: 2px;" width="350"><strong>${current_sections[s].ttl}</strong></td><td bgcolor="#${theme_color}" height="46" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="125"><img src="${banner_path_right}" style="width: 125px; display: block; border: none;"></td></tr><tr><td colspan="3" bgcolor="#${bgc(current_sections[s].bgc)}" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td>`);
 
                     raw_HTML = (`<!-- Color Banner --><td><table align="center" bgcolor="#${theme_color}" border="0" cellpadding="0" cellspacing="0" class="m-0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border: 0;" width="600"><tr style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;"><td bgcolor="#${theme_color}" height="46" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="125"><img src="${banner_path_left}" style="width: 125px; display: block; border: none;"></td><td align="center" bgcolor="#${theme_color}" height="46" style="font-family:'Open Sans', Arial, Helvetica, sans-serif; border: 0 none; text-decoration: none; color: #ffffff; font-size: 13px; line-height: 13px; font-weight: bold; letter-spacing: 2px;" width="350"><strong>${current_sections[s].ttl}</strong></td><td bgcolor="#${theme_color}" height="46" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="125"><img src="${banner_path_right}" style="width: 125px; display: block; border: none;"></td></tr><tr><td colspan="3" bgcolor="#${bgc(current_sections[s].bgc)}" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td>`);
                 } else if (current_sections[s].typ === `blb`) {
@@ -1109,27 +1107,26 @@
                             </tr>
                         </table>
                     </td>
+                    <div class="form-popup" id="editForm${current_sections[s].id}">
+                        <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                        <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                        <input type="hidden" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" value="${current_sections[s].ttl}" />
+                        <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                        <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
+                        <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                        <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
+                        <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                        <br />
+                        <nobr>Text:&nbsp;<textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea>
+                        <br />
+                        <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                        <br />&nbsp;<br />
+                        <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                        <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                        <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                    </div>
                     <a id="section${current_sections[s].id}" />
-                    <!-- Text blurb --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse; border: 0;" width="100%"><tr height="10" style="border-spacing: 0; border-collapse: collapse; "><td width="50">&nbsp;</td><td style="text-align: center; color: #000000; line-height: 17.4px; font-size: 14px; font-family: Arial, Helvetica, sans-serif;" width="500">${current_sections[s].dsc}</td><td width="50">&nbsp;</td></tr><tr><td colspan="3" bgcolor="#${bgc(current_sections[s].bgc)}" height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td></tr></table>
-                        <div class="form-popup" id="editForm${current_sections[s].id}">
-                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
-                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
-                            <input type="hidden" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" value="${current_sections[s].ttl}" />
-                            <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
-                            <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
-                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
-                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
-                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
-                            <br />
-                            <nobr>Text:&nbsp;<textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea>
-                            <br />
-                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
-                            <br />&nbsp;<br />
-                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
-                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
-                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
-                        </div>
-                    </td>`);
+                    <!-- Text blurb --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse; border: 0;" width="100%"><tr height="10" style="border-spacing: 0; border-collapse: collapse; "><td width="50">&nbsp;</td><td style="text-align: center; color: #000000; line-height: 17.4px; font-size: 14px; font-family: Arial, Helvetica, sans-serif;" width="500">${current_sections[s].dsc}</td><td width="50">&nbsp;</td></tr><tr><td colspan="3" bgcolor="#${bgc(current_sections[s].bgc)}" height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td></tr></table></td>`);
 
                     raw_HTML = (`<!-- Text blurb --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse; border: 0;" width="100%"><tr height="10" style="border-spacing: 0; border-collapse: collapse; "><td width="50">&nbsp;</td><td style="text-align: center; color: #000000; line-height: 17.4px; font-size: 14px; font-family: Arial, Helvetica, sans-serif;" width="500">${current_sections[s].dsc}</td><td width="50">&nbsp;</td></tr><tr><td colspan="3" bgcolor="#${bgc(current_sections[s].bgc)}" height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td></tr></table></td>`);
                 } else if (current_sections[s].typ === `sla`) {
@@ -1149,28 +1146,27 @@
                             </tr>
                         </table>
                     </td>
+                    <div class="form-popup" id="editForm${current_sections[s].id}">
+                        <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                        <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                        <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                        <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
+                        <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                        <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
+                        <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                        <br />
+                        <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
+                        <br />
+                        <nobr>Link:&nbsp;<input type="text" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" size="102" value="${current_sections[s].lnk}" />
+                        <br />
+                        <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                        <br />&nbsp;<br />
+                        <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                        <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                        <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                    </div>
                     <a id="section${current_sections[s].id}" />
-                    <!-- Single Line Article --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;"><tr><td rowspan="2" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;"><a href="${current_sections[s].lnk}" target="_blank" >${current_sections[s].ttl}&nbsp;&raquo;</a></td><td rowspan="2" width="50">&nbsp;</td></tr><tr><td width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table>
-                        <div class="form-popup" id="editForm${current_sections[s].id}">
-                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
-                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
-                            <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
-                            <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
-                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
-                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
-                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
-                            <br />
-                            <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
-                            <br />
-                            <nobr>Link:&nbsp;<input type="text" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" size="102" value="${current_sections[s].lnk}" />
-                            <br />
-                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
-                            <br />&nbsp;<br />
-                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
-                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
-                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
-                        </div>
-                    </td>`);
+                    <!-- Single Line Article --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;"><tr><td rowspan="2" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;"><a href="${current_sections[s].lnk}" target="_blank" >${current_sections[s].ttl}&nbsp;&raquo;</a></td><td rowspan="2" width="50">&nbsp;</td></tr><tr><td width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td>`);
 
                     raw_HTML = (`<!-- Single Line Article --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;"><tr><td rowspan="2" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;"><a href="${current_sections[s].lnk}" target="_blank" >${current_sections[s].ttl}&nbsp;&raquo;</a></td><td rowspan="2" width="50">&nbsp;</td></tr><tr><td width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td>`);
                 } else if (current_sections[s].typ === `lad`) {
@@ -1190,29 +1186,28 @@
                             </tr>
                         </table>
                     </td>
+                    <div class="form-popup" id="editForm${current_sections[s].id}">
+                        <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                        <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                        <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                        <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                        <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
+                        <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                        <br />
+                        <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
+                        <br />
+                        <nobr>Link:&nbsp;<input type="text" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" size="102" value="${current_sections[s].lnk}" />
+                        <br />
+                        <nobr>Desc:&nbsp;<textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea>
+                        <br />
+                        <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                        <br />&nbsp;<br />
+                        <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                        <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                        <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                    </div>
                     <a id="section${current_sections[s].id}" />
-                    <!-- article with title and description --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;"><a href="${current_sections[s].lnk}" target="_blank" >${current_sections[s].ttl}&nbsp;&raquo;</a></td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #eeeeee;"><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr><tr><td colspan="2" width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td></tr></table>
-                        <div class="form-popup" id="editForm${current_sections[s].id}">
-                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
-                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
-                            <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
-                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
-                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
-                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
-                            <br />
-                            <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
-                            <br />
-                            <nobr>Link:&nbsp;<input type="text" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" size="102" value="${current_sections[s].lnk}" />
-                            <br />
-                            <nobr>Desc:&nbsp;<textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea>
-                            <br />
-                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
-                            <br />&nbsp;<br />
-                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
-                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
-                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
-                        </div>
-                    </td>`);
+                    <!-- article with title and description --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;"><a href="${current_sections[s].lnk}" target="_blank" >${current_sections[s].ttl}&nbsp;&raquo;</a></td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #eeeeee;"><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr><tr><td colspan="2" width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td></tr></table></td>`);
 
                     raw_HTML = (`<!-- article with title and description -->
                     <td>
@@ -1263,27 +1258,26 @@
                             </tr>
                         </table>
                     </td>
+                    <div class="form-popup" id="editForm${current_sections[s].id}">
+                        <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                        <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                        <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
+                        <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
+                        <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                        <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                        <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
+                        <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                        <br />
+                        <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></nobr>
+                        <br />
+                        <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                        <br />&nbsp;<br />
+                        <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                        <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                        <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                    </div>
                     <a id="section${current_sections[s].id}" />
-                    <!-- underlined bold title --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #000000;"><tr><td rowspan="2" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: underline; font-weight: 600;">${current_sections[s].ttl}</td><td rowspan="2" width="50">&nbsp;</td></tr><tr><td width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table>
-                        <div class="form-popup" id="editForm${current_sections[s].id}">
-                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
-                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
-                            <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
-                            <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
-                            <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
-                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
-                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
-                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
-                            <br />
-                            <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></nobr>
-                            <br />
-                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
-                            <br />&nbsp;<br />
-                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
-                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
-                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
-                        </div>
-                    </td>`);
+                    <!-- underlined bold title --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #000000;"><tr><td rowspan="2" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: underline; font-weight: 600;">${current_sections[s].ttl}</td><td rowspan="2" width="50">&nbsp;</td></tr><tr><td width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td>`);
 
                     raw_HTML = (`<!-- underlined bold title --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #000000;"><tr><td rowspan="2" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: underline; font-weight: 600;">${current_sections[s].ttl}</td><td rowspan="2" width="50">&nbsp;</td></tr><tr><td width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td>`);
                 } else if (current_sections[s].typ === `lsh`) {
@@ -1303,27 +1297,26 @@
                             </tr>
                         </table>
                     </td>
+                    <div class="form-popup" id="editForm${current_sections[s].id}">
+                        <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                        <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                        <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
+                        <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
+                        <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                        <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                        <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
+                        <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                        <br />
+                        <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></nobr>
+                        <br />
+                        <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                        <br />&nbsp;<br />
+                        <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                        <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                        <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                    </div>
                     <a id="section${current_sections[s].id}" />
-                    <!-- letterspaced sub-header --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse;  border: 0;" width="100%"><tr style="border-spacing: 0; border-collapse: collapse; "><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td><td style="border-spacing: 0; border-collapse: collapse; " width="500"><h4 class="letterspace" style="margin-bottom: 0px; margin-top: 5px; font-family: Arial, Helvetica, sans-serif; font-weight: 500; display: block; font-size: 18px; line-height: 25px; letter-spacing: 2px; color: #000000; text-align: center;">${current_sections[s].ttl}</h4></td><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td></tr><tr><td colspan="3" height="20" style="font-size: 20px; line-height: 20px;">&nbsp;</td></tr></table>
-                        <div class="form-popup" id="editForm${current_sections[s].id}">
-                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
-                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
-                            <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
-                            <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
-                            <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
-                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
-                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
-                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
-                            <br />
-                            <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></nobr>
-                            <br />
-                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
-                            <br />&nbsp;<br />
-                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
-                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
-                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
-                        </div>
-                    </td>`);
+                    <!-- letterspaced sub-header --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse;  border: 0;" width="100%"><tr style="border-spacing: 0; border-collapse: collapse; "><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td><td style="border-spacing: 0; border-collapse: collapse; " width="500"><h4 class="letterspace" style="margin-bottom: 0px; margin-top: 5px; font-family: Arial, Helvetica, sans-serif; font-weight: 500; display: block; font-size: 18px; line-height: 25px; letter-spacing: 2px; color: #000000; text-align: center;">${current_sections[s].ttl}</h4></td><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td></tr><tr><td colspan="3" height="20" style="font-size: 20px; line-height: 20px;">&nbsp;</td></tr></table></td>`);
 
                     raw_HTML = (`<!-- letterspaced sub-header --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" border="0" cellpadding="0" cellspacing="0" style="border-spacing: 0; border-collapse: collapse;  border: 0;" width="100%"><tr style="border-spacing: 0; border-collapse: collapse; "><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td><td style="border-spacing: 0; border-collapse: collapse; " width="500"><h4 class="letterspace" style="margin-bottom: 0px; margin-top: 5px; font-family: Arial, Helvetica, sans-serif; font-weight: 500; display: block; font-size: 18px; line-height: 25px; letter-spacing: 2px; color: #000000; text-align: center;">${current_sections[s].ttl}</h4></td><td style="border-spacing: 0; border-collapse: collapse; " width="50">&nbsp;</td></tr><tr><td colspan="3" height="20" style="font-size: 20px; line-height: 20px;">&nbsp;</td></tr></table></td>`);
                 } else if (current_sections[s].typ === `tbl`) {
@@ -1365,30 +1358,29 @@
                             </tr>
                         </table>
                     </td>
+                    <div class="form-popup" id="editForm${current_sections[s].id}">
+                        <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                        <br /><input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                        <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                        <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
+                        <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                        <br />
+                        <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></nobr>
+                        <br />
+                        <nobr>Desc:&nbsp;<textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea></nobr>
+                        <br />
+                        <nobr>Button:&nbsp;<input type="text" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" size="102" value="${current_sections[s].btn}" /></nobr>
+                        <br />
+                        <nobr>Link:&nbsp;<input type="text" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" size="102" value="${current_sections[s].lnk}" /></nobr>
+                        <br />
+                        <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                        <br />&nbsp;<br />
+                        <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                        <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                        <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                    </div>
                     <a id="section${current_sections[s].id}" />
-                    <!-- title and description with button --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;">${current_sections[s].ttl}</td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #ffffff;"><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr><tr><td colspan="2" width="520" height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td width="30">&nbsp;</td><td align="left" width="470"><table align="left" width="150" border="0" cellspacing="0" cellpadding="0"><tr><td style="background: #000000; padding: 7px 7px; border-radius: 0px; text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none;"><a href="${current_sections[s].lnk}" style="text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none; letter-spacing: .5px" target="_blank">${current_sections[s].btn}</a></td></tr></table></td></tr></table></td></tr><tr><td height="40" style="font-size: 40px; line-height: 40px;">&nbsp;</td></tr></table></td></tr></table>
-                        <div class="form-popup" id="editForm${current_sections[s].id}">
-                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
-                            <br /><input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
-                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
-                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
-                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
-                            <br />
-                            <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></nobr>
-                            <br />
-                            <nobr>Desc:&nbsp;<textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea></nobr>
-                            <br />
-                            <nobr>Button:&nbsp;<input type="text" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" size="102" value="${current_sections[s].btn}" /></nobr>
-                            <br />
-                            <nobr>Link:&nbsp;<input type="text" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" size="102" value="${current_sections[s].lnk}" /></nobr>
-                            <br />
-                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
-                            <br />&nbsp;<br />
-                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
-                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
-                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
-                        </div>
-                    </td>`);
+                    <!-- title and description with button --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;">${current_sections[s].ttl}</td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #ffffff;"><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr><tr><td colspan="2" width="520" height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td width="30">&nbsp;</td><td align="left" width="470"><table align="left" width="150" border="0" cellspacing="0" cellpadding="0"><tr><td style="background: #000000; padding: 7px 7px; border-radius: 0px; text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none;"><a href="${current_sections[s].lnk}" style="text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none; letter-spacing: .5px" target="_blank">${current_sections[s].btn}</a></td></tr></table></td></tr></table></td></tr><tr><td height="40" style="font-size: 40px; line-height: 40px;">&nbsp;</td></tr></table></td></tr></table></td>`);
 
                     raw_HTML = (`<!-- title and description with button --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;">${current_sections[s].ttl}</td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #ffffff;"><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr><tr><td colspan="2" width="520" height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td width="30">&nbsp;</td><td align="left" width="470"><table align="left" width="150" border="0" cellspacing="0" cellpadding="0"><tr><td style="background: #000000; padding: 7px 7px; border-radius: 0px; text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none;"><a href="${current_sections[s].lnk}" style="text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none; letter-spacing: .5px" target="_blank">${current_sections[s].btn}</a></td></tr></table></td></tr></table></td></tr><tr><td height="40" style="font-size: 40px; line-height: 40px;">&nbsp;</td></tr></table></td></tr></table></td>`);
                 } else if (current_sections[s].typ === `tbd`) {
@@ -1408,30 +1400,29 @@
                             </tr>
                         </table>
                     </td>
+                    <div class="form-popup" id="editForm${current_sections[s].id}">
+                        <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                        <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                        <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                        <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
+                        <br /><nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                        <br />
+                        <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></nobr>
+                        <br />
+                        <nobr>Button:&nbsp;<input type="text" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" size="102" value="${current_sections[s].btn}" /></nobr>
+                        <br />
+                        <nobr>Link:&nbsp;<input type="text" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" size="102" value="${current_sections[s].lnk}" /></nobr>
+                        <br />
+                        <nobr>Desc:&nbsp;<textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea></nobr>
+                        <br />
+                        <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                        <br />&nbsp;<br />
+                        <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                        <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                        <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                    </div>
                     <a id="section${current_sections[s].id}" />
-                    <!-- title with description under button --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;">${current_sections[s].ttl}</td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="30">&nbsp;</td><td align="left" width="470"><table align="left" width="150" border="0" cellspacing="0" cellpadding="0"><tr><td style="background: #000000; padding: 7px 7px; border-radius: 0px; text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none;"><a href="${current_sections[s].lnk}" style="text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none; letter-spacing: .5px" target="_blank">${current_sections[s].btn}</a></td></tr></table></td></tr><tr><td colspan="2" width="520" height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr></table></td></tr><tr><td height="40" style="font-size: 40px; line-height: 40px;">&nbsp;</td></tr></table></td></tr></table>
-                        <div class="form-popup" id="editForm${current_sections[s].id}">
-                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
-                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
-                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
-                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
-                            <br /><nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
-                            <br />
-                            <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" /></nobr>
-                            <br />
-                            <nobr>Button:&nbsp;<input type="text" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" size="102" value="${current_sections[s].btn}" /></nobr>
-                            <br />
-                            <nobr>Link:&nbsp;<input type="text" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" size="102" value="${current_sections[s].lnk}" /></nobr>
-                            <br />
-                            <nobr>Desc:&nbsp;<textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea></nobr>
-                            <br />
-                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
-                            <br />&nbsp;<br />
-                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
-                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
-                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
-                        </div>
-                    </td>`);
+                    <!-- title with description under button --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;">${current_sections[s].ttl}</td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="30">&nbsp;</td><td align="left" width="470"><table align="left" width="150" border="0" cellspacing="0" cellpadding="0"><tr><td style="background: #000000; padding: 7px 7px; border-radius: 0px; text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none;"><a href="${current_sections[s].lnk}" style="text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none; letter-spacing: .5px" target="_blank">${current_sections[s].btn}</a></td></tr></table></td></tr><tr><td colspan="2" width="520" height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr></table></td></tr><tr><td height="40" style="font-size: 40px; line-height: 40px;">&nbsp;</td></tr></table></td></tr></table></td>`);
 
                     raw_HTML = (`<!-- title with description under button --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;">${current_sections[s].ttl}</td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="30">&nbsp;</td><td align="left" width="470"><table align="left" width="150" border="0" cellspacing="0" cellpadding="0"><tr><td style="background: #000000; padding: 7px 7px; border-radius: 0px; text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none;"><a href="${current_sections[s].lnk}" style="text-align: center; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 16px; font-weight: 500; text-decoration: none; letter-spacing: .5px" target="_blank">${current_sections[s].btn}</a></td></tr></table></td></tr><tr><td colspan="2" width="520" height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr></table></td></tr><tr><td height="40" style="font-size: 40px; line-height: 40px;">&nbsp;</td></tr></table></td></tr></table></td>`);
                 } else if (current_sections[s].typ === `twd`) {
@@ -1451,28 +1442,27 @@
                             </tr>
                         </table>
                     </td>
+                    <div class="form-popup" id="editForm${current_sections[s].id}">
+                        <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                        <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                        <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
+                        <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                        <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                        <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
+                        <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                        <br />
+                        <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
+                        <br />
+                        <nobr>Desc:&nbsp;<textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea>
+                        <br />
+                        <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                        <br />&nbsp;<br />
+                        <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                        <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                        <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                    </div>
                     <a id="section${current_sections[s].id}" />
-                    <!-- non-linked title and description --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;">${current_sections[s].ttl}</td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr><tr><td colspan="2" width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td></tr></table>
-                        <div class="form-popup" id="editForm${current_sections[s].id}">
-                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
-                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
-                            <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
-                            <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
-                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
-                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
-                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
-                            <br />
-                            <nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
-                            <br />
-                            <nobr>Desc:&nbsp;<textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea>
-                            <br />
-                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
-                            <br />&nbsp;<br />
-                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
-                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
-                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
-                        </div>
-                    </td>`);
+                    <!-- non-linked title and description --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;">${current_sections[s].ttl}</td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr><tr><td colspan="2" width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td></tr></table></td>`);
 
                     raw_HTML = (`<!-- non-linked title and description --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px;  text-decoration: none;">${current_sections[s].ttl}</td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td></tr><tr><td><table width="500" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="30">&nbsp;</td><td width="470" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; line-height: 20px;  text-decoration: none;">${current_sections[s].dsc}</td></tr><tr><td colspan="2" width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td></tr></table></td>`);
                 } else if (current_sections[s].typ === `img`) {
@@ -1492,29 +1482,28 @@
                             </tr>
                         </table>
                     </td>
+                    <div class="form-popup" id="editForm${current_sections[s].id}">
+                        <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                        <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                        <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
+                        <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                        <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                        <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
+                        <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                        <br />
+                        <nobr>Path:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
+                        <br />
+                        <nobr>Link:&nbsp;<input type="text" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" size="102" value="${current_sections[s].lnk}" />
+                        <br />
+                        <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                        <br />&nbsp;<br />
+                        <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                        <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                        <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                    </div>
                     <a id="section${current_sections[s].id}" />
                     <!-- full width image -->
-                    <td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600"><a href="${current_sections[s].lnk}" target="_blank"><img width="600" alt="" src="${current_sections[s].ttl}" style="width: 600px; height: auto; display: block; border: 0;"></a></td></tr></table>
-                        <div class="form-popup" id="editForm${current_sections[s].id}">
-                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
-                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
-                            <input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" />
-                            <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
-                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
-                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
-                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
-                            <br />
-                            <nobr>Path:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}" />
-                            <br />
-                            <nobr>Link:&nbsp;<input type="text" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" size="102" value="${current_sections[s].lnk}" />
-                            <br />
-                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
-                            <br />&nbsp;<br />
-                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
-                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
-                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
-                        </div>
-                    </td>`);
+                    <td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600"><a href="${current_sections[s].lnk}" target="_blank"><img width="600" alt="" src="${current_sections[s].ttl}" style="width: 600px; height: auto; display: block; border: 0;"></a></td></tr></table></td>`);
 
                     raw_HTML = (`<!-- full width image -->
                     <td>
@@ -1541,27 +1530,26 @@
                             </tr>
                         </table>
                     </td>
+                    <div class="form-popup" id="editForm${current_sections[s].id}">
+                        <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                        <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                        <input type="hidden" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" value="${current_sections[s].ttl}" />
+                        <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
+                        <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                        <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                        <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
+                        <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                        <br />
+                        <nobr>HTML:&nbsp;<textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea>
+                        <br />
+                        <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                        <br />&nbsp;<br />
+                        <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                        <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                        <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                    </div>
                     <a id="section${current_sections[s].id}" />
-                    <!-- custom HTML --><td bgcolor="#${bgc(current_sections[s].bgc)}" style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});">${current_sections[s].dsc}
-                        <div class="form-popup" id="editForm${current_sections[s].id}">
-                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
-                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
-                            <input type="hidden" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" value="${current_sections[s].ttl}" />
-                            <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
-                            <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
-                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
-                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
-                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
-                            <br />
-                            <nobr>HTML:&nbsp;<textarea name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" cols="103" rows="${((current_sections[s].dsc.length)/68)}">${current_sections[s].dsc}</textarea>
-                            <br />
-                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
-                            <br />&nbsp;<br />
-                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
-                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
-                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
-                        </div>
-                    </td>`);
+                    <!-- custom HTML --><td bgcolor="#${bgc(current_sections[s].bgc)}" style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});">${current_sections[s].dsc}</td>`);
                     
                     raw_HTML = (`<!-- custom HTML --><td bgcolor="#${bgc(current_sections[s].bgc)}">${current_sections[s].dsc}</td>`)
                 } else if (current_sections[s].typ === `hrl`) {
@@ -1581,27 +1569,26 @@
                             </tr>
                         </table>
                     </td>
+                    <div class="form-popup" id="editForm${current_sections[s].id}">
+                        <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                        <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                        <input type="hidden" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" value="${current_sections[s].ttl}" />
+                        <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
+                        <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                        <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                        <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
+                        <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                        <br />
+                        <nobr>Height:&nbsp;<input type="text" size="4" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" /></nobr>
+                        <br />
+                        <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                        <br />&nbsp;<br />
+                        <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                        <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                        <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                    </div>
                     <a id="section${current_sections[s].id}" />
-                    <!-- horizontal rule divider --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td align="center" height="15" style="font-size: 15px; line-height: 15px;">_________</td></tr><tr><td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table>
-                        <div class="form-popup" id="editForm${current_sections[s].id}">
-                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
-                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
-                            <input type="hidden" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" value="${current_sections[s].ttl}" />
-                            <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
-                            <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
-                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
-                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
-                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
-                            <br />
-                            <nobr>Height:&nbsp;<input type="text" size="4" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" /></nobr>
-                            <br />
-                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
-                            <br />&nbsp;<br />
-                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
-                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
-                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
-                        </div>
-                    </td>`);
+                    <!-- horizontal rule divider --><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td align="center" height="15" style="font-size: 15px; line-height: 15px;">_________</td></tr><tr><td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td>`);
 
                     raw_HTML = (`<!-- horizontal rule divider --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td align="center" height="15" style="font-size: 15px; line-height: 15px;">_________</td></tr><tr><td height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td>`);
                 } else if (current_sections[s].typ === `spc`) {
@@ -1621,28 +1608,27 @@
                             </tr>
                         </table>
                     </td>
+                    <div class="form-popup" id="editForm${current_sections[s].id}">
+                        <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
+                        <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
+                        <input type="hidden" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" value="${current_sections[s].ttl}" />
+                        <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
+                        <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
+                        <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
+                        <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
+                        <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
+                        <br />
+                        <nobr>Height:&nbsp;<input type="text" size="4" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" /></nobr>
+                        <br />
+                        <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
+                        <br />&nbsp;<br />
+                        <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
+                        <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
+                        <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
+                    </div>
                     <a id="section${current_sections[s].id}" />
                     <!-- spacer -->
-                    <td width="600" bgcolor="#${bgc(current_sections[s].bgc)}" height="${current_sections[s].dsc}" style="font-size: ${current_sections[s].dsc}px; line-height: ${current_sections[s].dsc}px; filter: contrast(${visContrastFilter(current_sections[s].vis)});"">
-                        <div class="form-popup" id="editForm${current_sections[s].id}">
-                            <p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)} - Section ${current_sections[s].id}
-                            <input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}" />
-                            <input type="hidden" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" value="${current_sections[s].ttl}" />
-                            <input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value="${current_sections[s].lnk}" />
-                            <input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}" />
-                            <input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}" />
-                            <input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}" />
-                            <nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr>
-                            <br />
-                            <nobr>Height:&nbsp;<input type="text" size="4" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value="${current_sections[s].dsc}" /></nobr>
-                            <br />
-                            <nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr>
-                            <br />&nbsp;<br />
-                            <button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button>
-                            <button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button>
-                            <button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p>
-                        </div>
-                    </td>`);
+                    <td width="600" bgcolor="#${bgc(current_sections[s].bgc)}" height="${current_sections[s].dsc}" style="font-size: ${current_sections[s].dsc}px; line-height: ${current_sections[s].dsc}px; filter: contrast(${visContrastFilter(current_sections[s].vis)});""></td>`);
 
                     raw_HTML = (`<!-- spacer --><td bgcolor="#${bgc(current_sections[s].bgc)}" height="${current_sections[s].dsc}" style="font-size: ${current_sections[s].dsc}px; line-height: ${current_sections[s].dsc}px;">&nbsp;</td>`);
                 };
