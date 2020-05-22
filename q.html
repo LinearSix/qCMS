@@ -216,11 +216,11 @@
             // spc - spacer
 
         // update title with timestamp for better bookmarking
-        let saveTimer = setInterval(titleTimer, 1000);
+        // let saveTimer = setInterval(titleTimer, 1000);
 
-        function titleTimer() {
+        function titleTimer(typ, dsc) {
             let d = new Date();
-            document.getElementById("title").innerHTML = `CMS Saved: ${(d.getMonth()+1)}/${d.getDate()}/${d.getFullYear()}&nbsp;${d.toLocaleTimeString()}`;
+            document.getElementById("title").innerHTML = `${typ.toUpperCase()} ${dsc.toUpperCase()}: ${(d.getMonth()+1)}/${d.getDate()}/${d.getFullYear()}&nbsp;${d.toLocaleTimeString()}`;
         };
 
         function stopTimer() {
@@ -299,6 +299,9 @@
             current_sections[i].odr = i;
             current_sections[i].id = i;
         };
+
+        // start the timer for unique ID bookmarking
+        let saveTimer = setInterval(titleTimer(current_sections[0].typ, current_sections[0].dsc), 1000);
 
         console.log(current_sections);
 
