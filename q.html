@@ -385,6 +385,7 @@
             let updated_btn;
             let updated_vis;
             let updated_stl;
+            let updated_itm;
 
             // special values for header
             let updated_month;
@@ -419,18 +420,35 @@
                 console.log(`newQs: ${newQs}`);
 
             } else {
+
                 updated_odr = document.getElementById(`odr${id}`);
                 updated_typ = document.getElementById(`typ${id}`);
                 updated_bgc = document.getElementById(`bgc${id}`);
                 updated_ttl = document.getElementById(`ttl${id}`);
                 updated_lnk = document.getElementById(`lnk${id}`);
-                updated_dsc = document.getElementById(`dsc${id}`);
+                // updated_dsc = document.getElementById(`dsc${id}`);
                 updated_btn = document.getElementById(`btn${id}`);
                 updated_vis = document.getElementById(`vis${id}`);
                 updated_stl = document.getElementById(`stl${id}`);
 
+                // special case for Title with Bulleted Links (TBL)
+                let itm_array = [];
+                updated_itm = ``
+                updated_itm = document.getElementsByClassName(`itm`);
+                if (updated_itm !== ``) { // it's a TBL - create the dsc variable
+                    updated_dsc = ``;
+                    for (i=0; i<updated_itm.length; i++) {
+                        if ( i % 2 == 0) {
+                            if (updated_itm[(i)].value !== ``) {
+                                updated_dsc += `<li><a href="${updated_itm[(i+1)].value}" target="_blank">${updated_itm[(i)].value}</a></li>`
+                            };
+                        };
+                    };
+                } else {
+                    updated_dsc = document.getElementById(`dsc${id}`);
+                };
                 // build updated section as newQs
-                newQs = `&odr=${updated_odr.value}&id=${id}&typ=${updated_typ.value}&bgc=${updated_bgc.value}&ttl=${encodeURIComponent(updated_ttl.value)}&lnk=${encodeURIComponent(updated_lnk.value)}&dsc=${encodeURIComponent(updated_dsc.value)}&btn=${updated_btn.value}&vis=${Number(updated_vis.value)}&stl=${updated_stl.value}`;
+                newQs = `&odr=${updated_odr.value}&id=${id}&typ=${updated_typ.value}&bgc=${updated_bgc.value}&ttl=${encodeURIComponent(updated_ttl.value)}&lnk=${encodeURIComponent(updated_lnk.value)}&dsc=${encodeURIComponent(updated_dsc)}&btn=${updated_btn.value}&vis=${Number(updated_vis.value)}&stl=${updated_stl.value}`;
             };
 
             console.log(`id: ${id}`);
@@ -439,7 +457,7 @@
             console.log(`bgc: ${updated_bgc.value}`);
             console.log(`ttl: ${updated_ttl.value}`);
             console.log(`lnk: ${updated_lnk.value}`);
-            console.log(`dsc: ${encodeURIComponent(updated_dsc.value)}`);
+            console.log(`dsc: ${encodeURIComponent(updated_dsc)}`);
             console.log(`btn: ${updated_btn.value}`);
             console.log(`vis: ${updated_vis.value}`);
             console.log(`stl: ${updated_stl.value}`);
@@ -461,7 +479,7 @@
             
             // get rid of initial "&" character
             qs = qs.slice(1)
-            // console.log(qs);
+            console.log(qs);
             stopTimer()
             window.location.replace(`q.html?${qs}#section${id}`);
         };
@@ -487,7 +505,7 @@
             updated_bgc = document.getElementById(`bgc${id}`);
             updated_ttl = document.getElementById(`ttl${id}`);
             updated_lnk = document.getElementById(`lnk${id}`);
-            updated_dsc = document.getElementById(`dsc${id}`);
+            // updated_dsc = document.getElementById(`dsc${id}`);
             updated_btn = document.getElementById(`btn${id}`);
             updated_vis = document.getElementById(`vis${id}`);
             updated_stl = document.getElementById(`stl${id}`);
@@ -499,8 +517,25 @@
                 updated_vis = 1;
             };
 
+            // special case for Title with Bulleted Links (TBL)
+            let itm_array = [];
+            updated_itm = ``
+            updated_itm = document.getElementsByClassName(`itm`);
+            if (updated_itm !== ``) { // it's a TBL - create the dsc variable
+                updated_dsc = ``;
+                for (i=0; i<updated_itm.length; i++) {
+                    if ( i % 2 == 0) {
+                        if (updated_itm[(i)].value !== ``) {
+                            updated_dsc += `<li><a href="${updated_itm[(i+1)].value}" target="_blank">${updated_itm[(i)].value}</a></li>`
+                        };
+                    };
+                };
+            } else {
+                updated_dsc = document.getElementById(`dsc${id}`);
+            };
+
             // build updated section as newQs
-            newQs = `&odr=${updated_odr.value}&id=${id}&typ=${updated_typ.value}&bgc=${updated_bgc.value}&ttl=${encodeURIComponent(updated_ttl.value)}&lnk=${encodeURIComponent(updated_lnk.value)}&dsc=${encodeURIComponent(updated_dsc.value)}&btn=${updated_btn.value}&vis=${updated_vis}&stl=${updated_stl.value}`;
+            newQs = `&odr=${updated_odr.value}&id=${id}&typ=${updated_typ.value}&bgc=${updated_bgc.value}&ttl=${encodeURIComponent(updated_ttl.value)}&lnk=${encodeURIComponent(updated_lnk.value)}&dsc=${encodeURIComponent(updated_dsc)}&btn=${updated_btn.value}&vis=${updated_vis}&stl=${updated_stl.value}`;
 
             console.log(`id: ${id}`);
             console.log(`odr: ${updated_odr.value}`);
@@ -1003,12 +1038,12 @@
                     section_list_inputs = `<ul style="margin-top: 0px; margin-left: -12px;">`;
                     let i = 0;
                     for (i=0; i<section_list_array.length; i++) {
-                        section_list_inputs = section_list_inputs + `<br /><li style="margin-left: -12px;"><input type="text" size="27" name="listItem${i+1}" id="listItem${i+1}" value="${section_list_array[i+1]}" /><br /><input type="text" size="27" name="listItem${i}" id="listItem${i}" value="${section_list_array[i]}" />`
+                        section_list_inputs = section_list_inputs + `<br /><li style="margin-left: -12px;"><input type="text" size="27" class="itm" name="listItem${i+1}" id="listItem${i+1}" value="${section_list_array[i+1]}" /><br /><input type="text" size="27" class="itm" name="listItem${i}" id="listItem${i}" value="${section_list_array[i]}" />`
                         i++
                     };
-                    section_list_inputs = section_list_inputs + `<li style="margin-left: -12px;"><input type="text" size="27" name="listItem${i+2}" id="listItem${i+2}" value="" /><br /><input type="text" size="27" name="listItem${i+1}" id="listItem${i+1}" value="" /></li></ul>`
+                    section_list_inputs = section_list_inputs + `<li style="margin-left: -12px;"><input type="text" size="102" class="itm" name="listItem${i+2}" id="listItem${i+2}" value="" /><br /><input type="text" size="27" class="itm" name="listItem${i+1}" id="listItem${i+1}" value="" /></li></ul>`
 
-                    section_cells = (`<td width="1000" bgcolor="#${sectionEditColor(current_sections[s].id)}" align="left" style="border-top: solid #cccccc 1px; border-bottom: solid #cccccc 1px;"><a class="anchor" id="section${current_sections[s].id}"></a><table width="1000" border="0" cellpadding="2"><tr><td width="70" align="right" padding: 0px 0px 0px 15px;"><strong>Type:</strong></td><td width="260" align="left"><input type="text" size="30" name="typ${current_sections[s].id}" id="typ${current_sections[s].id}" value="${unAbrvType(current_sections[s].typ)}" /></td><td rowspan="2" width="70" align="right" style="padding: 0px 15px 0px 0px;"><button class="delete" onclick="deleteSection(${current_sections[s].id})">Delete</button></td></tr><tr><td width="70" align="right" valign="top" padding: 0px 0px 0px 15px;"><strong>Content:</strong></td><td width="260" align="left"><input type="text" size="30" name="content${s}" id="content${s}" value="${current_sections[s].ttl}" />${section_list_inputs}</td></tr></table></td><!-- title with bulleted links --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="2" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px; text-decoration: none;">${current_sections[s].ttl}<ul style="color: #000000; line-height: 23.2px; font-size: 16px; font-family: Arial, Helvetica, sans-serif;">${current_sections[s].dsc}</ul></td><td rowspan="2" width="50">&nbsp;</td></tr><tr><td width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td>`);
+                    section_cells = (`<td onclick="openEditForm(${current_sections[s].id})" align="center" valign="top" width="120" style="border-top: solid #cccccc 1px; border-bottom: solid #cccccc 1px;"><table width="120" border="0"><tr><td height="8" style="font-size: 8px; line-height: 8px; letter-spacing: -.5px">${current_sections[s].typ.toUpperCase()}</td><td rowspan="2"><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/edit_icon.png" onclick="openEditForm(${current_sections[s].id})" style="border: 0; display: block;"/></td><td rowspan="2"><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/copy_icon.png" onclick="copySection(${current_sections[s].id})" style="border: 0; display: block;"/></td><td rowspan="2"><img src="https://webfiles2.nfp.com/webfiles/public/2020_emails/newsletter_cms/delete_icon.png" onclick="deleteSection(${current_sections[s].id})" style="border: 0; display: block;"/></td><td rowspan="2">${reorderArrows(current_sections[s].id)}</td></tr><tr><td><img src="${visIconPath(current_sections[s].vis)}" onclick="sectionVisibility(${current_sections[s].id})" style="border: 0; display: block;"/></td></tr></table></td><div class="form-popup" id="editForm${current_sections[s].id}"><p class="label" style="font-size: 18px; line-height: 24px;">Edit ${unAbrvType(current_sections[s].typ)}- Section ${current_sections[s].id}<input type="hidden" name="odr${current_sections[s].id}" id="odr${current_sections[s].id}" value="${current_sections[s].odr}"/><input type="hidden" name="dsc${current_sections[s].id}" id="dsc${current_sections[s].id}" value=""/><input type="hidden" name="lnk${current_sections[s].id}" id="lnk${current_sections[s].id}" value=""/><input type="hidden" name="btn${current_sections[s].id}" id="btn${current_sections[s].id}" value="${current_sections[s].btn}"/><input type="hidden" name="vis${current_sections[s].id}" id="vis${current_sections[s].id}" value="${current_sections[s].vis}"/><input type="hidden" name="stl${current_sections[s].id}" id="stl${current_sections[s].id}" value="${current_sections[s].stl}"/><nobr>Type:&nbsp;${typDropdown(current_sections[s].typ, current_sections[s].id)}</nobr><br/><nobr>Title:&nbsp;<input type="text" name="ttl${current_sections[s].id}" id="ttl${current_sections[s].id}" size="102" value="${current_sections[s].ttl}"/><br/>${section_list_inputs}<br/><nobr>Background:&nbsp;${bgcDropdown(current_sections[s].bgc, current_sections[s].id)}</nobr><br/>&nbsp;<br/><button type="button" class="btn" onclick="updateSection(${current_sections[s].id})">Update</button><button type="button" class="btn delete" onclick="deleteSection(${current_sections[s].id})">Delete</button><button type="button" class="btn cancel" onclick="closeEditForm(${current_sections[s].id})">Cancel</button></p></div><a id="section${current_sections[s].id}"/><td style=" filter: contrast(${visContrastFilter(current_sections[s].vis)});"><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse;"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;"><tr><td rowspan="3" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px; text-decoration: none;">${current_sections[s].ttl}<ul>${current_sections[s].dsc}</ul></td><td rowspan="3" width="50">&nbsp;</td></tr><tr><td width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td>`);
                     
                     raw_HTML = (`<!-- title with bulleted links --><td><table bgcolor="#${bgc(current_sections[s].bgc)}" width="600" align="center" border="0" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td width="600" align="center" valign="middle"><table width="600" align="center" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; border-color: #${bgc(current_sections[s].bgc)};"><tr><td rowspan="2" width="50">&nbsp;</td><td width="500" align="left" valign="middle" style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 23px; text-decoration: none;">${current_sections[s].ttl}<ul style="color: #000000; line-height: 23.2px; font-size: 16px; font-family: Arial, Helvetica, sans-serif;">${current_sections[s].dsc}</ul></td><td rowspan="2" width="50">&nbsp;</td></tr><tr><td width="500" height="30" style="font-size: 30px; line-height: 30px;">&nbsp;</td></tr></table></td></tr></table></td>`);
                 } else if (current_sections[s].typ === `tdb`) {
@@ -1123,7 +1158,7 @@
                     <td><button class="addButton" onclick="addSection('lsh')">Letterspaced<br />Sub-Header</button></td>
                 </tr>
                 <tr>
-                    <td><button class="addButton" style="background-color: #333e48;">Title with<br />Bulleted Links</button></td>
+                    <td><button class="addButton" onclick="addSection('tbl')">Title with<br />Bulleted Links</button></td>
                     <td><button class="addButton" onclick="addSection('tdb')">Title /<br />Description<br />/ Button</button></td>
                 </tr>
                 <tr>
